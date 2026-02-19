@@ -72,7 +72,7 @@ No backend, no API, no cloud dependency: everything runs locally in your browser
 
 ### 1) Open directly
 
-Open `cooked.html` in your browser.
+Open `index.html` in your browser.
 
 ### 2) Run with local server (recommended)
 
@@ -83,7 +83,7 @@ python3 -m http.server 8080
 Then open:
 
 ```text
-http://localhost:8080/cooked.html
+http://localhost:8080/index.html
 ```
 
 ## Example Syntax

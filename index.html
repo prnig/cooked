@@ -23,11 +23,11 @@
   --bg-grad-3: rgba(245,158,11,.2);
 }
 [data-theme="light"] {
-  --bg: #dfe5eb; --bg-card: rgba(223,230,237,.92); --bg-card-hover: rgba(228,234,240,.97);
-  --bg-input: rgba(220,227,234,.95); --bg-overlay: rgba(0,0,0,.3);
-  --bg-solid: #dce3ea;
-  --border: #bec8d2; --border-focus: #6366f1;
-  --text: #15202d; --text-secondary: #334558; --text-muted: #4f6278;
+  --bg: #cfd8e2; --bg-card: rgba(207,218,229,.94); --bg-card-hover: rgba(214,224,233,.98);
+  --bg-input: rgba(201,213,224,.96); --bg-overlay: rgba(0,0,0,.30);
+  --bg-solid: #c8d3df;
+  --border: #97a8ba; --border-focus: #3347c7;
+  --text: #0f1a27; --text-secondary: #273a4e; --text-muted: #3f566f;
   --accent: #135bec; --accent-hover: #0f4dcc; --accent-subtle: rgba(19,91,236,.1);
   --green: #16a34a; --red: #dc2626;
   --shadow-card: 0 1px 3px rgba(0,0,0,.06);
@@ -117,7 +117,7 @@ body.low-power .glass, body.low-power .studio-header { backdrop-filter: none; }
 #output-card { order: -1; }
 
 /* ── Pattern input ── */
-#pattern { font-family: var(--mono); font-size: 1rem; border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; width: 100%; background: var(--bg-input); color: var(--text); outline: none; transition: border-color .15s, box-shadow .15s; resize: vertical; min-height: 72px; line-height: 1.6; }
+#pattern { font-family: var(--mono); font-size: 1rem; border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; width: 100%; background: var(--bg-input); color: var(--text); outline: none; transition: border-color .15s, box-shadow .15s; resize: vertical; min-height: 110px; line-height: 1.6; }
 #pattern:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-subtle); }
 #pattern::placeholder { color: var(--text-muted); }
 .pattern-help { font-size: .82rem; color: var(--text-muted); margin-top: 8px; line-height: 1.5; }
@@ -137,6 +137,12 @@ body.low-power .glass, body.low-power .studio-header { backdrop-filter: none; }
 .col-preview:empty { margin-top: 0; }
 .col-tag { display: inline-flex; align-items: center; gap: 4px; background: var(--accent-subtle); color: var(--accent); border: 1px solid rgba(99,102,241,.2); font-family: var(--mono); font-size: .82rem; padding: 4px 12px; border-radius: 20px; white-space: nowrap; max-width: 200px; overflow: hidden; text-overflow: ellipsis; }
 .col-tag .col-num { background: var(--accent); color: #fff; width: 16px; height: 16px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: .6rem; font-weight: 700; flex-shrink: 0; }
+.col-tag.col-more {
+  background: color-mix(in srgb, var(--bg-solid) 85%, var(--accent) 15%);
+  color: var(--text-secondary);
+  border-color: color-mix(in srgb, var(--border) 65%, transparent);
+  font-weight: 600;
+}
 .col-sep { color: var(--text-muted); font-size: .65rem; font-weight: 700; }
 
 /* ── Generate bar ── */
@@ -196,7 +202,7 @@ body.low-power .glass, body.low-power .studio-header { backdrop-filter: none; }
 [data-theme="dark"] .warn { color: #fbbf24; }
 
 /* ── Autocomplete ── */
-.ac-box { position: fixed; z-index: 220; min-width: 250px; max-width: 420px; max-height: 240px; overflow-y: auto; background: var(--bg-solid); border: 1px solid color-mix(in srgb, var(--border) 70%, #000 30%); border-radius: 10px; box-shadow: var(--shadow-lg); display: none; }
+.ac-box { position: fixed; z-index: 420; min-width: 250px; max-width: 420px; max-height: 240px; overflow-y: auto; background: var(--bg-solid); border: 1px solid color-mix(in srgb, var(--border) 70%, #000 30%); border-radius: 10px; box-shadow: var(--shadow-lg); display: none; }
 .ac-item { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 10px; cursor: pointer; border-bottom: 1px solid var(--border); }
 .ac-item:last-child { border-bottom: none; }
 .ac-item.active { background: var(--accent-subtle); }
@@ -435,8 +441,8 @@ body.low-power .glass, body.low-power .studio-header { backdrop-filter: none; }
 
 /* ── Theme chooser popup ── */
 .theme-chooser-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.7); z-index: 300; align-items: center; justify-content: center; }
-.theme-chooser-overlay.open { display: flex; }
-.theme-chooser { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; box-shadow: var(--shadow-lg); padding: 40px 36px 32px; text-align: center; max-width: 420px; width: 90%; }
+.theme-chooser-overlay.open { display: flex; pointer-events: none; }
+.theme-chooser { pointer-events: auto; background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; box-shadow: var(--shadow-lg); padding: 40px 36px 32px; text-align: center; max-width: 420px; width: 90%; }
 .theme-chooser h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 6px; }
 .theme-chooser p { font-size: 1rem; color: var(--text-secondary); margin-bottom: 28px; }
 .theme-choices { display: flex; gap: 16px; justify-content: center; }
@@ -445,6 +451,69 @@ body.low-power .glass, body.low-power .studio-header { backdrop-filter: none; }
 .theme-choice .choice-icon { font-size: 2.2rem; margin-bottom: 8px; display: block; }
 .theme-choice .choice-label { font-size: .95rem; font-weight: 700; color: var(--text); display: block; }
 .theme-choice .choice-sub { font-size: .78rem; color: var(--text-muted); display: block; margin-top: 2px; }
+
+/* ── First-run onboarding ── */
+.onboarding-overlay { display: none; position: fixed; inset: 0; z-index: 360; }
+.onboarding-overlay.open { display: block; }
+.onboarding-dim { position: absolute; inset: 0; background: rgba(2,6,23,.56); }
+[data-theme="light"] .onboarding-dim { background: rgba(15,23,42,.34); }
+.onboarding-overlay.has-target .onboarding-dim { background: transparent; }
+.onboarding-spotlight {
+  position: fixed; border-radius: 14px;
+  border: 1px solid color-mix(in srgb, var(--accent) 72%, #fff 28%);
+  box-shadow: 0 0 0 9999px rgba(2,6,23,.50), 0 10px 24px rgba(2,6,23,.34), 0 0 0 1px rgba(255,255,255,.24) inset;
+  transition: left .25s ease, top .25s ease, width .25s ease, height .25s ease, opacity .2s ease;
+  pointer-events: none; opacity: 0;
+}
+.onboarding-overlay.has-target .onboarding-spotlight { opacity: 1; }
+.onboarding-card {
+  position: absolute; right: 16px; bottom: 16px; width: min(480px, calc(100vw - 28px));
+  background: color-mix(in srgb, var(--bg-card) 95%, #020617 5%);
+  border: 1px solid color-mix(in srgb, var(--border) 78%, transparent);
+  border-radius: 16px; box-shadow: var(--shadow-lg); padding: 16px 16px 14px;
+}
+[data-theme="light"] .onboarding-card { background: rgba(247,250,254,.97); }
+.onboarding-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+.onboarding-step { font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--text-muted); font-weight: 700; }
+.onboarding-close {
+  border: 1px solid var(--border); background: transparent; color: var(--text-muted);
+  width: 28px; height: 28px; border-radius: 8px; cursor: pointer;
+}
+.onboarding-close:hover { color: var(--text); border-color: var(--accent); }
+.onboarding-title { font-size: 1.08rem; font-weight: 800; color: var(--text); margin-bottom: 6px; }
+.onboarding-body { font-size: .88rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 12px; }
+.onboarding-flow {
+  border: 1px solid color-mix(in srgb, var(--border) 72%, transparent);
+  background: color-mix(in srgb, var(--bg-solid) 82%, transparent);
+  border-radius: 12px; padding: 10px; margin-bottom: 12px;
+}
+.onboarding-flow-track { display: flex; align-items: center; gap: 9px; }
+.flow-dot {
+  min-width: 96px; text-align: center; padding: 8px 7px; border-radius: 10px; font-size: .72rem; font-weight: 700;
+  border: 1px solid color-mix(in srgb, var(--border) 70%, transparent); color: var(--text-secondary);
+  background: color-mix(in srgb, var(--bg-card) 78%, transparent);
+}
+.flow-dot.active { color: #fff; border-color: color-mix(in srgb, var(--accent) 72%, transparent); background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 85%, #3b82f6 15%), color-mix(in srgb, var(--accent) 95%, #1d4ed8 5%)); }
+.flow-arrow { flex: 1; min-width: 24px; height: 2px; background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 45%, transparent), color-mix(in srgb, var(--accent) 85%, transparent), color-mix(in srgb, var(--accent) 45%, transparent)); background-size: 200% 100%; animation: flow-slide 1.35s linear infinite; opacity: .9; }
+@keyframes flow-slide { to { background-position: 200% 0; } }
+.onboarding-actions { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.onboarding-actions-left, .onboarding-actions-right { display: flex; gap: 8px; align-items: center; }
+.tour-btn {
+  border: 1px solid var(--border); color: var(--text-secondary); background: color-mix(in srgb, var(--bg-solid) 84%, transparent);
+  border-radius: 9px; padding: 8px 12px; font-size: .82rem; cursor: pointer; font-weight: 700;
+}
+.tour-btn:hover { border-color: var(--accent); color: var(--accent); }
+.tour-btn.primary { background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 80%, #3b82f6 20%), color-mix(in srgb, var(--accent) 94%, #1d4ed8 6%)); border-color: color-mix(in srgb, var(--accent) 55%, transparent); color: #fff; }
+.tour-btn.primary:hover { filter: brightness(1.03); color: #fff; }
+@media (prefers-reduced-motion: reduce) {
+  .onboarding-spotlight { transition: none; }
+  .flow-arrow { animation: none; }
+}
+@media (max-width: 860px) {
+  .onboarding-card { left: 10px; right: 10px; bottom: 10px; width: auto; }
+  .onboarding-flow-track { gap: 6px; }
+  .flow-dot { min-width: 74px; font-size: .66rem; }
+}
 
 /* ── Footer ── */
 .site-footer { text-align: center; padding: 24px 16px 32px; font-size: .85rem; color: var(--text-muted); line-height: 1.8; position: relative; z-index: 1; }
@@ -643,6 +712,11 @@ body { overflow-x: hidden; }
   color: #67e8f9;
   background: rgba(34,211,238,.12);
 }
+[data-theme="light"] .example-badge {
+  border-color: rgba(71,85,105,.42);
+  color: #1f3a57;
+  background: rgba(100,116,139,.16);
+}
 .example-blocks { font-size: .62rem; letter-spacing: .08em; text-transform: uppercase; color: #64748b; font-weight: 700; }
 .example-main-title { font-size: 1.04rem; font-weight: 800; color: #e2e8f0; margin-bottom: 6px; }
 [data-theme="light"] .example-main-title { color: #111827; }
@@ -688,6 +762,56 @@ body { overflow-x: hidden; }
 .example-flow-node b { display: block; font-size: .58rem; text-transform: uppercase; letter-spacing: .08em; color: #93c5fd; margin-bottom: 4px; }
 .example-flow-node span { font-family: var(--mono); font-size: .68rem; color: #e2e8f0; word-break: break-all; }
 [data-theme="light"] .example-flow-node span { color: #334155; }
+[data-theme="light"] .studio-left .card,
+[data-theme="light"] .studio-right .card,
+[data-theme="light"] .studio-main .card {
+  background: color-mix(in srgb, var(--bg-card) 97%, transparent);
+  border-color: color-mix(in srgb, #7f93a8 58%, var(--border) 42%);
+}
+[data-theme="light"] .node-head {
+  background: color-mix(in srgb, #c2cfdb 92%, transparent);
+  color: #23364a;
+  border-bottom-color: color-mix(in srgb, #8195aa 46%, transparent);
+}
+[data-theme="light"] .node-head .node-id {
+  color: #1f3550;
+  font-weight: 700;
+  background: color-mix(in srgb, #dde6ef 98%, transparent);
+  border-color: color-mix(in srgb, #6f869d 64%, transparent);
+}
+[data-theme="light"] .method-node .node-head {
+  background: linear-gradient(180deg, rgba(102,76,180,.30), rgba(102,76,180,.20));
+  color: #23364a;
+}
+[data-theme="light"] .method-node .method-pill-preview { color: #17385e; }
+[data-theme="light"] .method-node .method-mini { color: #3b5169; }
+[data-theme="light"] .method-remove {
+  color: #20374f;
+  border-color: color-mix(in srgb, #6f869d 56%, var(--border) 44%);
+  background: color-mix(in srgb, #e2eaf2 92%, transparent);
+}
+[data-theme="light"] .workflow-canvas {
+  background: radial-gradient(1200px 520px at 20% 0%, rgba(19,91,236,.10), transparent 60%),
+              radial-gradient(900px 440px at 100% 80%, rgba(34,197,94,.08), transparent 60%),
+              linear-gradient(to bottom right, rgba(210,220,230,.90), rgba(203,214,225,.92));
+}
+[data-theme="light"] .flow-grid { opacity: .42; }
+[data-theme="light"] .workflow-ctrl-btn {
+  border-color: color-mix(in srgb, #70859a 58%, var(--border) 42%);
+  background: color-mix(in srgb, #dde6ef 94%, transparent);
+  color: #33495f;
+}
+[data-theme="light"] .workflow-ctrl-btn:hover { color: #17385e; border-color: #2b4d76; }
+[data-theme="light"] .pattern-help { color: #445a71; }
+[data-theme="light"] .toolbox-head,
+[data-theme="light"] .tool-cat { color: #32475e; }
+[data-theme="light"] .tool-action-btn { color: #24374c; }
+[data-theme="light"] .tool-action-btn small { color: #4a5f75; }
+[data-theme="light"] .toolbox-search {
+  background: color-mix(in srgb, #e7edf4 96%, transparent);
+  color: #1c3146;
+  border-color: color-mix(in srgb, #7d92a8 62%, var(--border) 38%);
+}
 .example-flow-conn { min-width: 20px; height: 2px; background: linear-gradient(90deg, rgba(59,130,246,.8), rgba(168,85,247,.8)); border-radius: 999px; }
 @media(max-width:900px){ .example-tutorial-inner { grid-template-columns: 1fr; } }
 .studio-left .card, .studio-right .card, .studio-main .card {
@@ -723,17 +847,7 @@ body { overflow-x: hidden; }
   animation: flow-drift 4.8s linear infinite, flow-pulse 2.6s ease-in-out infinite;
 }
 .flow-link::after {
-  content: '';
-  position: absolute;
-  right: -1px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 0;
-  height: 0;
-  border-top: 5px solid transparent;
-  border-bottom: 5px solid transparent;
-  border-left: 8px solid rgba(52,211,153,.85);
-  filter: drop-shadow(0 0 6px rgba(52,211,153,.25));
+  content: none;
 }
 .flow-node {
   position: relative; z-index: 2;
@@ -783,6 +897,37 @@ body { overflow-x: hidden; }
   padding: 2px 7px;
   letter-spacing: .04em;
 }
+.node-step-preview {
+  display: none;
+  border-top: 1px solid color-mix(in srgb, var(--border) 55%, transparent);
+  background: color-mix(in srgb, var(--bg-solid) 86%, transparent);
+  padding: 7px 10px 8px;
+  cursor: pointer;
+}
+.node-step-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 4px; }
+.node-step-title { font-size: .61rem; text-transform: uppercase; letter-spacing: .08em; font-weight: 700; color: var(--text-muted); }
+.node-step-meta { font-size: .62rem; color: var(--text-muted); }
+.node-step-lines {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: .71rem;
+  line-height: 1.35;
+  color: var(--text-secondary);
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: none;
+  overflow: hidden;
+}
+.node-step-preview:hover {
+  background: color-mix(in srgb, var(--bg-solid) 80%, transparent);
+}
+[data-theme="light"] .node-step-preview {
+  background: color-mix(in srgb, #e4ebf3 94%, transparent);
+  border-top-color: color-mix(in srgb, #7f93a8 42%, transparent);
+}
+[data-theme="light"] .node-step-title { color: #334b63; }
+[data-theme="light"] .node-step-meta { color: #476079; }
+[data-theme="light"] .node-step-lines { color: #243a50; }
 .node-pattern { grid-column: 1; grid-row: 1; }
 .node-options { grid-column: 2; grid-row: 1; }
 .node-options .options-grid { grid-template-columns: 1fr; }
@@ -860,6 +1005,34 @@ body { overflow-x: hidden; }
 .method-node .card-body { padding: 10px 12px; }
 .method-node .method-pill-preview { font-family: var(--mono); font-size: .84rem; color: #c7d2fe; font-weight: 700; }
 .method-node .method-mini { font-size: .66rem; color: #94a3b8; margin-top: 3px; }
+.method-edit-inline {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+}
+.method-edit-input {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--mono);
+  font-size: .78rem;
+  border: 1px solid color-mix(in srgb, var(--border) 72%, transparent);
+  border-radius: 8px;
+  padding: 5px 8px;
+  background: color-mix(in srgb, var(--bg-solid) 84%, transparent);
+  color: var(--text);
+}
+.method-edit-save, .method-edit-cancel {
+  border: 1px solid color-mix(in srgb, var(--border) 72%, transparent);
+  border-radius: 8px;
+  padding: 5px 8px;
+  font-size: .72rem;
+  cursor: pointer;
+  background: color-mix(in srgb, var(--bg-solid) 84%, transparent);
+  color: var(--text-secondary);
+}
+.method-edit-save:hover { color: var(--accent); border-color: color-mix(in srgb, var(--accent) 58%, var(--border) 42%); }
+.method-edit-cancel:hover { color: var(--red); border-color: color-mix(in srgb, var(--red) 58%, var(--border) 42%); }
 .method-node.compact .node-head { padding: 7px 9px; font-size: .58rem; }
 .method-node.compact .method-pill-preview { font-size: .76rem; }
 .method-node.compact .method-mini { font-size: .6rem; }
@@ -913,8 +1086,21 @@ body { overflow-x: hidden; }
   line-height: 1;
 }
 .method-remove:hover { color: var(--red); border-color: color-mix(in srgb, var(--red) 50%, var(--border) 50%); }
+.method-edit {
+  border: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+  background: transparent;
+  color: var(--text-muted);
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  cursor: pointer;
+  line-height: 1;
+  margin-right: 6px;
+  font-size: .72rem;
+}
+.method-edit:hover { color: var(--accent); border-color: color-mix(in srgb, var(--accent) 56%, var(--border) 44%); }
 .studio-main .pattern-help { font-size: .74rem; }
-.studio-main #pattern { min-height: 82px; font-size: .9rem; border-radius: 10px; }
+.studio-main #pattern { min-height: 128px; font-size: .92rem; border-radius: 10px; }
 .studio-main .gen-bar .btn { padding: 11px 16px; font-size: .92rem; }
 .node-output { display: flex; flex-direction: column; }
 .node-output #output-wrapper { flex: 1; min-height: 0; }
@@ -1011,7 +1197,7 @@ body { overflow-x: hidden; }
   min-height: 100%;
   transform-origin: 0 0;
 }
-.flow-links { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
+.flow-links { position: absolute; inset: 0; pointer-events: none; z-index: 1; display: none !important; }
 .workflow-stage.compact-links .flow-links { display: none; }
 .workflow-stage.compact-links .flow-particle { display: none !important; }
 .workflow-stage.compact-links .flow-node::before,
@@ -1022,8 +1208,8 @@ body { overflow-x: hidden; }
   max-width: min(42vw, 380px);
   will-change: left, top;
 }
-.node-pattern { left: clamp(20px, 4vw, 80px); top: clamp(88px, 18vh, 150px); width: clamp(248px, 23vw, 320px); }
-.node-options { left: clamp(300px, 34vw, 560px); top: clamp(120px, 20vh, 190px); width: clamp(260px, 24vw, 348px); }
+.node-pattern { left: clamp(20px, 4vw, 80px); top: clamp(88px, 18vh, 150px); width: clamp(300px, 30vw, 420px); }
+.node-options { left: clamp(470px, 44vw, 700px); top: clamp(120px, 20vh, 190px); width: clamp(260px, 24vw, 348px); }
 .node-output {
   right: clamp(8px, 1vw, 18px);
   left: auto;
@@ -1059,17 +1245,17 @@ body { overflow-x: hidden; }
 .workflow-ctrl-btn.wide { width: auto; min-width: 96px; padding: 0 10px; font-size: .72rem; font-weight: 700; }
 .studio-right #output-card { position: sticky; top: 10px; max-height: calc(100dvh - 86px); display: flex; flex-direction: column; }
 .studio-right #output-wrapper { flex: 1; min-height: 0; }
-.studio-right #output-area { max-height: none; height: 100%; min-height: 220px; background: color-mix(in srgb, #020617 88%, transparent); color: #dbeafe; border-top: 1px solid color-mix(in srgb, var(--border) 55%, transparent); font-size: .82rem; }
+.studio-right #output-area { height: auto; min-height: 170px; max-height: min(36vh, 300px); overflow-y: auto; background: color-mix(in srgb, #020617 88%, transparent); color: #dbeafe; border-top: 1px solid color-mix(in srgb, var(--border) 55%, transparent); font-size: .82rem; }
 .studio-right .empty-state { min-height: 220px; }
 .studio-right .output-head { background: color-mix(in srgb, var(--bg-solid) 72%, transparent); }
 .studio-right .output-title { color: #cbd5e1; }
 [data-theme="light"] .studio-right #output-area {
-  background: color-mix(in srgb, #f4f7fb 96%, transparent);
-  border-top: 1px solid color-mix(in srgb, #cbd5e1 70%, transparent);
-  color: #7c91a7;
+  background: color-mix(in srgb, #edf3f9 98%, transparent);
+  border-top: 1px solid color-mix(in srgb, #98abc0 72%, transparent);
+  color: #4f647a;
 }
-[data-theme="light"] .studio-right .output-title { color: #72879d; }
-[data-theme="light"] .studio-right .output-stats { color: #6f859b; }
+[data-theme="light"] .studio-right .output-title { color: #3a4f66; }
+[data-theme="light"] .studio-right .output-stats { color: #445a71; }
 .starter-templates {
   margin-top: 12px;
   display: grid;
@@ -1099,8 +1285,8 @@ body { overflow-x: hidden; }
 }
 
 @media(max-width:1360px) and (min-width:1021px) {
-  .node-pattern { left: clamp(16px, 2.5vw, 48px); width: clamp(226px, 22vw, 292px); }
-  .node-options { left: clamp(260px, 30vw, 460px); width: clamp(240px, 22vw, 320px); }
+  .node-pattern { left: clamp(16px, 2.5vw, 48px); width: clamp(270px, 30vw, 360px); }
+  .node-options { left: clamp(410px, 42vw, 620px); width: clamp(240px, 22vw, 320px); }
   .node-output { width: clamp(252px, 22vw, 320px); height: clamp(300px, 58vh, 500px); }
 }
 @media(max-width:1020px) {
@@ -1203,6 +1389,10 @@ body.simplified-mode .studio-right .starter-templates {
   <div class="studio-actions">
     <button class="mode-btn" id="mode-toggle-btn" onclick="toggleSimplifiedMode()">Simplified Mode</button>
     <button class="mode-btn" id="simple-reset-btn" onclick="resetSimplifiedMode()">Reset</button>
+    <button class="hdr-text-btn" onclick="startOnboarding(true)" title="Replay quick tutorial">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+      Take Tour
+    </button>
     <button class="hdr-text-btn" onclick="openExamplesModal()" title="Usage examples">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><path d="M8 6h13"/><path d="M8 12h13"/><path d="M8 18h13"/><path d="M3 6h.01"/><path d="M3 12h.01"/><path d="M3 18h.01"/></svg>
       Examples
@@ -1227,17 +1417,17 @@ body.simplified-mode .studio-right .starter-templates {
       </div>
       <div class="toolbox-list">
         <div class="tool-cat">Transformations</div>
-        <button class="tool-action-btn" type="button" id="tool-open-methods" onclick="openMethodsFromSidebar()">
+        <button class="tool-action-btn" type="button" id="tool-open-methods">
           Open Method Reference
           <small>Browse all methods with examples, params, and one-click insert.</small>
         </button>
-        <button class="tool-action-btn" type="button" id="tool-open-examples" onclick="openExamplesFromSidebar()">
+        <button class="tool-action-btn" type="button" id="tool-open-examples">
           Open Examples & Tutorials
           <small>Explore practical workflows and insert them directly.</small>
         </button>
-        <button class="tool-action-btn" type="button" id="tool-clear-all" onclick="clearAllAndSidebarSearch()">
+        <button class="tool-action-btn" type="button" id="tool-clear-all">
           Clear All
-          <small>Reset pattern, options, variables/files, workflow nodes, and output.</small>
+          <small>Reset input, options, variables/files, workflow nodes, and output.</small>
         </button>
         <div class="tool-note">Tip: type a method like <span class="tool-inline-kbd">md5</span> or <span class="tool-inline-kbd">regex</span> then press <span class="tool-inline-kbd">Enter</span>.</div>
       </div>
@@ -1295,13 +1485,13 @@ body.simplified-mode .studio-right .starter-templates {
         <section class="card flow-node node-pattern">
           <span class="node-port in" aria-hidden="true"></span>
           <span class="node-port out" aria-hidden="true"></span>
-          <div class="node-head"><span class="node-title"><span class="node-handle">⋮⋮</span>Pattern Input</span><span class="node-id">NODE 01</span></div>
+          <div class="node-head"><span class="node-title"><span class="node-handle">⋮⋮</span>Input Area</span><span class="node-id">NODE 01</span></div>
           <div class="card-body">
             <div class="section-head">
-              <div class="field-label">Pattern</div>
-              <span class="help" data-tip="Main recipe input. Space splits columns, comma splits values, dot applies methods.">?</span>
+              <div class="field-label">Input</div>
+              <span class="help" data-tip="Main input area. Paste values, ranges, and literals. Space splits columns, comma splits values, dot applies methods.">?</span>
             </div>
-            <textarea id="pattern" placeholder="Type a pattern...  e.g.  admin,root _,- pass,secret" spellcheck="false" rows="2" oninput="onPatternChange()" onkeydown="onPatternKey(event)"></textarea>
+            <textarea id="pattern" placeholder="Type or paste input...  e.g.  admin,root _,- pass,secret" spellcheck="false" rows="4" oninput="onPatternChange()" onkeydown="onPatternKey(event)"></textarea>
             <div class="pattern-help"><kbd>space</kbd> separates columns &nbsp;&middot;&nbsp; <kbd>,</kbd> separates values &nbsp;&middot;&nbsp; <kbd>1-100</kbd> ranges &nbsp;&middot;&nbsp; <kbd>.method</kbd> transforms &nbsp;&middot;&nbsp; use <kbd>`text with space`</kbd> to keep spaces in one value</div>
             <div id="warn-pattern" class="warn"></div>
             <div id="col-preview" class="col-preview"></div>
@@ -1310,6 +1500,7 @@ body.simplified-mode .studio-right .starter-templates {
               <button id="btn-cancel" class="btn btn-danger" onclick="cancelGenerate()">Cancel</button>
             </div>
           </div>
+          <div id="step-preview-input" class="node-step-preview"></div>
         </section>
 
         <section id="options-section" class="card flow-node node-options">
@@ -1332,13 +1523,10 @@ body.simplified-mode .studio-right .starter-templates {
             </div>
             <div id="warn-options" class="warn"></div>
           </div>
+          <div id="step-preview-options" class="node-step-preview"></div>
         </section>
 
         <div id="method-node-layer"></div>
-        <div class="method-legend" id="method-legend">
-          <span class="method-legend-item"><span class="source-dot global"></span>Global workflow method</span>
-          <span class="method-legend-item"><span class="source-dot pattern"></span>Inline method in pattern text</span>
-        </div>
       </div>
 
       <div class="workflow-controls">
@@ -1356,11 +1544,12 @@ body.simplified-mode .studio-right .starter-templates {
   <aside class="studio-right">
     <div class="card" id="output-card">
       <div class="output-head">
-        <span class="output-title"><span class="live-dot"></span>Live Preview <span class="help" data-tip="Generated results. Copy for quick use, Download for full output.">?</span></span>
+        <span class="output-title"><span class="live-dot"></span>Results Pane <span class="help" data-tip="Generated results. Copy for quick use, Download for full output.">?</span></span>
         <div class="output-meta">
           <span id="stats" class="output-stats"></span>
           <div class="output-actions">
-            <button class="btn btn-ghost" onclick="copyOutput()" id="btn-copy">Copy</button>
+            <button class="btn btn-ghost" onclick="copyOutput()" id="btn-copy">Copy All</button>
+            <button class="btn btn-ghost" onclick="openFullResultsWindow()">Open Full</button>
             <button class="btn btn-ghost" onclick="downloadOutput()">Download</button>
           </div>
         </div>
@@ -1371,11 +1560,6 @@ body.simplified-mode .studio-right .starter-templates {
           <div class="empty-icon">&#128187;</div>
           <h3>No output yet</h3>
           <p>Enter a pattern and hit Generate, or try an example.</p>
-          <div class="starter-templates">
-            <button class="starter-btn" type="button" onclick="applyStarterTemplate('hash')"><b>admin,root _,- pass,secret</b>Uppercase + hash combo list</button>
-            <button class="starter-btn" type="button" onclick="applyStarterTemplate('url')"><b>`https://api.example.com/v1`.host.tld</b>Quick URL parsing starter</button>
-            <button class="starter-btn" type="button" onclick="applyStarterTemplate('creds')"><b>Credential list -> .user</b>Extract usernames from multiline creds</button>
-          </div>
         </div>
         <div id="output-area" style="display:none;"></div>
       </div>
@@ -1498,10 +1682,45 @@ body.simplified-mode .studio-right .starter-templates {
   </div>
 </div>
 
+<div id="onboarding-overlay" class="onboarding-overlay" aria-hidden="true">
+  <div class="onboarding-dim"></div>
+  <div id="onboarding-spotlight" class="onboarding-spotlight"></div>
+  <div class="onboarding-card" role="dialog" aria-modal="true" aria-labelledby="onboarding-title">
+    <div class="onboarding-top">
+      <div id="onboarding-step" class="onboarding-step">Quick Tour</div>
+      <button class="onboarding-close" onclick="skipOnboarding()" aria-label="Skip tutorial">&times;</button>
+    </div>
+    <div id="onboarding-title" class="onboarding-title">Welcome to COOKED</div>
+    <div id="onboarding-body" class="onboarding-body"></div>
+    <div id="onboarding-flow" class="onboarding-flow" style="display:none;">
+      <div class="onboarding-flow-track">
+        <div class="flow-dot active">Input</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-dot active">Methods</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-dot active">Preview</div>
+      </div>
+    </div>
+    <div class="onboarding-actions">
+      <div class="onboarding-actions-left">
+        <button id="onboarding-try" class="tour-btn" type="button" style="display:none;" onclick="runOnboardingAction()">Try this step</button>
+      </div>
+      <div class="onboarding-actions-right">
+        <button class="tour-btn" type="button" onclick="skipOnboarding()">Skip</button>
+        <button id="onboarding-back" class="tour-btn" type="button" onclick="prevOnboardingStep()">Back</button>
+        <button id="onboarding-next" class="tour-btn primary" type="button" onclick="nextOnboardingStep()">Next</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 <div id="test-results"></div>
 
 <script>
+const BUILD_ID = 'preview7-fix-2026-02-19-3';
+console.info('[COOKED]', BUILD_ID);
+
 // ============================================================
 // Cook Parser — ported from pkg/parse/syntax.go + pkg/config/parse.go
 // ============================================================
@@ -1511,8 +1730,9 @@ const CookParser = {
     let tmp = '';
     let insideRaw = false;
     let insideBrackets = false;
-    for (const c of p) {
-      if (c === ',' && !insideRaw && !insideBrackets) { s.push(tmp); tmp = ''; continue; }
+    const normalized = String(p || '').replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+    for (const c of normalized) {
+      if ((c === ',' || c === '\n') && !insideRaw && !insideBrackets) { s.push(tmp); tmp = ''; continue; }
       if (c === '`') { insideRaw = !insideRaw; }
       if (!insideRaw && c === '[') insideBrackets = true;
       if (!insideRaw && c === ']') insideBrackets = false;
@@ -1672,6 +1892,72 @@ const CookMethods = {
     return values.map(v => v.split(old).join(nw));
   },
   contains(values, val) { return values.filter(v => String(v).includes(val)); },
+  grep(values, val) {
+    const raw = String(val == null ? '' : val);
+    if (!raw) return values;
+    let re = null;
+    let isRegex = false;
+    if (raw.startsWith('/') && raw.length > 1) {
+      const last = raw.lastIndexOf('/');
+      if (last > 0) {
+        const body = raw.slice(1, last);
+        const flagsRaw = raw.slice(last + 1);
+        const flags = flagsRaw.includes('i') ? flagsRaw : (flagsRaw + 'i');
+        try { re = new RegExp(body, flags); isRegex = true; } catch { re = null; }
+      }
+    }
+    if (!re && raw.startsWith('re:')) {
+      try { re = new RegExp(raw.slice(3), 'i'); isRegex = true; } catch { re = null; }
+    }
+    const needle = raw.toLowerCase();
+    const out = [];
+    for (const v of values) {
+      const txt = String(v == null ? '' : v);
+      const lines = txt.split(/\r?\n/);
+      for (const line of lines) {
+        if (isRegex) {
+          re.lastIndex = 0;
+          if (re.test(line)) out.push(line);
+        } else if (line.toLowerCase().includes(needle)) {
+          out.push(line);
+        }
+      }
+    }
+    return out;
+  },
+  grepv(values, val) {
+    const raw = String(val == null ? '' : val);
+    if (!raw) return values;
+    let re = null;
+    let isRegex = false;
+    if (raw.startsWith('/') && raw.length > 1) {
+      const last = raw.lastIndexOf('/');
+      if (last > 0) {
+        const body = raw.slice(1, last);
+        const flagsRaw = raw.slice(last + 1);
+        const flags = flagsRaw.includes('i') ? flagsRaw : (flagsRaw + 'i');
+        try { re = new RegExp(body, flags); isRegex = true; } catch { re = null; }
+      }
+    }
+    if (!re && raw.startsWith('re:')) {
+      try { re = new RegExp(raw.slice(3), 'i'); isRegex = true; } catch { re = null; }
+    }
+    const needle = raw.toLowerCase();
+    const out = [];
+    for (const v of values) {
+      const txt = String(v == null ? '' : v);
+      const lines = txt.split(/\r?\n/);
+      for (const line of lines) {
+        if (isRegex) {
+          re.lastIndex = 0;
+          if (!re.test(line)) out.push(line);
+        } else if (!line.toLowerCase().includes(needle)) {
+          out.push(line);
+        }
+      }
+    }
+    return out;
+  },
   starts(values, val) { return values.filter(v => String(v).startsWith(val)); },
   ends(values, val) { return values.filter(v => String(v).endsWith(val)); },
   minlength(values, val) {
@@ -1687,6 +1973,38 @@ const CookMethods = {
   split(values, delim) {
     const r = [];
     for (const v of values) r.push(...v.split(delim));
+    return r;
+  },
+  awkn(values, val) {
+    const raw = String(val == null ? '' : val);
+    let idx = 0;
+    let delim = ' ';
+    if (raw) {
+      const sep = raw.indexOf(':');
+      if (sep >= 0) {
+        idx = parseInt(raw.slice(0, sep), 10);
+        delim = raw.slice(sep + 1);
+      } else {
+        idx = parseInt(raw, 10);
+      }
+      if (!Number.isFinite(idx)) idx = 0;
+    }
+    if (delim === '\\t') delim = '\t';
+    const r = [];
+    for (const v of values) {
+      const line = String(v == null ? '' : v);
+      let fields;
+      if (delim === ' ') {
+        fields = line.trim().split(/\s+/).filter(Boolean);
+      } else if (delim === '') {
+        fields = line.split('');
+      } else {
+        fields = line.split(delim);
+      }
+      if (!fields.length) continue;
+      const at = idx < 0 ? fields.length + idx : idx;
+      if (at >= 0 && at < fields.length) r.push(fields[at]);
+    }
     return r;
   },
   splitindex(values, val) {
@@ -1885,7 +2203,7 @@ const CookMethods = {
 const METHOD_ALIASES = {
   u: 'upper', upper: 'upper', l: 'lower', lower: 'lower', t: 'title', title: 'title',
   trim: 'trim', ltrim: 'ltrim', rtrim: 'rtrim', unique: 'unique',
-  contains: 'contains', starts: 'starts', ends: 'ends',
+  contains: 'contains', grep: 'grep', grepv: 'grepv', awkn: 'awkn', awk: 'awkn', starts: 'starts', ends: 'ends',
   minlength: 'minlength', minlen: 'minlength', maxlength: 'maxlength', maxlen: 'maxlength',
   fb: 'filebase', filebase: 'filebase',
   sort: 'sort', sortu: 'sortu', reverse: 'reverse', replace: 'replace',
@@ -2398,7 +2716,19 @@ class CookEngine {
       } else {
         return false;
       }
-      const result = await this.applyMethods(vals, splitS.slice(1));
+      let chain = splitS.slice(1);
+      // Friendly shorthand: multiline raw literal + method chain acts line-by-line
+      // unless user already provided an explicit split[\n] as first-class step.
+      if (u.startsWith('`') && u.endsWith('`') && u.includes('\n')) {
+        const hasLineSplit = chain.some((m) => {
+          const lower = String(m || '').toLowerCase();
+          if (!lower.startsWith('split[') || !lower.endsWith(']')) return false;
+          const inside = lower.slice(6, -1);
+          return inside === '\\n' || inside === '\n';
+        });
+        if (!hasLineSplit) chain = ['split[\n]', ...chain];
+      }
+      const result = await this.applyMethods(vals, chain);
       array.push(...result);
       return true;
     }
@@ -2473,16 +2803,25 @@ class CookEngine {
 // UI Controller
 // ============================================================
 let fullResults = [];
-const MAX_DISPLAY = 10000;
+const MAX_DISPLAY = 500;
+const STEP_PREVIEW_LIMIT = 50;
+const STEP_PREVIEW_SHOW_LINES = 5;
+let STEP_PREVIEW_TIMER = 0;
+let STEP_PREVIEW_SEQ = 0;
 const PRESET_KEY = 'cooked-presets-v1';
 const PRESET_LAST_KEY = 'cooked-last-preset-v1';
 const PRESET_AUTORESTORE_KEY = 'cooked-preset-autorestore-v1';
 const FAVORITE_METHODS_KEY = 'cooked-favorite-methods-v1';
+const ONBOARDING_KEY = 'cook-onboarding-v1';
+const ONBOARDING_STATE = { open: false, step: 0, startedManually: false, pendingAfterTheme: false, followRaf: 0, enteredStep: -1, dotRestore: null };
+const METHOD_EDIT_STATE = { id: null, draft: '' };
+let TOOLBOX_SEARCH_OPEN_TIMER = 0;
 const METHOD_SNIPPETS = [
   ['upper', 'UPPERCASE'], ['lower', 'lowercase'], ['title', 'Title Case'],
   ['reverse', 'reverse'], ['sort', 'sort lines'], ['sortu', 'sort unique'], ['unique', 'keep first unique'],
   ['trim', 'trim spaces'], ['ltrim', 'trim left'], ['rtrim', 'trim right'],
-  ['contains[text]', 'keep values containing text'], ['starts[text]', 'keep values with prefix'], ['ends[text]', 'keep values with suffix'],
+  ['contains[text]', 'keep values containing text'], ['grep[text]', 'grep-style include filter'], ['grepv[text]', 'grep-style exclude filter'], ['awkn[0::]', 'awk-style field picker'],
+  ['starts[text]', 'keep values with prefix'], ['ends[text]', 'keep values with suffix'],
   ['minlength[8]', 'minimum length filter'], ['maxlength[16]', 'maximum length filter'],
   ['replace[old:new]', 'replace text'], ['split[delim]', 'split by delimiter'],
   ['splitindex[delim:0]', 'split + index'], ['filebase', 'base filename'],
@@ -2503,7 +2842,7 @@ const METHOD_CATALOG = METHOD_SNIPPETS.map(([insert, desc]) => {
 });
 const METHOD_FLOW_PALETTE = [
   'upper', 'lower', 'title', 'reverse', 'sort', 'sortu', 'unique',
-  'trim', 'contains[admin]', 'minlength[8]',
+  'trim', 'contains[admin]', 'grep[api]', 'awkn[0::]', 'minlength[8]',
   'md5', 'sha1', 'sha256', 'b64e', 'hexe', 'urle',
   'replace[old:new]', 'split[,]', 'splitindex[-:1]', 'leet[1]',
   'regex[[0-9]+]', 'json[name]', 'user', 'pass'
@@ -2521,6 +2860,9 @@ const METHOD_DETAILS = {
   rtrim: { long: 'Trim trailing whitespace only.', ex: '`  hello  `.rtrim' },
   replace: { long: 'Replace text using `replace[old:new]` format.', ex: '`hello world`.replace[o:0]' },
   contains: { long: 'Keep values that contain a substring.', ex: 'p.contains[admin]' },
+  grep: { long: 'Keep values matching text or regex (`/pattern/flags` or `re:pattern`).', ex: '`api.example.com\ncdn.example.com`.grep[api]' },
+  grepv: { long: 'Drop values matching text or regex (inverse grep).', ex: '`admin\nguest\nroot`.grepv[guest]' },
+  awkn: { long: 'Extract one field by index using `awkn[index:delimiter]` (0-based, negative indexes allowed).', ex: '`alice:pass1\nbob:pass2`.awkn[0::]' },
   starts: { long: 'Keep values that start with a prefix.', ex: 'p.starts[api-]' },
   ends: { long: 'Keep values that end with a suffix.', ex: 'p.ends[.json]' },
   minlength: { long: 'Keep values with minimum length `n`.', ex: 'p.minlength[8]' },
@@ -2573,6 +2915,9 @@ const METHOD_DETAILS = {
 };
 const METHOD_PARAM_GUIDE = {
   contains: 'Params: [text] - keep only lines containing text.',
+  grep: 'Params: [text] or [/regex/flags] or [re:pattern] - keep matching lines.',
+  grepv: 'Params: same as grep - remove matching lines.',
+  awkn: 'Params: [index:delimiter] - pick a field (0-based). Example awkn[1::] for password from user:pass.',
   starts: 'Params: [prefix] - keep only lines starting with prefix.',
   ends: 'Params: [suffix] - keep only lines ending with suffix.',
   minlength: 'Params: [n] - keep strings with length >= n.',
@@ -2591,6 +2936,81 @@ const METHOD_FLOW_STATE = { items: [], dragIndex: -1, dragMethod: '', nextId: 1,
 const METHOD_SELECTION = new Set();
 const WORKFLOW_HISTORY = { undo: [], redo: [], max: 80, restoring: false };
 let METHOD_FLOW_LAST_SYNC = '';
+let LAST_PATTERN_TEXT_FOR_UNDO = '';
+function extractPatternMethodsFromText(patternText) {
+  const methods = [];
+  const entries = extractPatternMethodEntriesFromText(patternText);
+  for (const e of entries) methods.push(e.method);
+  return methods;
+}
+
+function getPatternTokensWithRanges(text) {
+  const raw = String(text || '');
+  const tokens = [];
+  let inBacktick = false;
+  let start = -1;
+  for (let i = 0; i < raw.length; i++) {
+    const ch = raw[i];
+    if (ch === '`') {
+      if (start < 0) start = i;
+      inBacktick = !inBacktick;
+      continue;
+    }
+    const isSep = !inBacktick && (ch === ' ' || ch === '\t' || ch === '\n');
+    if (isSep) {
+      if (start >= 0) {
+        tokens.push({ token: raw.slice(start, i), start, end: i });
+        start = -1;
+      }
+      continue;
+    }
+    if (start < 0) start = i;
+  }
+  if (start >= 0) tokens.push({ token: raw.slice(start), start, end: raw.length });
+  return tokens;
+}
+
+function extractPatternMethodEntriesFromText(patternText) {
+  const out = [];
+  const pattern = String(patternText || '').trim();
+  const tokens = pattern ? getPatternTokensWithRanges(patternText) : [];
+  for (let tokenIndex = 0; tokenIndex < tokens.length; tokenIndex++) {
+    const tokenObj = tokens[tokenIndex];
+    const token = tokenObj.token;
+    if (!token) continue;
+    if (token.startsWith('`')) {
+      let close = -1;
+      let escaped = false;
+      for (let i = 1; i < token.length; i++) {
+        const ch = token[i];
+        if (ch === '\\' && !escaped) { escaped = true; continue; }
+        if (ch === '`' && !escaped) { close = i; break; }
+        escaped = false;
+      }
+      if (close > 0) {
+        const suffix = token.slice(close + 1);
+        if (suffix.startsWith('.')) {
+          const parts = CookParser.splitMethods('x' + suffix);
+          if (parts.length > 1) {
+            parts.slice(1).forEach((m, methodIndex) => {
+              out.push({ method: m, tokenIndex, methodIndex });
+            });
+          }
+        }
+      }
+      continue;
+    }
+    if (/^[A-Za-z_][A-Za-z0-9_]*(\.[A-Za-z_][A-Za-z0-9_]*(\[[^\]]*\])?)+$/.test(token)) {
+      const parts = CookParser.splitMethods(token);
+      if (parts.length > 1) {
+        parts.slice(1).forEach((m, methodIndex) => {
+          out.push({ method: m, tokenIndex, methodIndex });
+        });
+      }
+    }
+  }
+  return out;
+}
 const METHOD_NODE_UI = { width: 220, rowHeight: 92, gap: 18, compact: false };
 const EXAMPLE_LIBRARY = [
   { name: 'Combo Permutation', tags: ['cross-product'], pattern: 'admin,root _,- pass,secret', options: { methods: 'upper' }, output: 'ADMIN_PASS\nADMIN_SECRET\nADMIN-PASS\nADMIN-SECRET\nROOT_PASS\nROOT_SECRET\nROOT-PASS\nROOT-SECRET' },
@@ -2624,10 +3044,16 @@ const EXAMPLE_LIBRARY = [
   { name: 'Hex Roundtrip', tags: ['encode/decode', 'dot-chain'], pattern: '`Secret42`.hexe.hexd.upper', output: 'SECRET42' },
   { name: 'Leet + Reverse', tags: ['leet[1]', 'dot-chain'], pattern: '`password`.leet[1].reverse', output: 'dr0wss4p\n...' },
   { name: 'Replace Attack Pattern', tags: ['dot-chain'], pattern: '`admin_login`.replace[_:-].upper', output: 'ADMIN-LOGIN' },
-  { name: 'Charcode Payload', tags: ['encoding', 'dot-chain'], pattern: '`<script>alert(1)<\\/script>`.charcode', output: '&#60;&#115;...' },
+  { name: 'Charcode Payload', tags: ['encoding', 'dot-chain'], pattern: '`alert(1)`.charcode', output: '&#97;&#108;...' },
   { name: 'Subdomain Burst', tags: ['url', 'dot-chain'], pattern: '`dev.api.stage.example.com`.allsub.sortu', output: 'api\ndev\nstage' },
   { name: 'Trim + Unique Wordlist', tags: ['dot-chain'], pattern: '`  admin  ,admin, root ,root `.split[,].trim.unique', output: 'admin\nroot' },
   { name: 'Contains Admin Filter', tags: ['dot-chain'], pattern: '`admin-panel,user-home,admin-api`.split[,].contains[admin]', output: 'admin-panel\nadmin-api' },
+  { name: 'Grep API Hosts', tags: ['filters', 'dot-chain', 'url'], pattern: '`api.example.com\ncdn.example.com\napi.test.net`.grep[api.]', output: 'api.example.com\napi.test.net' },
+  { name: 'Inverse Grep Guests', tags: ['filters', 'dot-chain'], pattern: '`admin\nguest\nops\nguest-demo`.grepv[guest]', output: 'admin\nops' },
+  { name: 'AWK User Column', tags: ['filters', 'credentials', 'dot-chain'], pattern: '`alice:pass123\nbob:secret!\nguest:qwerty`.awkn[0::]', output: 'alice\nbob\nguest' },
+  { name: 'AWK Password Column', tags: ['filters', 'credentials', 'dot-chain'], pattern: '`alice:pass123\nbob:secret!\nguest:qwerty`.awkn[1::]', output: 'pass123\nsecret!\nqwerty' },
+  { name: 'Regex Grep Status', tags: ['filters', 'regex', 'dot-chain'], pattern: '`200 OK\n500 ERROR\n404 MISS\n503 DOWN`.grep[/^5\\d\\d/]', output: '500 ERROR\n503 DOWN' },
+  { name: 'Path Field Then Filter', tags: ['filters', 'url', 'dot-chain'], pattern: '`GET /api/v1/users\nPOST /login\nGET /api/v1/admin`.awkn[1: ].starts[/api/]', output: '/api/v1/users\n/api/v1/admin' },
   { name: 'StartsWith API Prefix', tags: ['dot-chain'], pattern: '`api-v1,web-v1,api-v2`.split[,].starts[api-]', output: 'api-v1\napi-v2' },
   { name: 'EndsWith JSON Files', tags: ['dot-chain'], pattern: '`alphaJSON,betaTXT,gammaJSON`.split[,].ends[JSON]', output: 'alphaJSON\ngammaJSON' },
   { name: 'MinLength Passwords', tags: ['dot-chain'], pattern: '`root,admin123,guest01,SuperSecure99`.split[,].minlength[8]', output: 'admin123\nSuperSecure99' },
@@ -2654,27 +3080,302 @@ function escapeHtml(value) {
   return String(value)
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;');
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function renderStepPreview(targetId, title, lines, total, hint) {
+  const el = document.getElementById(targetId);
+  if (!el) return;
+  el.style.display = 'block';
+  const arr = Array.isArray(lines) ? lines : [];
+  const textLines = [];
+  let truncated = false;
+  for (let i = 0; i < arr.length; i++) {
+    const parts = String(arr[i] ?? '').split(/\r?\n/);
+    for (let j = 0; j < parts.length; j++) {
+      const piece = parts[j];
+      if (textLines.length >= STEP_PREVIEW_SHOW_LINES) {
+        truncated = true;
+        break;
+      }
+      textLines.push(piece);
+    }
+    if (truncated) break;
+  }
+  if (truncated || arr.length > STEP_PREVIEW_SHOW_LINES) textLines.push('...');
+  const text = textLines.length ? textLines.join('\n') : '(no lines)';
+  const shownCount = Math.min(STEP_PREVIEW_SHOW_LINES, Math.max(0, Number(total) || 0));
+  const meta = total > shownCount ? `${shownCount}/${total.toLocaleString()} lines` : `${total.toLocaleString()} lines`;
+  const hintText = hint ? ` · ${hint}` : '';
+  el.dataset.previewCopy = text;
+  el.title = 'Click to copy this preview';
+  el.innerHTML = `<div class="node-step-head"><span class="node-step-title">${escapeHtml(title)}</span><span class="node-step-meta">${escapeHtml(meta + hintText)}</span></div><pre class="node-step-lines">${escapeHtml(text)}</pre>`;
+}
+
+function setStepPreviewVisible(targetId, visible) {
+  const el = document.getElementById(targetId);
+  if (!el) return;
+  el.style.display = visible ? 'block' : 'none';
+}
+
+function clearStepPreviews() {
+  setStepPreviewVisible('step-preview-input', false);
+  setStepPreviewVisible('step-preview-options', false);
+  document.querySelectorAll('[id^="step-preview-method-"]').forEach((el) => {
+    el.style.display = 'none';
+    el.innerHTML = '';
+  });
+}
+
+function buildPatternMethodRankMap(items, patternChain) {
+  const map = new Map();
+  const chain = Array.isArray(patternChain) ? patternChain : [];
+  const patternItems = items
+    .filter((it) => it && it.source === 'pattern')
+    .slice()
+    .sort((a, b) => (a.id - b.id));
+  const withMeta = patternItems
+    .filter((it) => Number.isFinite(it.patternTokenIndex) && Number.isFinite(it.patternMethodIndex))
+    .slice()
+    .sort((a, b) => (a.patternTokenIndex - b.patternTokenIndex) || (a.patternMethodIndex - b.patternMethodIndex) || (a.id - b.id));
+  let metaRank = 0;
+  for (const it of withMeta) {
+    map.set(it.id, metaRank++);
+  }
+  const used = new Set();
+  let rank = metaRank;
+  for (const method of chain) {
+    const idx = patternItems.findIndex((it) => !used.has(it.id) && String(it.method || '') === String(method || ''));
+    if (idx >= 0) {
+      const it = patternItems[idx];
+      used.add(it.id);
+      if (!map.has(it.id)) map.set(it.id, rank++);
+    }
+  }
+  for (const it of patternItems) {
+    if (!map.has(it.id)) map.set(it.id, rank++);
+  }
+  return map;
+}
+
+function getMethodItemsOrdered() {
+  const stage = document.getElementById('workflow-stage');
+  const pattern = document.getElementById('pattern')?.value || '';
+  const patternChain = extractPatternMethodsFromText(pattern);
+  const rankMap = buildPatternMethodRankMap(METHOD_FLOW_STATE.items, patternChain);
+  const rows = METHOD_FLOW_STATE.items.map((item) => {
+    const el = stage ? stage.querySelector(`.method-node[data-id="${item.id}"]`) : null;
+    const y = parseFloat(el?.style.top || item.y || 0);
+    const x = parseFloat(el?.style.left || item.x || 0);
+    const pRank = item.source === 'pattern'
+      ? (rankMap.has(item.id) ? rankMap.get(item.id) : Number.MAX_SAFE_INTEGER - 1)
+      : Number.MAX_SAFE_INTEGER;
+    return { item, y, x, pRank };
+  });
+  rows.sort((a, b) => {
+    const ap = a.item.source === 'pattern';
+    const bp = b.item.source === 'pattern';
+    if (ap && bp) return (a.pRank - b.pRank) || (a.item.id - b.item.id);
+    if (ap !== bp) return ap ? -1 : 1;
+    return (a.y - b.y) || (a.x - b.x) || (a.item.id - b.item.id);
+  });
+  return rows.map((v) => v.item);
+}
+
+async function generatePreviewStage(patternCols, params, fileParams, options, limit) {
+  const engine = new CookEngine(patternCols, params, {
+    methodsForAll: options.methodsForAll || '',
+    methodParam: options.methodParam || '',
+    appendParam: options.appendParam || '',
+    min: Number.isFinite(options.min) ? options.min : -1,
+  });
+  if (fileParams) engine.fileParams = fileParams;
+  const origCollect = engine.collectResults.bind(engine);
+  engine.collectResults = async function collectLimited() {
+    await origCollect();
+    if (this.allResults.length > limit) {
+      this.allResults = this.allResults.slice(0, limit);
+      this.cancelled = true;
+    }
+  };
+  return engine.generateAsync();
+}
+
+function scheduleStepPreviewUpdate(delay = 180) {
+  if (STEP_PREVIEW_TIMER) window.clearTimeout(STEP_PREVIEW_TIMER);
+  const seq = ++STEP_PREVIEW_SEQ;
+  STEP_PREVIEW_TIMER = window.setTimeout(() => { updateWorkflowStepPreviews(seq); }, delay);
+}
+
+async function collectPreviewContext() {
+  const patternText = document.getElementById('pattern')?.value?.trim() || '';
+  if (!patternText) return null;
+  const patternCols = splitPatternColumns(patternText);
+  const previewPatternCols = splitPatternColumnsForPreview(patternText);
+  const params = {};
+  for (const row of document.querySelectorAll('#param-rows .dyn-row')) {
+    const name = row.querySelector('.param-name')?.value?.trim();
+    const val = row.querySelector('.param-value')?.value?.trim();
+    if (name) params[name] = val || '';
+  }
+  const fileParams = {};
+  for (const row of document.querySelectorAll('#file-rows .dyn-row')) {
+    const name = row.querySelector('.file-name')?.value?.trim();
+    const fileInput = row.querySelector('.file-input');
+    if (name && fileInput?.files && fileInput.files[0]) fileParams[name] = await readFileInput(fileInput);
+  }
+  const mode = document.getElementById('opt-mode').value;
+  const minValue = parseInt(document.getElementById('opt-min').value, 10);
+  let appendParam = document.getElementById('opt-append').value.trim();
+  if (mode === 'append') {
+    const cols = [];
+    for (let i = 1; i < patternCols.length; i++) cols.push(String(i));
+    appendParam = cols.join(',');
+  } else if (mode === 'mutation') {
+    appendParam = '';
+  }
+  return {
+    patternCols,
+    previewPatternCols,
+    params,
+    fileParams,
+    mode,
+    min: Number.isFinite(minValue) ? minValue : -1,
+    appendParam,
+    methodParam: document.getElementById('opt-colmethods').value.trim(),
+    globalMethods: parseMethodCsv(document.getElementById('opt-methods').value.trim()),
+    mutationProfile: document.getElementById('opt-mutate-profile')?.value || 'balanced',
+    mutationWords: parseMutationWords(document.getElementById('opt-mutate-words')?.value || '')
+  };
+}
+
+async function updateWorkflowStepPreviews(seq) {
+  if (seq !== STEP_PREVIEW_SEQ) return;
+  const ctx = await collectPreviewContext();
+  if (seq !== STEP_PREVIEW_SEQ) return;
+  if (!ctx) { clearStepPreviews(); return; }
+  try {
+    const inputStage = await generatePreviewStage(ctx.previewPatternCols, ctx.params, ctx.fileParams, {
+      methodsForAll: '',
+      methodParam: '',
+      appendParam: ctx.mode === 'append' ? ctx.appendParam : '',
+      min: ctx.min
+    }, STEP_PREVIEW_LIMIT);
+    if (seq !== STEP_PREVIEW_SEQ) return;
+    setStepPreviewVisible('step-preview-input', true);
+    renderStepPreview('step-preview-input', 'Input Expansion', inputStage, inputStage.length, ctx.mode === 'append' ? 'line-by-line base' : '');
+
+    const hasRules =
+      ctx.mode !== 'permutation' ||
+      !!ctx.methodParam ||
+      !!ctx.appendParam ||
+      ctx.min !== -1 ||
+      ctx.globalMethods.length > 0;
+
+    let rulesStage = await generatePreviewStage(ctx.previewPatternCols, ctx.params, ctx.fileParams, {
+      methodsForAll: '',
+      methodParam: ctx.methodParam,
+      appendParam: ctx.appendParam,
+      min: ctx.min
+    }, STEP_PREVIEW_LIMIT);
+    if (seq !== STEP_PREVIEW_SEQ) return;
+    if (ctx.mode === 'mutation') {
+      rulesStage = generateMutationWordlist(rulesStage, {
+        profile: ctx.mutationProfile,
+        extraWords: ctx.mutationWords
+      }).slice(0, STEP_PREVIEW_LIMIT);
+    }
+    if (hasRules) {
+      setStepPreviewVisible('step-preview-options', true);
+      renderStepPreview('step-preview-options', 'After Transform Rules', rulesStage, rulesStage.length, ctx.mode === 'mutation' ? 'mutation mode applied' : '');
+    } else {
+      setStepPreviewVisible('step-preview-options', false);
+    }
+
+    let current = rulesStage;
+    const orderedItems = getMethodItemsOrdered();
+    document.querySelectorAll('[id^="step-preview-method-"]').forEach((el) => { el.style.display = 'none'; });
+    for (const item of orderedItems) {
+      const id = item.id;
+      if (!item.method) continue;
+      const tmpEngine = new CookEngine(['x'], {}, { methodsForAll: '', methodParam: '', appendParam: '', min: -1 });
+      current = await tmpEngine.applyMethods(current, [item.method]);
+      if (seq !== STEP_PREVIEW_SEQ) return;
+      const shown = current.slice(0, STEP_PREVIEW_LIMIT);
+      renderStepPreview(`step-preview-method-${id}`, `After .${item.method}`, shown, current.length, '');
+    }
+  } catch {
+    renderStepPreview('step-preview-input', 'Input Expansion', ['Preview unavailable'], 1, '');
+    renderStepPreview('step-preview-options', 'After Transform Rules', ['Preview unavailable'], 1, '');
+  }
 }
 
 function onPatternChange() {
-  const text = document.getElementById('pattern').value.trim();
+  const patternEl = document.getElementById('pattern');
+  if (!patternEl) return;
+  const rawValue = String(patternEl.value || '');
+  if (!WORKFLOW_HISTORY.restoring && rawValue !== LAST_PATTERN_TEXT_FOR_UNDO) {
+    const snap = captureWorkflowSnapshot();
+    snap.patternText = LAST_PATTERN_TEXT_FOR_UNDO;
+    pushWorkflowUndo(snap);
+  }
+  const text = patternEl.value.trim();
   const preview = document.getElementById('col-preview');
-  if (!text) { preview.innerHTML = ''; validateInputs(); return; }
+  if (!text) {
+    preview.innerHTML = '';
+    validateInputs();
+    clearStepPreviews();
+    syncMethodFlowFromInput(true);
+    LAST_PATTERN_TEXT_FOR_UNDO = rawValue;
+    return;
+  }
   const cols = splitPatternColumns(text);
   let html = '';
-  cols.forEach((col, i) => {
+  const MAX_COL_PREVIEW_TAGS = 6;
+  const visibleCols = cols.slice(0, MAX_COL_PREVIEW_TAGS);
+  visibleCols.forEach((col, i) => {
     if (i > 0) html += '<span class="col-sep">&times;</span>';
-    const display = col.length > 24 ? col.slice(0, 22) + '..' : col;
+    const normalized = String(col || '')
+      .replace(/`/g, '')
+      .replace(/\s+/g, ' ')
+      .trim();
+    const display = normalized.length > 24 ? normalized.slice(0, 22) + '..' : normalized;
     const escaped = display.replace(/</g, '&lt;').replace(/>/g, '&gt;');
     html += `<span class="col-tag"><span class="col-num">${i + 1}</span>${escaped}</span>`;
   });
+  if (cols.length > MAX_COL_PREVIEW_TAGS) {
+    html += '<span class="col-sep">&times;</span>';
+    html += `<span class="col-tag col-more">+${(cols.length - MAX_COL_PREVIEW_TAGS).toLocaleString()} more</span>`;
+  }
   preview.innerHTML = html;
+  syncMethodFlowFromInput(true);
   validateInputs();
+  scheduleStepPreviewUpdate(120);
+  LAST_PATTERN_TEXT_FOR_UNDO = rawValue;
+}
+
+function autoWrapPatternPasteLiteral() {
+  const patternEl = document.getElementById('pattern');
+  if (!patternEl) return;
+  const value = String(patternEl.value || '');
+  const trimmed = value.trim();
+  if (!trimmed) return;
+  if (trimmed.startsWith('`') && trimmed.endsWith('`')) return;
+  const hasNewlines = trimmed.includes('\n');
+  const isSentenceLike = /\s/.test(trimmed) && !trimmed.includes(',');
+  // Keep multiline paste as a real wordlist; only wrap single-line sentence-style input.
+  if (hasNewlines || !isSentenceLike) return;
+  patternEl.value = '`' + trimmed + '`';
 }
 
 function onPatternKey(e) {
   if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); startGenerate(); }
+  if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z') {
+    // Let textarea keep native undo, then resync node graph from restored text.
+    setTimeout(() => onPatternChange(), 0);
+  }
 }
 function isTypingTarget(el) {
   if (!el) return false;
@@ -2682,6 +3383,7 @@ function isTypingTarget(el) {
   return tag === 'input' || tag === 'textarea' || !!el.closest('[contenteditable="true"]');
 }
 document.addEventListener('keydown', (e) => {
+  if (ONBOARDING_STATE.open && e.key === 'Escape') { e.preventDefault(); skipOnboarding(); return; }
   if (e.key === 'Enter' && (e.ctrlKey || e.metaKey) && !acState.input) { e.preventDefault(); startGenerate(); }
   if (e.key === 'Enter' && !e.ctrlKey && !e.metaKey && document.getElementById('method-modal')?.classList.contains('open')) {
     const tag = (document.activeElement && document.activeElement.tagName || '').toLowerCase();
@@ -2692,6 +3394,7 @@ document.addEventListener('keydown', (e) => {
     if (tag !== 'textarea') { e.preventDefault(); insertSelectedExample(false); }
   }
   if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'z') {
+    if (isTypingTarget(document.activeElement)) return;
     e.preventDefault();
     if (e.shiftKey) redoWorkflowAction();
     else undoWorkflowAction();
@@ -2747,8 +3450,8 @@ function addParamRow(name, val) {
   row.className = 'dyn-row';
   row.innerHTML = `<input type="text" placeholder="name" class="name-input param-name" value="${name || ''}" /><input type="text" placeholder="values (comma = multiple)" class="val-input param-value" value="${val || ''}" /><button class="icon-btn" onclick="this.parentElement.remove()" title="Remove">&times;</button>`;
   container.appendChild(row);
-  row.querySelector('.param-name').addEventListener('input', validateInputs);
-  row.querySelector('.param-value').addEventListener('input', validateInputs);
+  row.querySelector('.param-name').addEventListener('input', () => { validateInputs(); scheduleStepPreviewUpdate(); });
+  row.querySelector('.param-value').addEventListener('input', () => { validateInputs(); scheduleStepPreviewUpdate(); });
   if (!name) row.querySelector('.name-input').focus();
 }
 
@@ -2758,7 +3461,8 @@ function addFileRow() {
   row.className = 'dyn-row';
   row.innerHTML = '<input type="text" placeholder="name" class="name-input file-name" /><input type="file" class="val-input file-input" style="padding:4px 6px;" /><button class="icon-btn" onclick="this.parentElement.remove()" title="Remove">&times;</button>';
   container.appendChild(row);
-  row.querySelector('.file-name').addEventListener('input', validateInputs);
+  row.querySelector('.file-name').addEventListener('input', () => { validateInputs(); scheduleStepPreviewUpdate(); });
+  row.querySelector('.file-input').addEventListener('change', () => scheduleStepPreviewUpdate(120));
   row.querySelector('.name-input').focus();
 }
 
@@ -2848,7 +3552,7 @@ async function startGenerate() {
     if (fullResults.length === 0) {
       outputArea.textContent = '(no results)';
     } else if (fullResults.length > MAX_DISPLAY) {
-      outputArea.textContent = fullResults.slice(0, MAX_DISPLAY).join('\n') + `\n\n... ${(fullResults.length - MAX_DISPLAY).toLocaleString()} more lines (use Download for full output)`;
+      outputArea.textContent = fullResults.slice(0, MAX_DISPLAY).join('\n') + `\n\n... ${(fullResults.length - MAX_DISPLAY).toLocaleString()} more lines (use Open Full / Copy All / Download for complete output)`;
     } else {
       outputArea.textContent = fullResults.join('\n');
     }
@@ -2865,9 +3569,23 @@ async function startGenerate() {
 function cancelGenerate() { if (window._currentEngine) window._currentEngine.cancelled = true; }
 
 function splitPatternColumns(text) {
+  const raw = String(text || '').replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+  let sawNewline = false;
+  let sawSpaceOrTab = false;
+  let inRaw = false;
+  for (const ch of raw) {
+    if (ch === '`') { inRaw = !inRaw; continue; }
+    if (inRaw) continue;
+    if (ch === '\n') sawNewline = true;
+    else if (ch === ' ' || ch === '\t') sawSpaceOrTab = true;
+  }
+  // Friendly default for pasted wordlists: newline-only input becomes one column with line values.
+  if (sawNewline && !sawSpaceOrTab) {
+    return [raw];
+  }
   const cols = [];
   let current = '', inBacktick = false;
-  for (const ch of text) {
+  for (const ch of raw) {
     if (ch === '`') { inBacktick = !inBacktick; current += ch; continue; }
     if (!inBacktick && (ch === ' ' || ch === '\t' || ch === '\n')) {
       if (current) { cols.push(current); current = ''; }
@@ -2877,6 +3595,35 @@ function splitPatternColumns(text) {
   }
   if (current) cols.push(current);
   return cols;
+}
+
+function stripInlineMethodsFromToken(token) {
+  const t = String(token || '');
+  if (!t) return t;
+  if (t.startsWith('`')) {
+    let close = -1;
+    let escaped = false;
+    for (let i = 1; i < t.length; i++) {
+      const ch = t[i];
+      if (ch === '\\' && !escaped) { escaped = true; continue; }
+      if (ch === '`' && !escaped) { close = i; break; }
+      escaped = false;
+    }
+    if (close > 0) {
+      const suffix = t.slice(close + 1).trim();
+      if (suffix.startsWith('.')) return t.slice(0, close + 1);
+    }
+    return t;
+  }
+  if (/^[A-Za-z_][A-Za-z0-9_]*(\.[A-Za-z_][A-Za-z0-9_]*(\[[^\]]*\])?)+$/.test(t)) {
+    const parts = CookParser.splitMethods(t);
+    if (parts.length > 1) return parts[0];
+  }
+  return t;
+}
+
+function splitPatternColumnsForPreview(text) {
+  return splitPatternColumns(text).map((tok) => stripInlineMethodsFromToken(tok));
 }
 
 function parseMethodCsv(csv) {
@@ -3010,13 +3757,13 @@ function getMethodLayoutRegion() {
   if (!stage || !patternEl || !optionsEl) {
     return { startX: 20, startY: 220, availableW: Math.max(180, (stage?.clientWidth || 900) - 40), availableH: Math.max(140, (stage?.clientHeight || 560) - 240) };
   }
-  const patternLeft = parseFloat(patternEl.style.left) || 70;
-  const patternTop = parseFloat(patternEl.style.top) || 142;
-  const patternW = patternEl.offsetWidth || 274;
+  const patternLeft = parseFloat(patternEl.style.left) || DEFAULT_WORKFLOW_LAYOUT.pattern.left;
+  const patternTop = parseFloat(patternEl.style.top) || DEFAULT_WORKFLOW_LAYOUT.pattern.top;
+  const patternW = patternEl.offsetWidth || 340;
   const patternH = patternEl.offsetHeight || 180;
-  const optionsLeft = parseFloat(optionsEl.style.left) || 404;
-  const optionsTop = parseFloat(optionsEl.style.top) || 172;
-  const optionsW = optionsEl.offsetWidth || 294;
+  const optionsLeft = parseFloat(optionsEl.style.left) || DEFAULT_WORKFLOW_LAYOUT.options.left;
+  const optionsTop = parseFloat(optionsEl.style.top) || DEFAULT_WORKFLOW_LAYOUT.options.top;
+  const optionsW = optionsEl.offsetWidth || 320;
   const optionsH = optionsEl.offsetHeight || 220;
   const pad = 20;
 
@@ -3045,10 +3792,22 @@ function getMethodLayoutRegion() {
 function captureWorkflowSnapshot() {
   const pattern = document.querySelector('.node-pattern');
   const options = document.querySelector('.node-options');
+  const patternInput = document.getElementById('pattern');
+  const methodsInput = document.getElementById('opt-methods');
+  const colMethodsInput = document.getElementById('opt-colmethods');
+  const modeInput = document.getElementById('opt-mode');
+  const appendInput = document.getElementById('opt-append');
+  const minInput = document.getElementById('opt-min');
   return {
     items: METHOD_FLOW_STATE.items.map((i) => ({ ...i })),
     nextId: METHOD_FLOW_STATE.nextId,
     selected: [...METHOD_SELECTION],
+    patternText: patternInput ? patternInput.value : '',
+    globalMethodsText: methodsInput ? methodsInput.value : '',
+    colMethodsText: colMethodsInput ? colMethodsInput.value : '',
+    modeValue: modeInput ? modeInput.value : 'permutation',
+    appendValue: appendInput ? appendInput.value : '',
+    minValue: minInput ? minInput.value : '',
     pattern: pattern ? { left: parseFloat(pattern.style.left) || DEFAULT_WORKFLOW_LAYOUT.pattern.left, top: parseFloat(pattern.style.top) || DEFAULT_WORKFLOW_LAYOUT.pattern.top } : DEFAULT_WORKFLOW_LAYOUT.pattern,
     options: options ? { left: parseFloat(options.style.left) || DEFAULT_WORKFLOW_LAYOUT.options.left, top: parseFloat(options.style.top) || DEFAULT_WORKFLOW_LAYOUT.options.top } : DEFAULT_WORKFLOW_LAYOUT.options,
     scale: WORKFLOW_VIEW.scale
@@ -3065,6 +3824,20 @@ function pushWorkflowUndo(snapshot) {
 function applyWorkflowSnapshot(snapshot) {
   if (!snapshot) return;
   WORKFLOW_HISTORY.restoring = true;
+  const patternInput = document.getElementById('pattern');
+  const methodsInput = document.getElementById('opt-methods');
+  const colMethodsInput = document.getElementById('opt-colmethods');
+  const modeInput = document.getElementById('opt-mode');
+  const appendInput = document.getElementById('opt-append');
+  const minInput = document.getElementById('opt-min');
+  if (patternInput && typeof snapshot.patternText === 'string') patternInput.value = snapshot.patternText;
+  if (methodsInput && typeof snapshot.globalMethodsText === 'string') methodsInput.value = snapshot.globalMethodsText;
+  if (colMethodsInput && typeof snapshot.colMethodsText === 'string') colMethodsInput.value = snapshot.colMethodsText;
+  if (modeInput && typeof snapshot.modeValue === 'string') modeInput.value = snapshot.modeValue || 'permutation';
+  if (appendInput && typeof snapshot.appendValue === 'string') appendInput.value = snapshot.appendValue;
+  if (minInput && typeof snapshot.minValue === 'string') minInput.value = snapshot.minValue;
+  updateModeUI();
+  onPatternChange();
   METHOD_FLOW_STATE.items = (snapshot.items || []).map((i) => ({ ...i }));
   METHOD_FLOW_STATE.nextId = Number.isFinite(snapshot.nextId) ? snapshot.nextId : (METHOD_FLOW_STATE.items.length + 1);
   METHOD_SELECTION.clear();
@@ -3110,29 +3883,53 @@ function deleteSelectedMethodNodes() {
 function syncMethodFlowToInput() {
   const input = document.getElementById('opt-methods');
   if (!input) return;
-  const ordered = [...METHOD_FLOW_STATE.items].sort((a, b) => (a.x - b.x) || (a.y - b.y));
+  const ordered = getMethodItemsOrdered();
   input.value = ordered.filter(i => i.source !== 'pattern').map(i => i.method).join(',');
-  METHOD_FLOW_LAST_SYNC = input.value;
+  const patternMethods = extractPatternMethodsFromText(document.getElementById('pattern')?.value || '');
+  METHOD_FLOW_LAST_SYNC = input.value + '\n||\n' + patternMethods.join(',');
   validateInputs();
 }
 
-function syncMethodFlowFromInput() {
+function syncMethodFlowFromInput(skipUndo) {
   const raw = document.getElementById('opt-methods')?.value || '';
-  if (raw === METHOD_FLOW_LAST_SYNC && !WORKFLOW_HISTORY.restoring) return;
-  if (!WORKFLOW_HISTORY.restoring) pushWorkflowUndo(captureWorkflowSnapshot());
+  const patternEntries = extractPatternMethodEntriesFromText(document.getElementById('pattern')?.value || '');
+  const patternMethods = patternEntries.map((e) => e.method);
+  const syncKey = raw + '\n||\n' + patternMethods.join(',');
+  if (syncKey === METHOD_FLOW_LAST_SYNC && !WORKFLOW_HISTORY.restoring) {
+    // Keep visual direction canonical (left->right by execution order) even when chain text did not change.
+    layoutMethodNodes(false);
+    renderMethodFlow();
+    updateWorkflowConnectors();
+    return;
+  }
+  if (!skipUndo && !WORKFLOW_HISTORY.restoring) pushWorkflowUndo(captureWorkflowSnapshot());
   const methods = parseMethodCsv(raw);
-  METHOD_FLOW_STATE.items = methods.map((m, idx) => ({
-    id: METHOD_FLOW_STATE.nextId++,
-    method: m,
-    source: 'global',
-    x: 0,
-    y: 0
-  }));
+  METHOD_FLOW_STATE.items = [];
+  methods.forEach((m) => {
+    METHOD_FLOW_STATE.items.push({
+      id: METHOD_FLOW_STATE.nextId++,
+      method: m,
+      source: 'global',
+      x: 0,
+      y: 0
+    });
+  });
+  patternEntries.forEach((entry) => {
+    METHOD_FLOW_STATE.items.push({
+      id: METHOD_FLOW_STATE.nextId++,
+      method: entry.method,
+      source: 'pattern',
+      patternTokenIndex: entry.tokenIndex,
+      patternMethodIndex: entry.methodIndex,
+      x: 0,
+      y: 0
+    });
+  });
   METHOD_SELECTION.clear();
-  layoutMethodNodes();
+  layoutMethodNodes(false);
   renderMethodFlow();
   updateWorkflowConnectors();
-  METHOD_FLOW_LAST_SYNC = raw;
+  METHOD_FLOW_LAST_SYNC = syncKey;
 }
 
 function layoutMethodNodes(orderByCurrent) {
@@ -3175,10 +3972,20 @@ function layoutMethodNodes(orderByCurrent) {
   const slotH = METHOD_NODE_UI.rowHeight + 8;
 
   const items = [...METHOD_FLOW_STATE.items];
-  items.sort((a, b) => {
-    if (orderByCurrent) return (a.y - b.y) || (a.x - b.x) || (a.id - b.id);
-    return a.id - b.id;
-  });
+  if (orderByCurrent) {
+    items.sort((a, b) => (a.y - b.y) || (a.x - b.x) || (a.id - b.id));
+  } else {
+    const pattern = document.getElementById('pattern')?.value || '';
+    const patternChain = extractPatternMethodsFromText(pattern);
+    const rankMap = buildPatternMethodRankMap(items, patternChain);
+    items.sort((a, b) => {
+      const ra = a.source === 'pattern' ? (rankMap.get(a.id) ?? (Number.MAX_SAFE_INTEGER - 1)) : Number.MAX_SAFE_INTEGER;
+      const rb = b.source === 'pattern' ? (rankMap.get(b.id) ?? (Number.MAX_SAFE_INTEGER - 1)) : Number.MAX_SAFE_INTEGER;
+      if (ra !== rb) return ra - rb;
+      if (a.source !== b.source) return a.source === 'pattern' ? -1 : 1;
+      return a.id - b.id;
+    });
+  }
   items.forEach((item, i) => {
     const col = i % selected.cols;
     const row = Math.floor(i / selected.cols);
@@ -3263,7 +4070,8 @@ function addMethodNode(method, x, y, source) {
     y: Number.isFinite(y) ? y : 0
   });
   METHOD_SELECTION.clear();
-  layoutMethodNodes(true);
+  // Additions should follow canonical chain direction, not stale x/y ordering.
+  layoutMethodNodes(false);
   renderMethodFlow();
   syncMethodFlowToInput();
   updateWorkflowConnectors();
@@ -3292,7 +4100,8 @@ function clearMethodFlow() {
 function renderMethodFlow() {
   const layer = document.getElementById('method-node-layer');
   if (!layer) return;
-  layer.innerHTML = METHOD_FLOW_STATE.items.map((item, idx) => {
+  const orderedItems = getMethodItemsOrdered();
+  layer.innerHTML = orderedItems.map((item, idx) => {
     const meta = METHOD_CATALOG.find(m => item.method.startsWith(m.name));
     const isPattern = item.source === 'pattern';
     const kind = isPattern ? 'Inline method in pattern' : 'Global workflow method';
@@ -3302,31 +4111,162 @@ function renderMethodFlow() {
     return `<section class="card flow-node method-node${selectedClass}${compactClass}" data-id="${item.id}" style="left:${item.x}px;top:${item.y}px;width:${METHOD_NODE_UI.width}px;" tabindex="0">
       <span class="node-port in" aria-hidden="true"></span>
       <span class="node-port out" aria-hidden="true"></span>
-      <div class="node-head"><span class="node-title"><span class="node-handle">⋮⋮</span>Method</span><span class="node-id">M${idx + 1}</span><button class="method-remove" type="button" data-rm="${item.id}">&times;</button></div>
+      <div class="node-head"><span class="node-title"><span class="node-handle">⋮⋮</span>Method</span><span class="node-id">M${idx + 1}</span><span><button class="method-edit" type="button" data-edit-btn="${item.id}" title="Edit method">✎</button><button class="method-remove" type="button" data-rm="${item.id}">&times;</button></span></div>
       <div class="card-body">
-        <div class="method-pill-preview">.${escapeHtml(item.method)}</div>
+        <div class="method-pill-preview" data-edit-method="${item.id}" title="Double-click to edit this method">.${escapeHtml(item.method)}</div>
+        ${METHOD_EDIT_STATE.id === item.id
+          ? `<div class="method-edit-inline">
+              <input type="text" class="method-edit-input" data-edit-input="${item.id}" value="${escapeHtml(METHOD_EDIT_STATE.draft || item.method)}" />
+              <button type="button" class="method-edit-save" data-edit-save="${item.id}">Save</button>
+              <button type="button" class="method-edit-cancel" data-edit-cancel="${item.id}">Cancel</button>
+            </div>`
+          : ''
+        }
         <div class="method-mini">${escapeHtml(meta?.desc || 'Transformation step')} · <span class="source-dot ${dotClass}"></span>${escapeHtml(kind)}</div>
       </div>
+      <div id="step-preview-method-${item.id}" class="node-step-preview"></div>
     </section>`;
   }).join('');
   layer.querySelectorAll('.method-remove').forEach((btn) => {
     btn.addEventListener('click', () => removeFlowMethod(parseInt(btn.dataset.rm || '-1', 10)));
   });
-  layer.querySelectorAll('.method-node').forEach((nodeEl) => {
-    nodeEl.addEventListener('click', (e) => {
-      if (e.target.closest('.method-remove')) return;
-      const id = parseInt(nodeEl.dataset.id || '-1', 10);
-      const multi = e.metaKey || e.ctrlKey;
-      if (multi) {
-        if (METHOD_SELECTION.has(id)) METHOD_SELECTION.delete(id);
-        else METHOD_SELECTION.add(id);
-      } else {
-        METHOD_SELECTION.clear();
-        METHOD_SELECTION.add(id);
-      }
-      renderMethodFlow();
+  layer.querySelectorAll('[data-edit-btn]').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const id = parseInt(btn.getAttribute('data-edit-btn') || '-1', 10);
+      if (id >= 0) startInlineEditFlowMethod(id);
     });
   });
+  layer.querySelectorAll('[data-edit-method]').forEach((el) => {
+    el.addEventListener('dblclick', (e) => {
+      e.stopPropagation();
+      const id = parseInt(el.getAttribute('data-edit-method') || '-1', 10);
+      if (id >= 0) startInlineEditFlowMethod(id);
+    });
+  });
+  layer.querySelectorAll('[data-edit-save]').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const id = parseInt(btn.getAttribute('data-edit-save') || '-1', 10);
+      if (id >= 0) commitInlineEditFlowMethod(id);
+    });
+  });
+  layer.querySelectorAll('[data-edit-cancel]').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      cancelInlineEditFlowMethod();
+    });
+  });
+  layer.querySelectorAll('[data-edit-input]').forEach((inputEl) => {
+    inputEl.addEventListener('keydown', (e) => {
+      const id = parseInt(inputEl.getAttribute('data-edit-input') || '-1', 10);
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        if (id >= 0) commitInlineEditFlowMethod(id);
+      } else if (e.key === 'Escape') {
+        e.preventDefault();
+        cancelInlineEditFlowMethod();
+      }
+    });
+    inputEl.addEventListener('input', () => {
+      METHOD_EDIT_STATE.draft = inputEl.value;
+    });
+  });
+  if (METHOD_EDIT_STATE.id !== null) {
+    const editInput = layer.querySelector(`[data-edit-input="${METHOD_EDIT_STATE.id}"]`);
+    if (editInput) {
+      setTimeout(() => {
+        editInput.focus();
+        editInput.select();
+      }, 0);
+    }
+  }
+  scheduleStepPreviewUpdate(80);
+}
+
+function startInlineEditFlowMethod(id) {
+  const item = METHOD_FLOW_STATE.items.find((m) => m.id === id);
+  if (!item) return;
+  METHOD_EDIT_STATE.id = id;
+  METHOD_EDIT_STATE.draft = String(item.method || '');
+  renderMethodFlow();
+}
+
+function cancelInlineEditFlowMethod() {
+  METHOD_EDIT_STATE.id = null;
+  METHOD_EDIT_STATE.draft = '';
+  renderMethodFlow();
+}
+
+function updatePatternMethodAt(patternText, tokenIndex, methodIndex, nextMethod) {
+  const tokens = getPatternTokensWithRanges(patternText);
+  const tok = tokens[tokenIndex];
+  if (!tok) return null;
+  const token = tok.token;
+  let rebuilt = token;
+  if (token.startsWith('`')) {
+    let close = -1;
+    let escaped = false;
+    for (let i = 1; i < token.length; i++) {
+      const ch = token[i];
+      if (ch === '\\' && !escaped) { escaped = true; continue; }
+      if (ch === '`' && !escaped) { close = i; break; }
+      escaped = false;
+    }
+    if (close <= 0) return null;
+    const rawPart = token.slice(0, close + 1);
+    const suffix = token.slice(close + 1);
+    const parts = suffix.startsWith('.') ? CookParser.splitMethods('x' + suffix).slice(1) : [];
+    if (!parts.length || methodIndex < 0 || methodIndex >= parts.length) return null;
+    parts[methodIndex] = nextMethod;
+    rebuilt = rawPart + '.' + parts.join('.');
+  } else {
+    const parts = CookParser.splitMethods(token);
+    if (parts.length <= 1) return null;
+    const methods = parts.slice(1);
+    if (methodIndex < 0 || methodIndex >= methods.length) return null;
+    methods[methodIndex] = nextMethod;
+    rebuilt = parts[0] + '.' + methods.join('.');
+  }
+  return String(patternText).slice(0, tok.start) + rebuilt + String(patternText).slice(tok.end);
+}
+
+function commitInlineEditFlowMethod(id) {
+  const item = METHOD_FLOW_STATE.items.find((m) => m.id === id);
+  if (!item) return;
+  const next = String(METHOD_EDIT_STATE.draft || '').trim().replace(/^\.+/, '');
+  if (!next) {
+    showToast('Method cannot be empty');
+    return;
+  }
+  if (next === String(item.method || '')) {
+    cancelInlineEditFlowMethod();
+    return;
+  }
+  pushWorkflowUndo(captureWorkflowSnapshot());
+  if (item.source === 'pattern') {
+    const patternInput = document.getElementById('pattern');
+    const currentPattern = patternInput ? patternInput.value : '';
+    const updated = updatePatternMethodAt(currentPattern, item.patternTokenIndex, item.patternMethodIndex, next);
+    if (!patternInput || updated === null) {
+      showToast('Could not map pattern method for edit');
+      return;
+    }
+    patternInput.value = updated;
+    METHOD_EDIT_STATE.id = null;
+    METHOD_EDIT_STATE.draft = '';
+    onPatternChange();
+    showToast(`Updated inline method to .${next}`);
+    return;
+  }
+  item.method = next;
+  METHOD_EDIT_STATE.id = null;
+  METHOD_EDIT_STATE.draft = '';
+  renderMethodFlow();
+  syncMethodFlowToInput();
+  updateWorkflowConnectors();
+  scheduleStepPreviewUpdate(80);
+  showToast(`Updated method to .${next}`);
 }
 
 function initMethodFlowBuilder() {
@@ -3369,7 +4309,6 @@ function initToolboxSearch() {
     examplesBtn.dataset.search = `examples tutorials workflow templates ${exTokens}`;
   }
 
-  let openTimer = 0;
   function openMethodsWithQuery(q) {
     const query = String(q || '').trim();
     if (!query) return;
@@ -3390,13 +4329,21 @@ function initToolboxSearch() {
   function openExamplesWithQuery(q) { openExamplesFromSidebar(q); }
 
   function scheduleOpen(query) {
-    if (openTimer) window.clearTimeout(openTimer);
-    openTimer = window.setTimeout(() => openMethodsWithQuery(query), 180);
+    if (ONBOARDING_STATE.open) return;
+    if (TOOLBOX_SEARCH_OPEN_TIMER) window.clearTimeout(TOOLBOX_SEARCH_OPEN_TIMER);
+    TOOLBOX_SEARCH_OPEN_TIMER = window.setTimeout(() => {
+      if (ONBOARDING_STATE.open) return;
+      openMethodsWithQuery(query);
+    }, 180);
   }
 
   input.addEventListener('input', () => {
     const q = input.value.trim();
-    if (!q) { if (openTimer) window.clearTimeout(openTimer); return; }
+    if (!q) {
+      if (TOOLBOX_SEARCH_OPEN_TIMER) window.clearTimeout(TOOLBOX_SEARCH_OPEN_TIMER);
+      TOOLBOX_SEARCH_OPEN_TIMER = 0;
+      return;
+    }
     // Debounced handoff keeps UI responsive and avoids re-render on each keystroke.
     scheduleOpen(q);
   });
@@ -3443,8 +4390,42 @@ function getSidebarSearchInput() {
 }
 
 function clearSidebarSearch() {
+  if (TOOLBOX_SEARCH_OPEN_TIMER) {
+    window.clearTimeout(TOOLBOX_SEARCH_OPEN_TIMER);
+    TOOLBOX_SEARCH_OPEN_TIMER = 0;
+  }
   const input = getSidebarSearchInput();
-  if (input) input.value = '';
+  if (input) {
+    input.value = '';
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    input.blur();
+  }
+}
+
+function safeOpenMethodsSidebar(seedQuery) {
+  const q = String(seedQuery || '').trim();
+  if (typeof openMethodModal === 'function') {
+    openMethodModal({ query: q, focus: true });
+    const methodSearch = document.getElementById('method-search-input');
+    if (methodSearch) {
+      methodSearch.value = q;
+      if (typeof filterMethods === 'function') filterMethods(q);
+    }
+  }
+  clearSidebarSearch();
+}
+
+function safeOpenExamplesSidebar(seedQuery) {
+  const q = String(seedQuery || '').trim();
+  if (typeof openExamplesModal === 'function') {
+    openExamplesModal();
+    const exSearch = document.getElementById('examples-search-input');
+    if (exSearch) {
+      exSearch.value = q;
+      if (typeof filterExamples === 'function') filterExamples(q);
+    }
+  }
+  clearSidebarSearch();
 }
 
 function openMethodsFromSidebar(seedQuery) {
@@ -3468,6 +4449,43 @@ function openExamplesFromSidebar(seedQuery) {
     filterExamples(q);
   }
   clearSidebarSearch();
+}
+
+// Resilient global wrappers for inline handlers and cached/stale DOM callbacks.
+window.openMethodsFromSidebar = function openMethodsFromSidebarGlobal(seedQuery) {
+  return safeOpenMethodsSidebar(seedQuery);
+};
+window.openExamplesFromSidebar = function openExamplesFromSidebarGlobal(seedQuery) {
+  return safeOpenExamplesSidebar(seedQuery);
+};
+
+function bindPrimaryActionButtons() {
+  const methodsBtn = document.getElementById('tool-open-methods');
+  const examplesBtn = document.getElementById('tool-open-examples');
+  const clearBtn = document.getElementById('tool-clear-all');
+  const hdrExamples = document.querySelector('.studio-actions .hdr-text-btn[title=\"Usage examples\"]');
+  const hdrMethods = document.querySelector('.studio-actions .hdr-text-btn[title=\"Method reference\"]');
+
+  if (methodsBtn) {
+    methodsBtn.removeAttribute('onclick');
+    methodsBtn.onclick = () => safeOpenMethodsSidebar();
+  }
+  if (examplesBtn) {
+    examplesBtn.removeAttribute('onclick');
+    examplesBtn.onclick = () => safeOpenExamplesSidebar();
+  }
+  if (clearBtn) {
+    clearBtn.removeAttribute('onclick');
+    clearBtn.onclick = () => clearAllAndSidebarSearch();
+  }
+  if (hdrExamples) {
+    hdrExamples.removeAttribute('onclick');
+    hdrExamples.onclick = () => openExamplesModal();
+  }
+  if (hdrMethods) {
+    hdrMethods.removeAttribute('onclick');
+    hdrMethods.onclick = () => openMethodModal();
+  }
 }
 
 function clearAllAndSidebarSearch() {
@@ -3745,6 +4763,7 @@ function validateInputs() {
   const wo = document.getElementById('warn-options');
   wo.style.display = badCol.length ? 'block' : 'none';
   wo.textContent = badCol.length ? ('Invalid per-column syntax segments: ' + badCol.join('; ')) : '';
+  scheduleStepPreviewUpdate(200);
 }
 
 function getPresets() {
@@ -3875,9 +4894,69 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove('show'), 2000);
 }
 
+async function copyNodePreviewFromElement(el) {
+  if (!el) return;
+  const txt = String(el.dataset.previewCopy || '').trim();
+  if (!txt || txt === '(no lines)') return;
+  try {
+    await navigator.clipboard.writeText(txt);
+    showToast('Preview copied');
+  } catch {
+    showToast('Copy failed');
+  }
+}
+
 function copyOutput() {
   if (fullResults.length === 0) return;
   navigator.clipboard.writeText(fullResults.join('\n')).then(() => showToast('Copied to clipboard'));
+}
+
+function openFullResultsWindow() {
+  if (fullResults.length === 0) {
+    showToast('No results yet. Click Generate first.');
+    return;
+  }
+  const win = window.open('about:blank', '_blank');
+  if (!win) {
+    // Fallback keeps the action useful even if popups are restricted.
+    downloadOutput();
+    showToast('Popup blocked. Downloaded output instead.');
+    return;
+  }
+  try {
+    const doc = win.document;
+    doc.open();
+    doc.write('<!doctype html><html><head><meta charset="utf-8"><title>Cooked Results</title></head><body>');
+    doc.close();
+    if (!doc.documentElement) {
+      const html = doc.createElement('html');
+      doc.appendChild(html);
+    }
+    if (!doc.head) {
+      const head = doc.createElement('head');
+      doc.documentElement.insertBefore(head, doc.documentElement.firstChild);
+    }
+    if (!doc.body) {
+      const body = doc.createElement('body');
+      doc.documentElement.appendChild(body);
+    }
+    doc.body.innerHTML = '';
+    doc.body.style.margin = '0';
+    doc.body.style.fontFamily = 'ui-monospace, Menlo, Consolas, monospace';
+    doc.body.style.background = '#0b1220';
+    doc.body.style.color = '#dbeafe';
+
+    const pre = doc.createElement('pre');
+    pre.textContent = fullResults.join('\n');
+    pre.style.margin = '0';
+    pre.style.padding = '14px';
+    pre.style.whiteSpace = 'pre';
+    pre.style.lineHeight = '1.45';
+    doc.body.appendChild(pre);
+  } catch (err) {
+    downloadOutput();
+    showToast('Could not open new window. Downloaded output instead.');
+  }
 }
 
 function downloadOutput() {
@@ -4216,37 +5295,7 @@ function extractOptionMethodsFromExample(ex) {
 
 function extractPatternMethodsFromExample(ex) {
   if (!ex) return [];
-  const methods = [];
-  const pattern = String(ex.pattern || '').trim();
-  const tokens = pattern ? splitPatternColumns(pattern) : [];
-  for (const token of tokens) {
-    if (!token) continue;
-    // Parse raw literal chains like `text`.upper.md5 without treating URL dots as methods.
-    if (token.startsWith('`')) {
-      let close = -1;
-      let escaped = false;
-      for (let i = 1; i < token.length; i++) {
-        const ch = token[i];
-        if (ch === '\\' && !escaped) { escaped = true; continue; }
-        if (ch === '`' && !escaped) { close = i; break; }
-        escaped = false;
-      }
-      if (close > 0) {
-        const suffix = token.slice(close + 1);
-        if (suffix.startsWith('.')) {
-          const parts = CookParser.splitMethods('x' + suffix);
-          if (parts.length > 1) methods.push(...parts.slice(1));
-        }
-      }
-      continue;
-    }
-    // Parse variable-style chains like p.host.tld or word.upper.reverse.
-    if (/^[A-Za-z_][A-Za-z0-9_]*(\.[A-Za-z_][A-Za-z0-9_]*(\[[^\]]*\])?)+$/.test(token)) {
-      const parts = CookParser.splitMethods(token);
-      if (parts.length > 1) methods.push(...parts.slice(1));
-    }
-  }
-  return methods;
+  return extractPatternMethodsFromText(ex.pattern || '');
 }
 
 function applyExampleConfig(index, shouldRun) {
@@ -4320,7 +5369,7 @@ function getExampleCategories(ex) {
   if (methods.includes('regex') || tags.has('regex')) cats.add('regex');
   if (methods.includes('json') || tags.has('json')) cats.add('json');
   if (methods.includes('user') || methods.includes('pass') || tags.has('advanced')) cats.add('credentials');
-  if (methods.some((m) => ['contains','starts','ends','minlength','maxlength'].includes(m))) cats.add('filters');
+  if (tags.has('filters') || methods.some((m) => ['contains','grep','grepv','awkn','starts','ends','minlength','maxlength'].includes(m))) cats.add('filters');
   if (methods.some((m) => ['smart','smartjoin','leet'].includes(m)) || tags.has('smart') || tags.has('leet[1]')) cats.add('smart');
   if (methods.length >= 2 || tags.has('dot-chain') || tags.has('col methods')) cats.add('pipelines');
 
@@ -4329,29 +5378,67 @@ function getExampleCategories(ex) {
 }
 
 function getExampleNarrative(ex) {
-  const pattern = String(ex.pattern || '').trim();
-  const methods = extractMethodsFromExample(ex).map((m) => `.${m}`);
-  const out = String(ex.output || '');
-  const outputSample = out.split('\n').filter(Boolean).slice(0, 1).join('');
-  const shortPattern = pattern.length > 34 ? `${pattern.slice(0, 34)}...` : pattern;
+  const options = ex.options || {};
+  const mode = String(options.mode || 'permutation');
+  const pattern = String(ex.pattern || '').toLowerCase();
+  const rawMethods = extractMethodsFromExample(ex);
+  const methods = rawMethods.map((m) => {
+    const s = String(m || '').toLowerCase();
+    const i = s.indexOf('[');
+    return i >= 0 ? s.slice(0, i) : s;
+  });
+  const hasRange = /(^|[^0-9])\d+-\d+([^0-9]|$)/.test(pattern) || /\*/.test(pattern);
+  const phrases = [];
 
-  let action = 'combine values and apply methods';
-  if (/(^|[^0-9])\d+-\d+([^0-9]|$)/.test(pattern)) action = 'expand the range into real values';
-  if (methods.some((m) => /\.md5|\.sha1|\.sha224|\.sha256|\.sha384|\.sha512/.test(m))) action = 'turn each value into a hash';
-  else if (methods.some((m) => /\.regex/.test(m))) action = 'extract only text that matches the regex';
-  else if (methods.some((m) => /\.json/.test(m))) action = 'read a key from JSON text';
-  else if (methods.some((m) => /\.user|\.pass/.test(m))) action = 'extract usernames or passwords';
-  else if (methods.some((m) => /\.host|\.path|\.query|\.tld|\.subdomain/.test(m))) action = 'extract parts of URLs/domains';
-  else if (methods.some((m) => /\.b64|\.hex|\.url|\.xml|\.unicode|\.utf16|\.charcode/.test(m))) action = 'encode/decode text';
-  else if (methods.some((m) => /\.contains|\.starts|\.ends|\.minlength|\.maxlength/.test(m))) action = 'filter values that match the rule';
-  else if (methods.some((m) => /\.smart|\.leet|\.replace|\.split/.test(m))) action = 'transform text format';
+  if (mode === 'append') phrases.push('pairs values line-by-line');
+  else if (mode === 'mutation') phrases.push('builds base values then generates mutation variants');
+  else if (pattern.includes(' ')) phrases.push('combines columns with cross-product permutations');
+  else if (pattern.includes(',')) phrases.push('expands comma-separated values');
 
-  const parts = [];
-  if (shortPattern) parts.push(`Input: ${shortPattern}`);
-  parts.push(`Does: ${action}`);
-  if (methods.length) parts.push(`Steps: ${methods.join(' -> ')}`);
-  if (outputSample) parts.push(`Result: ${outputSample}${out.includes('...') || out.includes('…') ? ' ...' : ''}`);
-  return parts.join(' | ');
+  if (hasRange) phrases.push('expands ranges and repeat syntax');
+
+  const hashNames = [];
+  if (methods.includes('md5')) hashNames.push('MD5');
+  if (methods.includes('sha1')) hashNames.push('SHA-1');
+  if (methods.includes('sha224')) hashNames.push('SHA-224');
+  if (methods.includes('sha256')) hashNames.push('SHA-256');
+  if (methods.includes('sha384')) hashNames.push('SHA-384');
+  if (methods.includes('sha512')) hashNames.push('SHA-512');
+  if (hashNames.length) phrases.push(`hashes results with ${hashNames.join(', ')}`);
+
+  if (methods.includes('upper')) phrases.push('converts output to uppercase');
+  if (methods.includes('lower')) phrases.push('converts output to lowercase');
+  if (methods.includes('title')) phrases.push('applies title casing');
+  if (methods.includes('reverse')) phrases.push('reverses characters');
+  if (methods.includes('trim') || methods.includes('ltrim') || methods.includes('rtrim')) phrases.push('trims whitespace');
+  if (methods.includes('replace')) phrases.push('replaces matching text segments');
+  if (methods.includes('split') || methods.includes('splitindex')) phrases.push('splits values by delimiters');
+  if (methods.includes('contains') || methods.includes('starts') || methods.includes('ends') || methods.includes('minlength') || methods.includes('maxlength')) phrases.push('filters values by match/length rules');
+  if (methods.includes('unique')) phrases.push('keeps only first unique values');
+  if (methods.includes('sort')) phrases.push('sorts results');
+  if (methods.includes('sortu')) phrases.push('sorts and removes duplicates');
+  if (methods.includes('regex')) phrases.push('extracts regex matches');
+  if (methods.includes('json')) phrases.push('extracts JSON fields');
+  if (methods.includes('user') || methods.includes('pass')) phrases.push('extracts credential components');
+  if (methods.includes('leet')) phrases.push('generates leetspeak variants');
+  if (methods.includes('smart') || methods.includes('smartjoin')) phrases.push('normalizes smart word tokens');
+  if (methods.some((m) => ['b64e','b64d','hexe','hexd','urle','urld','urlea','jsone','jsonu','xmle','xmlu','unicodee','unicoded','utf16','utf16be','charcode'].includes(m))) {
+    phrases.push('encodes or decodes text format');
+  }
+  if (methods.some((m) => ['scheme','host','port','path','query','keys','value','domain','tld','subdomain','allsub','alldir','fragment'].includes(m))) {
+    phrases.push('parses URL/domain components');
+  }
+
+  const unique = [];
+  const seen = new Set();
+  for (const p of phrases) {
+    if (!p || seen.has(p)) continue;
+    seen.add(p);
+    unique.push(p);
+  }
+  if (!unique.length) return 'Generates output from the configured workflow chain.';
+  if (unique.length === 1) return unique[0].charAt(0).toUpperCase() + unique[0].slice(1) + '.';
+  return unique[0].charAt(0).toUpperCase() + unique[0].slice(1) + ', then ' + unique.slice(1).join(', then ') + '.';
 }
 
 function filterExamples(query) {
@@ -4406,6 +5493,336 @@ function updateThemeIcons(theme) {
 function chooseTheme(theme) {
   applyTheme(theme);
   document.getElementById('theme-chooser').classList.remove('open');
+  if (ONBOARDING_STATE.pendingAfterTheme) {
+    ONBOARDING_STATE.pendingAfterTheme = false;
+    setTimeout(() => startOnboarding(false), 120);
+  }
+}
+
+function onboardingSteps() {
+  return [
+    {
+      title: 'Welcome to COOKED',
+      body: 'COOKED generates custom wordlists and transforms text fast. This 60-second tour will show the core workflow.',
+      showFlow: true
+    },
+    {
+      selector: '.node-pattern',
+      title: '1) Input Text Area',
+      body: 'Write or paste values and ranges here. Use commas for alternatives and spaces for columns. Backticks keep spaces in one value.',
+      actionLabel: 'Load a range sample',
+      action: () => {
+        const p = document.getElementById('pattern');
+        p.value = '1-5';
+        onPatternChange();
+        validateInputs();
+        p.focus();
+      }
+    },
+    {
+      selector: '#pattern',
+      title: '2) Dot Methods in Input',
+      body: 'Type a dot after text (example: test.) to get method suggestions, then pick one like upper to build chains such as test.upper.',
+      actionLabel: 'Show dot suggestions',
+      action: () => {
+        const p = document.getElementById('pattern');
+        if (!p) return;
+        ONBOARDING_STATE.dotRestore = p.value;
+        const current = p.value || '';
+        if (!current.trim()) p.value = 'test.';
+        else if (!current.endsWith('.')) p.value = current.replace(/\s+$/, '') + '.';
+        p.focus();
+        p.setSelectionRange(p.value.length, p.value.length);
+        updateAutocomplete(p);
+        setTimeout(() => updateAutocomplete(p), 30);
+      },
+      exit: () => {
+        hideAutocomplete();
+        const p = document.getElementById('pattern');
+        if (p && ONBOARDING_STATE.dotRestore !== null) p.value = ONBOARDING_STATE.dotRestore;
+        ONBOARDING_STATE.dotRestore = null;
+        onPatternChange();
+      }
+    },
+    {
+      selector: '#step-preview-input',
+      title: '3) Input Expansion Preview',
+      body: 'This preview shows the intermediate output of the current node before it goes to the next step.',
+      actionLabel: 'Preview 1-5 expansion',
+      action: () => {
+        const p = document.getElementById('pattern');
+        if (!p) return;
+        p.value = '1-5';
+        onPatternChange();
+        validateInputs();
+      }
+    },
+    {
+      selector: '.toolbox-search',
+      title: '4) Left Library Search',
+      body: 'Use left search to quickly find actions and methods in the workflow library.',
+      actionLabel: 'Search for md5',
+      action: () => {
+        const s = document.querySelector('.toolbox-search');
+        if (!s) return;
+        s.value = 'md5';
+        s.dispatchEvent(new Event('input', { bubbles: true }));
+        s.focus();
+      },
+      exit: () => clearSidebarSearch()
+    },
+    {
+      selector: '#opt-mode',
+      title: '5) Choose Combine Mode',
+      body: 'Cross-product creates all combinations. Line-by-line pairs items by row. Mutation generates typo and formatting variants.',
+      actionLabel: 'Switch to Line-by-line',
+      action: () => {
+        const mode = document.getElementById('opt-mode');
+        mode.value = 'append';
+        updateModeUI();
+        validateInputs();
+      }
+    },
+    {
+      selector: '#opt-methods',
+      title: '6) Add Global Methods',
+      body: 'Methods run in order on final output. Example: upper,sha256 or trim,unique,sortu.',
+      actionLabel: 'Apply upper + sha256',
+      action: () => {
+        const input = document.getElementById('opt-methods');
+        input.value = 'upper,sha256';
+        syncMethodFlowFromInput();
+        validateInputs();
+      }
+    },
+    {
+      selector: '#tool-open-methods',
+      title: '7) Open Methods',
+      body: 'Use Method Reference to browse all supported transformations and insert them safely.',
+      actionLabel: 'Open Method Reference',
+      action: () => openMethodModal()
+    },
+    {
+      selector: '#method-search-input',
+      title: '8) Search in Methods',
+      body: 'Search by name or alias (for example: md5, regex, json).',
+      enter: () => openMethodModal(),
+      actionLabel: 'Search sha',
+      action: () => {
+        const s = document.getElementById('method-search-input');
+        if (!s) return;
+        s.value = 'sha';
+        filterMethods('sha');
+        s.focus();
+      }
+    },
+    {
+      selector: '#tool-open-examples',
+      title: '9) Open Examples',
+      body: 'Examples are ready-made workflows you can apply directly and run.',
+      enter: () => closeMethodModal(),
+      actionLabel: 'Open Examples',
+      action: () => openExamplesModal()
+    },
+    {
+      selector: '#examples-search-input',
+      title: '10) Search in Examples',
+      body: 'Search by use case like credentials, url, hash, regex, or json.',
+      enter: () => openExamplesModal(),
+      actionLabel: 'Search credentials',
+      action: () => {
+        const s = document.getElementById('examples-search-input');
+        if (!s) return;
+        s.value = 'credential';
+        filterExamples('credential');
+        s.focus();
+      }
+    },
+    {
+      selector: '#btn-generate',
+      title: '11) Run Generation',
+      body: 'Click Generate to run the workflow and stream results into the Results Pane.',
+      actionLabel: 'Generate now',
+      enter: () => { closeMethodModal(); closeExamplesModal(); },
+      action: () => startGenerate()
+    },
+    {
+      selector: '#output-card',
+      title: '12) Review Output',
+      body: 'Results Pane shows a compact preview; use Open Full, Copy All, or Download for complete output.',
+      actionLabel: 'Copy output',
+      action: () => copyOutput()
+    },
+    {
+      selector: '#mode-toggle-btn',
+      title: '13) Simplified vs Advanced',
+      body: 'Use Simplified Mode for fast direct generation. Advanced Mode keeps the full workflow layout.',
+      actionLabel: 'Try Simplified Mode',
+      action: () => toggleSimplifiedMode()
+    },
+    {
+      title: 'You are ready',
+      body: 'Need ideas? Open Examples for ready-made workflows. You can replay this tutorial anytime with the Take Tour button.',
+      showFlow: true,
+      final: true
+    }
+  ];
+}
+
+function positionOnboardingSpotlight() {
+  if (!ONBOARDING_STATE.open) return;
+  const overlay = document.getElementById('onboarding-overlay');
+  const spotlight = document.getElementById('onboarding-spotlight');
+  if (!overlay || !spotlight) return;
+  const step = onboardingSteps()[ONBOARDING_STATE.step];
+  if (!step || !step.selector) {
+    overlay.classList.remove('has-target');
+    return;
+  }
+  const target = document.querySelector(step.selector);
+  if (!target) {
+    overlay.classList.remove('has-target');
+    return;
+  }
+  const rect = target.getBoundingClientRect();
+  if (rect.width < 2 || rect.height < 2 || rect.bottom < 0 || rect.top > window.innerHeight || rect.right < 0 || rect.left > window.innerWidth) {
+    overlay.classList.remove('has-target');
+    return;
+  }
+  const pad = step.selector === '#output-card' ? 10 : 8;
+  spotlight.style.left = Math.max(8, rect.left - pad) + 'px';
+  spotlight.style.top = Math.max(8, rect.top - pad) + 'px';
+  spotlight.style.width = Math.min(window.innerWidth - 16, rect.width + pad * 2) + 'px';
+  spotlight.style.height = Math.min(window.innerHeight - 16, rect.height + pad * 2) + 'px';
+  overlay.classList.add('has-target');
+}
+
+function startOnboardingFollow() {
+  stopOnboardingFollow();
+  const tick = () => {
+    if (!ONBOARDING_STATE.open) return;
+    positionOnboardingSpotlight();
+    ONBOARDING_STATE.followRaf = requestAnimationFrame(tick);
+  };
+  ONBOARDING_STATE.followRaf = requestAnimationFrame(tick);
+}
+
+function stopOnboardingFollow() {
+  if (!ONBOARDING_STATE.followRaf) return;
+  cancelAnimationFrame(ONBOARDING_STATE.followRaf);
+  ONBOARDING_STATE.followRaf = 0;
+}
+
+function renderOnboardingStep() {
+  const steps = onboardingSteps();
+  const step = steps[ONBOARDING_STATE.step];
+  if (!step) return;
+  const stepEl = document.getElementById('onboarding-step');
+  const titleEl = document.getElementById('onboarding-title');
+  const bodyEl = document.getElementById('onboarding-body');
+  const nextBtn = document.getElementById('onboarding-next');
+  const backBtn = document.getElementById('onboarding-back');
+  const tryBtn = document.getElementById('onboarding-try');
+  const flow = document.getElementById('onboarding-flow');
+  stepEl.textContent = `Quick Tour ${ONBOARDING_STATE.step + 1}/${steps.length}`;
+  titleEl.textContent = step.title;
+  bodyEl.textContent = step.body;
+  nextBtn.textContent = ONBOARDING_STATE.step >= steps.length - 1 ? 'Finish' : 'Next';
+  backBtn.disabled = ONBOARDING_STATE.step === 0;
+  backBtn.style.opacity = ONBOARDING_STATE.step === 0 ? '.55' : '1';
+  if (step.action) {
+    tryBtn.style.display = '';
+    tryBtn.textContent = step.actionLabel || 'Try this step';
+  } else {
+    tryBtn.style.display = 'none';
+  }
+  flow.style.display = step.showFlow ? '' : 'none';
+  if (ONBOARDING_STATE.enteredStep !== ONBOARDING_STATE.step && typeof step.enter === 'function') {
+    ONBOARDING_STATE.enteredStep = ONBOARDING_STATE.step;
+    step.enter();
+  }
+  if (step.selector) {
+    const el = document.querySelector(step.selector);
+    if (el && el.scrollIntoView) el.scrollIntoView({ behavior: 'auto', block: 'center', inline: 'nearest' });
+  }
+  setTimeout(positionOnboardingSpotlight, 30);
+  requestAnimationFrame(positionOnboardingSpotlight);
+}
+
+function startOnboarding(force) {
+  if (ONBOARDING_STATE.open) return;
+  if (!force) {
+    try {
+      if (localStorage.getItem(ONBOARDING_KEY) === 'done') return;
+    } catch {}
+  }
+  closeMethodModal();
+  closeExamplesModal();
+  const chooserOpen = document.getElementById('theme-chooser')?.classList.contains('open');
+  if (chooserOpen && !force) {
+    ONBOARDING_STATE.pendingAfterTheme = true;
+    return;
+  }
+  ONBOARDING_STATE.open = true;
+  ONBOARDING_STATE.startedManually = !!force;
+  ONBOARDING_STATE.step = 0;
+  ONBOARDING_STATE.enteredStep = -1;
+  if (document.body.classList.contains('simplified-mode')) applySimplifiedMode(false);
+  const overlay = document.getElementById('onboarding-overlay');
+  if (!overlay) return;
+  overlay.classList.add('open');
+  overlay.setAttribute('aria-hidden', 'false');
+  startOnboardingFollow();
+  renderOnboardingStep();
+}
+
+function closeOnboarding(markDone) {
+  runOnboardingStepExit(ONBOARDING_STATE.step);
+  ONBOARDING_STATE.open = false;
+  const overlay = document.getElementById('onboarding-overlay');
+  if (!overlay) return;
+  overlay.classList.remove('open', 'has-target');
+  overlay.setAttribute('aria-hidden', 'true');
+  stopOnboardingFollow();
+  if (markDone) {
+    try { localStorage.setItem(ONBOARDING_KEY, 'done'); } catch {}
+  }
+}
+
+function nextOnboardingStep() {
+  const steps = onboardingSteps();
+  if (ONBOARDING_STATE.step >= steps.length - 1) {
+    closeOnboarding(true);
+    showToast('Tutorial completed');
+    return;
+  }
+  runOnboardingStepExit(ONBOARDING_STATE.step);
+  ONBOARDING_STATE.step++;
+  renderOnboardingStep();
+}
+
+function prevOnboardingStep() {
+  if (ONBOARDING_STATE.step <= 0) return;
+  runOnboardingStepExit(ONBOARDING_STATE.step);
+  ONBOARDING_STATE.step--;
+  renderOnboardingStep();
+}
+
+function skipOnboarding() {
+  closeOnboarding(true);
+}
+
+function runOnboardingAction() {
+  const step = onboardingSteps()[ONBOARDING_STATE.step];
+  if (!step || !step.action) return;
+  step.action();
+  setTimeout(positionOnboardingSpotlight, 80);
+}
+
+function runOnboardingStepExit(idx) {
+  const step = onboardingSteps()[idx];
+  if (!step || typeof step.exit !== 'function') return;
+  step.exit();
 }
 
 function updateModeToggleLabel() {
@@ -4486,7 +5903,7 @@ function _requestConnectorFrame() {
 
 const DEFAULT_WORKFLOW_LAYOUT = {
   pattern: { left: 70, top: 142 },
-  options: { left: 404, top: 172 }
+  options: { left: 580, top: 168 }
 };
 const DEFAULT_WORKFLOW_SCALE = 0.9;
 const WORKFLOW_VIEW = { scale: DEFAULT_WORKFLOW_SCALE };
@@ -4549,6 +5966,9 @@ function resetWorkflowLayout() {
 function autoArrangeWorkflow() {
   pushWorkflowUndo(captureWorkflowSnapshot());
   applyWorkflowLayout(loadWorkflowLayout());
+  layoutMethodNodes(false);
+  renderMethodFlow();
+  syncMethodFlowToInput();
   WORKFLOW_VIEW.scale = DEFAULT_WORKFLOW_SCALE;
   applyWorkflowScale();
   updateWorkflowConnectors();
@@ -4730,6 +6150,10 @@ function updateWorkflowConnectorsNow() {
   if (!stage) return;
   const layer = document.getElementById('flow-links');
   if (!layer) return;
+  // Preview7: connector lines are intentionally disabled for a cleaner canvas.
+  layer.innerHTML = '';
+  stage.classList.add('compact-links');
+  return;
   const nodePattern = stage.querySelector('.node-pattern');
   const nodeOptions = stage.querySelector('.node-options');
   const rect = stage.getBoundingClientRect();
@@ -4835,6 +6259,16 @@ function initUXEnhancements() {
       el.addEventListener('input', syncMethodFlowFromInput);
     }
   });
+  const patternInput = document.getElementById('pattern');
+  if (patternInput) {
+    patternInput.addEventListener('paste', () => {
+      // After browser paste completes, normalize multiline input as a single raw literal block.
+      setTimeout(() => {
+        autoWrapPatternPasteLiteral();
+        onPatternChange();
+      }, 0);
+    });
+  }
   document.getElementById('opt-mode').addEventListener('change', validateInputs);
   document.getElementById('opt-mode').addEventListener('change', () => {
     const currentMode = document.getElementById('opt-mode').value;
@@ -4847,6 +6281,11 @@ function initUXEnhancements() {
   const mutationWords = document.getElementById('opt-mutate-words');
   if (mutationWords) mutationWords.addEventListener('input', validateInputs);
   document.addEventListener('click', (e) => {
+    const previewEl = e.target && e.target.closest ? e.target.closest('.node-step-preview') : null;
+    if (previewEl) {
+      copyNodePreviewFromElement(previewEl);
+      return;
+    }
     const box = document.getElementById('ac-box');
     if (!box) return;
     if (!box.contains(e.target) && e.target.id !== 'pattern' && e.target.id !== 'opt-methods' && e.target.id !== 'opt-colmethods') hideAutocomplete();
@@ -4857,13 +6296,20 @@ function initUXEnhancements() {
     layoutMethodNodes(true);
     renderMethodFlow();
     updateWorkflowConnectors();
+    positionOnboardingSpotlight();
   });
+  window.addEventListener('scroll', positionOnboardingSpotlight, true);
   refreshPresetSelect('');
   initMethodFlowBuilder();
   initToolboxSearch();
+  bindPrimaryActionButtons();
   initWorkflowDrag();
+  clearStepPreviews();
   updateModeUI();
   validateInputs();
+  LAST_PATTERN_TEXT_FOR_UNDO = String(document.getElementById('pattern')?.value || '');
+  scheduleStepPreviewUpdate(260);
+  setTimeout(() => startOnboarding(false), 260);
   setTimeout(updateWorkflowConnectors, 0);
   setTimeout(updateWorkflowConnectors, 150);
   const autoRestore = localStorage.getItem(PRESET_AUTORESTORE_KEY) === '1';
@@ -4881,8 +6327,8 @@ try {
   const m = document.getElementById('tool-open-methods');
   const e = document.getElementById('tool-open-examples');
   const c = document.getElementById('tool-clear-all');
-  if (m) m.onclick = () => openMethodsFromSidebar();
-  if (e) e.onclick = () => openExamplesFromSidebar();
+  if (m) m.onclick = () => safeOpenMethodsSidebar();
+  if (e) e.onclick = () => safeOpenExamplesSidebar();
   if (c) c.onclick = () => clearAllAndSidebarSearch();
 }
 

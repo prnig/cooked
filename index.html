@@ -1075,6 +1075,7 @@ body { overflow-x: hidden; }
 .method-legend-item .source-dot.global { background: #60a5fa; }
 .method-legend-item .source-dot.pattern { background: #22c55e; }
 .method-node .node-head { background: color-mix(in srgb, #6d28d9 16%, var(--bg-solid) 84%); }
+.mutation-node .node-head { background: color-mix(in srgb, #0f766e 22%, var(--bg-solid) 78%); }
 .method-remove {
   border: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
   background: transparent;
@@ -1100,7 +1101,7 @@ body { overflow-x: hidden; }
 }
 .method-edit:hover { color: var(--accent); border-color: color-mix(in srgb, var(--accent) 56%, var(--border) 44%); }
 .studio-main .pattern-help { font-size: .74rem; }
-.studio-main #pattern { min-height: 128px; font-size: .92rem; border-radius: 10px; }
+.studio-main #pattern { min-height: calc(128px * var(--node-scale, 1)); font-size: calc(.92rem * var(--node-scale, 1)); border-radius: 10px; }
 .studio-main .gen-bar .btn { padding: 11px 16px; font-size: .92rem; }
 .node-output { display: flex; flex-direction: column; }
 .node-output #output-wrapper { flex: 1; min-height: 0; }
@@ -1173,6 +1174,14 @@ body { overflow-x: hidden; }
   height: calc(100dvh - 64px);
   min-height: calc(100vh - 64px);
 }
+@media(max-width:1520px) and (min-width:1201px) {
+  .studio-shell {
+    grid-template-columns: clamp(188px, 17vw, 236px) minmax(0, 1fr) clamp(238px, 21vw, 308px);
+    gap: clamp(7px, .9vw, 11px);
+    padding: clamp(7px, .9vw, 11px);
+  }
+  .studio-right #output-area { max-height: min(34vh, 260px); }
+}
 @supports not (height: 100dvh) {
   .studio-shell { height: calc(100vh - 64px); }
 }
@@ -1196,6 +1205,8 @@ body { overflow-x: hidden; }
   min-width: 0;
   min-height: 100%;
   transform-origin: 0 0;
+  --node-scale: 1;
+  --node-vscale: 1;
 }
 .flow-links { position: absolute; inset: 0; pointer-events: none; z-index: 1; display: none !important; }
 .workflow-stage.compact-links .flow-links { display: none; }
@@ -1208,8 +1219,8 @@ body { overflow-x: hidden; }
   max-width: min(42vw, 380px);
   will-change: left, top;
 }
-.node-pattern { left: clamp(20px, 4vw, 80px); top: clamp(88px, 18vh, 150px); width: clamp(300px, 30vw, 420px); }
-.node-options { left: clamp(470px, 44vw, 700px); top: clamp(120px, 20vh, 190px); width: clamp(260px, 24vw, 348px); }
+.node-pattern { left: clamp(20px, 4vw, 80px); top: clamp(88px, 18vh, 150px); width: calc(clamp(300px, 30vw, 420px) * var(--node-scale)); }
+.node-options { left: clamp(470px, 44vw, 700px); top: clamp(120px, 20vh, 190px); width: calc(clamp(260px, 24vw, 348px) * var(--node-scale)); }
 .node-output {
   right: clamp(8px, 1vw, 18px);
   left: auto;
@@ -1308,6 +1319,17 @@ body { overflow-x: hidden; }
   .node-options .options-grid { grid-template-columns: 1fr; }
   .terminal-stats { grid-template-columns: 1fr; }
 }
+body.viewport-forced-simple #mode-toggle-btn { display: none; }
+.workflow-stage.workflow-tight .node-options .card-body { padding: 10px 11px; }
+.workflow-stage.workflow-tight .node-options .options-grid { gap: 7px; }
+.workflow-stage.workflow-tight .node-options .opt-field label { font-size: .64rem; }
+.workflow-stage.workflow-tight .node-options .opt-field input,
+.workflow-stage.workflow-tight .node-options .opt-field select {
+  padding: 6px 8px;
+  font-size: .74rem;
+}
+.workflow-stage.workflow-tight .pattern-help { font-size: .67rem; line-height: 1.35; }
+.workflow-stage.workflow-tight #pattern { min-height: calc(94px * var(--node-vscale, 1)); }
 
 /* Simplified mode: same engine/state, reduced UI complexity */
 body.simplified-mode .studio-shell {
@@ -1425,6 +1447,10 @@ body.simplified-mode .studio-right .starter-templates {
           Open Examples & Tutorials
           <small>Explore practical workflows and insert them directly.</small>
         </button>
+        <button class="tool-action-btn" type="button" id="tool-add-mutation-node">
+          Add Mutation Node
+          <small>Insert a mutation step with profile + custom words as node controls.</small>
+        </button>
         <button class="tool-action-btn" type="button" id="tool-clear-all">
           Clear All
           <small>Reset input, options, variables/files, workflow nodes, and output.</small>
@@ -1513,10 +1539,8 @@ body.simplified-mode .studio-right .starter-templates {
               <span class="help" data-tip="Advanced behavior controls. Leave blank to keep defaults.">?</span>
             </div>
             <div class="options-grid">
-              <div class="opt-field"><label>Combine mode <span class="help" data-tip="Cross-product multiplies values by column. Line-by-line pairs values by row index. Mutation creates typo-style and formatting variants from generated base values.">?</span></label><select id="opt-mode"><option value="permutation">Cross-product</option><option value="append">Line-by-line</option><option value="mutation">Mutation Wordlist</option></select><div class="flow-hint" id="mode-help-text"></div></div>
+              <div class="opt-field"><label>Combine mode <span class="help" data-tip="Cross-product multiplies values by column. Line-by-line pairs values by row index.">?</span></label><select id="opt-mode"><option value="permutation">Cross-product</option><option value="append">Line-by-line</option></select><div class="flow-hint" id="mode-help-text"></div></div>
               <div class="opt-field"><label>Min columns <span class="help" data-tip="Start emitting output only after this many columns are combined.">?</span></label><input type="text" id="opt-min" placeholder="all (default)" /></div>
-              <div class="opt-field mutation-only" id="opt-mutation-profile-wrap" hidden><label>Mutation profile <span class="help" data-tip="Balanced keeps output focused. Aggressive generates broader typo and separator variants.">?</span></label><select id="opt-mutate-profile"><option value="balanced">Balanced</option><option value="aggressive">Aggressive</option></select></div>
-              <div class="opt-field mutation-only" id="opt-mutation-words-wrap" hidden><label>Mutation words <span class="help" data-tip="Extra words to combine with each base value (comma/space/newline separated).">?</span></label><input type="text" id="opt-mutate-words" placeholder="e.g. corp,secure,internal" /></div>
               <div class="opt-field"><label>Apply to all <span class="help" data-tip="Methods applied to final output lines in order. Example: upper,unique,sortu">?</span></label><input type="text" id="opt-methods" placeholder="e.g. upper,unique,sortu" /><div class="flow-hint">Methods here run as a chain from left to right.</div></div>
               <div class="opt-field"><label>Per-column methods <span class="help" data-tip="Methods per column index. Example: 0:upper;1:lower">?</span></label><input type="text" id="opt-colmethods" placeholder="e.g. 0:upper;1:lower" /></div>
               <div class="opt-field"><label>Append columns <span class="help" data-tip="Columns to append line-by-line. Example: 1,2">?</span></label><input type="text" id="opt-append" placeholder="e.g. 1,2" /></div>
@@ -2937,6 +2961,23 @@ const METHOD_SELECTION = new Set();
 const WORKFLOW_HISTORY = { undo: [], redo: [], max: 80, restoring: false };
 let METHOD_FLOW_LAST_SYNC = '';
 let LAST_PATTERN_TEXT_FOR_UNDO = '';
+
+function isMutationFlowItem(item) {
+  return !!item && (item.type === 'mutation' || item.method === '__mutation__');
+}
+
+function createMutationFlowItem(profile, words, x, y) {
+  return {
+    id: METHOD_FLOW_STATE.nextId++,
+    type: 'mutation',
+    source: 'global',
+    method: '__mutation__',
+    profile: profile === 'aggressive' ? 'aggressive' : 'balanced',
+    words: String(words || ''),
+    x: Number.isFinite(x) ? x : 0,
+    y: Number.isFinite(y) ? y : 0
+  };
+}
 function extractPatternMethodsFromText(patternText) {
   const methods = [];
   const entries = extractPatternMethodEntriesFromText(patternText);
@@ -3233,8 +3274,6 @@ async function collectPreviewContext() {
     const cols = [];
     for (let i = 1; i < patternCols.length; i++) cols.push(String(i));
     appendParam = cols.join(',');
-  } else if (mode === 'mutation') {
-    appendParam = '';
   }
   return {
     patternCols,
@@ -3245,9 +3284,7 @@ async function collectPreviewContext() {
     min: Number.isFinite(minValue) ? minValue : -1,
     appendParam,
     methodParam: document.getElementById('opt-colmethods').value.trim(),
-    globalMethods: parseMethodCsv(document.getElementById('opt-methods').value.trim()),
-    mutationProfile: document.getElementById('opt-mutate-profile')?.value || 'balanced',
-    mutationWords: parseMutationWords(document.getElementById('opt-mutate-words')?.value || '')
+    globalMethods: parseMethodCsv(document.getElementById('opt-methods').value.trim())
   };
 }
 
@@ -3281,15 +3318,9 @@ async function updateWorkflowStepPreviews(seq) {
       min: ctx.min
     }, STEP_PREVIEW_LIMIT);
     if (seq !== STEP_PREVIEW_SEQ) return;
-    if (ctx.mode === 'mutation') {
-      rulesStage = generateMutationWordlist(rulesStage, {
-        profile: ctx.mutationProfile,
-        extraWords: ctx.mutationWords
-      }).slice(0, STEP_PREVIEW_LIMIT);
-    }
     if (hasRules) {
       setStepPreviewVisible('step-preview-options', true);
-      renderStepPreview('step-preview-options', 'After Transform Rules', rulesStage, rulesStage.length, ctx.mode === 'mutation' ? 'mutation mode applied' : '');
+      renderStepPreview('step-preview-options', 'After Transform Rules', rulesStage, rulesStage.length, '');
     } else {
       setStepPreviewVisible('step-preview-options', false);
     }
@@ -3299,12 +3330,22 @@ async function updateWorkflowStepPreviews(seq) {
     document.querySelectorAll('[id^="step-preview-method-"]').forEach((el) => { el.style.display = 'none'; });
     for (const item of orderedItems) {
       const id = item.id;
-      if (!item.method) continue;
-      const tmpEngine = new CookEngine(['x'], {}, { methodsForAll: '', methodParam: '', appendParam: '', min: -1 });
-      current = await tmpEngine.applyMethods(current, [item.method]);
+      if (isMutationFlowItem(item)) {
+        current = generateMutationWordlist(current, {
+          profile: item.profile || 'balanced',
+          extraWords: parseMutationWords(item.words || '')
+        }).slice(0, STEP_PREVIEW_LIMIT);
+      } else {
+        if (!item.method) continue;
+        const tmpEngine = new CookEngine(['x'], {}, { methodsForAll: '', methodParam: '', appendParam: '', min: -1 });
+        current = await tmpEngine.applyMethods(current, [item.method]);
+      }
       if (seq !== STEP_PREVIEW_SEQ) return;
       const shown = current.slice(0, STEP_PREVIEW_LIMIT);
-      renderStepPreview(`step-preview-method-${id}`, `After .${item.method}`, shown, current.length, '');
+      const title = isMutationFlowItem(item)
+        ? `After Mutation (${item.profile || 'balanced'})`
+        : `After .${item.method}`;
+      renderStepPreview(`step-preview-method-${id}`, title, shown, current.length, '');
     }
   } catch {
     renderStepPreview('step-preview-input', 'Input Expansion', ['Preview unavailable'], 1, '');
@@ -3409,8 +3450,11 @@ document.addEventListener('keydown', (e) => {
     selected.forEach((s) => {
       METHOD_FLOW_STATE.items.push({
         id: METHOD_FLOW_STATE.nextId++,
+        type: s.type || (isMutationFlowItem(s) ? 'mutation' : 'method'),
         method: s.method,
         source: s.source || 'global',
+        profile: isMutationFlowItem(s) ? (s.profile || 'balanced') : undefined,
+        words: isMutationFlowItem(s) ? String(s.words || '') : undefined,
         x: (s.x || 0) + 24,
         y: getMethodLayoutRegion().startY
       });
@@ -3518,20 +3562,16 @@ async function startGenerate() {
     if (name && fileInput.files && fileInput.files[0]) fileParams[name] = await readFileInput(fileInput);
   }
   const options = {
-    methodsForAll: document.getElementById('opt-methods').value.trim(),
+    methodsForAll: '',
     methodParam: document.getElementById('opt-colmethods').value.trim(),
     appendParam: document.getElementById('opt-append').value.trim(),
     min: parseInt(document.getElementById('opt-min').value, 10) || -1,
-    mode,
-    mutationProfile: document.getElementById('opt-mutate-profile')?.value || 'balanced',
-    mutationWords: parseMutationWords(document.getElementById('opt-mutate-words')?.value || ''),
+    mode
   };
   if (mode === 'append') {
     const cols = [];
     for (let i = 1; i < pattern.length; i++) cols.push(String(i));
     options.appendParam = cols.join(',');
-  } else if (mode === 'mutation') {
-    options.appendParam = '';
   }
   const t0 = performance.now();
   try {
@@ -3539,11 +3579,19 @@ async function startGenerate() {
     engine.fileParams = fileParams;
     window._currentEngine = engine;
     fullResults = await engine.generateAsync();
-    if (mode === 'mutation') {
-      fullResults = generateMutationWordlist(fullResults, {
-        profile: options.mutationProfile,
-        extraWords: options.mutationWords
-      });
+    const orderedNodes = getMethodItemsOrdered().filter((i) => i.source !== 'pattern');
+    if (orderedNodes.length) {
+      const tmpEngine = new CookEngine(['x'], {}, { methodsForAll: '', methodParam: '', appendParam: '', min: -1 });
+      for (const node of orderedNodes) {
+        if (isMutationFlowItem(node)) {
+          fullResults = generateMutationWordlist(fullResults, {
+            profile: node.profile || 'balanced',
+            extraWords: parseMutationWords(node.words || '')
+          });
+        } else if (node.method) {
+          fullResults = await tmpEngine.applyMethods(fullResults, [node.method]);
+        }
+      }
     }
     const elapsed = ((performance.now() - t0) / 1000).toFixed(2);
     stats.innerHTML = `<span class="count">${fullResults.length.toLocaleString()}</span> results &middot; ${elapsed}s`;
@@ -3634,7 +3682,6 @@ function parseMethodCsv(csv) {
 
 function getModeLabel(mode) {
   if (mode === 'append') return 'Line-by-line';
-  if (mode === 'mutation') return 'Mutation';
   return 'Cross-product';
 }
 
@@ -3644,6 +3691,28 @@ function parseMutationWords(raw) {
     .map((s) => s.trim())
     .filter(Boolean)
     .slice(0, 64);
+}
+
+function ensureLegacyMutationNode(options, silent) {
+  const opts = options || {};
+  const want =
+    opts.mode === 'mutation' ||
+    !!opts.mutationNode ||
+    (typeof opts.mutateProfile === 'string' || typeof opts.mutateWords === 'string');
+  if (!want) return false;
+  const profile = opts.mutationNode?.profile || opts.mutateProfile || 'balanced';
+  const words = opts.mutationNode?.words || opts.mutateWords || '';
+  const exists = METHOD_FLOW_STATE.items.some((i) => isMutationFlowItem(i));
+  if (!exists) METHOD_FLOW_STATE.items.push(createMutationFlowItem(profile, words));
+  else {
+    const it = METHOD_FLOW_STATE.items.find((i) => isMutationFlowItem(i));
+    if (it) {
+      it.profile = profile === 'aggressive' ? 'aggressive' : 'balanced';
+      it.words = String(words || '');
+    }
+  }
+  if (!silent) showToast('Legacy mutation mode migrated to Mutation node');
+  return true;
 }
 
 function titleCaseWord(value) {
@@ -3833,7 +3902,10 @@ function applyWorkflowSnapshot(snapshot) {
   if (patternInput && typeof snapshot.patternText === 'string') patternInput.value = snapshot.patternText;
   if (methodsInput && typeof snapshot.globalMethodsText === 'string') methodsInput.value = snapshot.globalMethodsText;
   if (colMethodsInput && typeof snapshot.colMethodsText === 'string') colMethodsInput.value = snapshot.colMethodsText;
-  if (modeInput && typeof snapshot.modeValue === 'string') modeInput.value = snapshot.modeValue || 'permutation';
+  if (modeInput && typeof snapshot.modeValue === 'string') {
+    const mv = snapshot.modeValue === 'append' ? 'append' : 'permutation';
+    modeInput.value = mv;
+  }
   if (appendInput && typeof snapshot.appendValue === 'string') appendInput.value = snapshot.appendValue;
   if (minInput && typeof snapshot.minValue === 'string') minInput.value = snapshot.minValue;
   updateModeUI();
@@ -3884,7 +3956,7 @@ function syncMethodFlowToInput() {
   const input = document.getElementById('opt-methods');
   if (!input) return;
   const ordered = getMethodItemsOrdered();
-  input.value = ordered.filter(i => i.source !== 'pattern').map(i => i.method).join(',');
+  input.value = ordered.filter(i => i.source !== 'pattern' && !isMutationFlowItem(i)).map(i => i.method).join(',');
   const patternMethods = extractPatternMethodsFromText(document.getElementById('pattern')?.value || '');
   METHOD_FLOW_LAST_SYNC = input.value + '\n||\n' + patternMethods.join(',');
   validateInputs();
@@ -3903,11 +3975,15 @@ function syncMethodFlowFromInput(skipUndo) {
     return;
   }
   if (!skipUndo && !WORKFLOW_HISTORY.restoring) pushWorkflowUndo(captureWorkflowSnapshot());
+  const preservedMutation = METHOD_FLOW_STATE.items
+    .filter((i) => isMutationFlowItem(i))
+    .map((i) => ({ ...i }));
   const methods = parseMethodCsv(raw);
-  METHOD_FLOW_STATE.items = [];
+  METHOD_FLOW_STATE.items = preservedMutation;
   methods.forEach((m) => {
     METHOD_FLOW_STATE.items.push({
       id: METHOD_FLOW_STATE.nextId++,
+      type: 'method',
       method: m,
       source: 'global',
       x: 0,
@@ -3917,6 +3993,7 @@ function syncMethodFlowFromInput(skipUndo) {
   patternEntries.forEach((entry) => {
     METHOD_FLOW_STATE.items.push({
       id: METHOD_FLOW_STATE.nextId++,
+      type: 'method',
       method: entry.method,
       source: 'pattern',
       patternTokenIndex: entry.tokenIndex,
@@ -3926,6 +4003,8 @@ function syncMethodFlowFromInput(skipUndo) {
     });
   });
   METHOD_SELECTION.clear();
+  const maxId = METHOD_FLOW_STATE.items.reduce((m, it) => Math.max(m, Number(it.id) || 0), 0);
+  METHOD_FLOW_STATE.nextId = Math.max(METHOD_FLOW_STATE.nextId, maxId + 1);
   layoutMethodNodes(false);
   renderMethodFlow();
   updateWorkflowConnectors();
@@ -4064,6 +4143,7 @@ function addMethodNode(method, x, y, source) {
   pushWorkflowUndo(captureWorkflowSnapshot());
   METHOD_FLOW_STATE.items.push({
     id: METHOD_FLOW_STATE.nextId++,
+    type: 'method',
     method,
     source: source === 'pattern' ? 'pattern' : 'global',
     x: Number.isFinite(x) ? x : (100000 + METHOD_FLOW_STATE.items.length),
@@ -4075,6 +4155,17 @@ function addMethodNode(method, x, y, source) {
   renderMethodFlow();
   syncMethodFlowToInput();
   updateWorkflowConnectors();
+}
+
+function addMutationNode(profile, words, x, y) {
+  pushWorkflowUndo(captureWorkflowSnapshot());
+  METHOD_FLOW_STATE.items.push(createMutationFlowItem(profile, words, x, y));
+  METHOD_SELECTION.clear();
+  layoutMethodNodes(false);
+  renderMethodFlow();
+  syncMethodFlowToInput();
+  updateWorkflowConnectors();
+  showToast('Mutation node added');
 }
 
 function removeFlowMethod(id) {
@@ -4102,27 +4193,44 @@ function renderMethodFlow() {
   if (!layer) return;
   const orderedItems = getMethodItemsOrdered();
   layer.innerHTML = orderedItems.map((item, idx) => {
-    const meta = METHOD_CATALOG.find(m => item.method.startsWith(m.name));
+    const isMutation = isMutationFlowItem(item);
+    const meta = isMutation ? null : METHOD_CATALOG.find(m => item.method.startsWith(m.name));
     const isPattern = item.source === 'pattern';
-    const kind = isPattern ? 'Inline method in pattern' : 'Global workflow method';
+    const kind = isMutation
+      ? 'Workflow mutation step'
+      : (isPattern ? 'Inline method in pattern' : 'Global workflow method');
     const dotClass = isPattern ? 'pattern' : 'global';
     const selectedClass = METHOD_SELECTION.has(item.id) ? ' selected' : '';
     const compactClass = METHOD_NODE_UI.compact ? ' compact' : '';
-    return `<section class="card flow-node method-node${selectedClass}${compactClass}" data-id="${item.id}" style="left:${item.x}px;top:${item.y}px;width:${METHOD_NODE_UI.width}px;" tabindex="0">
+    const mutationProfile = item.profile === 'aggressive' ? 'aggressive' : 'balanced';
+    const mutationWords = String(item.words || '');
+    return `<section class="card flow-node method-node${isMutation ? ' mutation-node' : ''}${selectedClass}${compactClass}" data-id="${item.id}" style="left:${item.x}px;top:${item.y}px;width:${METHOD_NODE_UI.width}px;" tabindex="0">
       <span class="node-port in" aria-hidden="true"></span>
       <span class="node-port out" aria-hidden="true"></span>
-      <div class="node-head"><span class="node-title"><span class="node-handle">⋮⋮</span>Method</span><span class="node-id">M${idx + 1}</span><span><button class="method-edit" type="button" data-edit-btn="${item.id}" title="Edit method">✎</button><button class="method-remove" type="button" data-rm="${item.id}">&times;</button></span></div>
+      <div class="node-head"><span class="node-title"><span class="node-handle">⋮⋮</span>${isMutation ? 'Mutation' : 'Method'}</span><span class="node-id">M${idx + 1}</span><span>${isMutation ? '' : `<button class="method-edit" type="button" data-edit-btn="${item.id}" title="Edit method">✎</button>`}<button class="method-remove" type="button" data-rm="${item.id}">&times;</button></span></div>
       <div class="card-body">
-        <div class="method-pill-preview" data-edit-method="${item.id}" title="Double-click to edit this method">.${escapeHtml(item.method)}</div>
-        ${METHOD_EDIT_STATE.id === item.id
-          ? `<div class="method-edit-inline">
-              <input type="text" class="method-edit-input" data-edit-input="${item.id}" value="${escapeHtml(METHOD_EDIT_STATE.draft || item.method)}" />
-              <button type="button" class="method-edit-save" data-edit-save="${item.id}">Save</button>
-              <button type="button" class="method-edit-cancel" data-edit-cancel="${item.id}">Cancel</button>
-            </div>`
-          : ''
+        ${isMutation
+          ? `<div class="method-pill-preview">Mutation Generator</div>
+             <div class="method-edit-inline">
+               <select class="method-edit-input" data-mut-prof="${item.id}">
+                 <option value="balanced"${mutationProfile === 'balanced' ? ' selected' : ''}>Balanced</option>
+                 <option value="aggressive"${mutationProfile === 'aggressive' ? ' selected' : ''}>Aggressive</option>
+               </select>
+             </div>
+             <div class="method-edit-inline">
+               <input type="text" class="method-edit-input" data-mut-words="${item.id}" value="${escapeHtml(mutationWords)}" placeholder="Extra words: corp,secure" />
+             </div>`
+          : `<div class="method-pill-preview" data-edit-method="${item.id}" title="Double-click to edit this method">.${escapeHtml(item.method)}</div>
+             ${METHOD_EDIT_STATE.id === item.id
+               ? `<div class="method-edit-inline">
+                   <input type="text" class="method-edit-input" data-edit-input="${item.id}" value="${escapeHtml(METHOD_EDIT_STATE.draft || item.method)}" />
+                   <button type="button" class="method-edit-save" data-edit-save="${item.id}">Save</button>
+                   <button type="button" class="method-edit-cancel" data-edit-cancel="${item.id}">Cancel</button>
+                 </div>`
+               : ''
+             }`
         }
-        <div class="method-mini">${escapeHtml(meta?.desc || 'Transformation step')} · <span class="source-dot ${dotClass}"></span>${escapeHtml(kind)}</div>
+        <div class="method-mini">${escapeHtml(isMutation ? 'Generate mutation variants from current lines' : (meta?.desc || 'Transformation step'))} · <span class="source-dot ${dotClass}"></span>${escapeHtml(kind)}</div>
       </div>
       <div id="step-preview-method-${item.id}" class="node-step-preview"></div>
     </section>`;
@@ -4172,6 +4280,24 @@ function renderMethodFlow() {
       METHOD_EDIT_STATE.draft = inputEl.value;
     });
   });
+  layer.querySelectorAll('[data-mut-prof]').forEach((selectEl) => {
+    selectEl.addEventListener('change', () => {
+      const id = parseInt(selectEl.getAttribute('data-mut-prof') || '-1', 10);
+      const item = METHOD_FLOW_STATE.items.find((m) => m.id === id);
+      if (!item || !isMutationFlowItem(item)) return;
+      item.profile = (selectEl.value === 'aggressive') ? 'aggressive' : 'balanced';
+      scheduleStepPreviewUpdate(100);
+    });
+  });
+  layer.querySelectorAll('[data-mut-words]').forEach((inputEl) => {
+    inputEl.addEventListener('input', () => {
+      const id = parseInt(inputEl.getAttribute('data-mut-words') || '-1', 10);
+      const item = METHOD_FLOW_STATE.items.find((m) => m.id === id);
+      if (!item || !isMutationFlowItem(item)) return;
+      item.words = inputEl.value;
+      scheduleStepPreviewUpdate(120);
+    });
+  });
   if (METHOD_EDIT_STATE.id !== null) {
     const editInput = layer.querySelector(`[data-edit-input="${METHOD_EDIT_STATE.id}"]`);
     if (editInput) {
@@ -4181,6 +4307,7 @@ function renderMethodFlow() {
       }, 0);
     }
   }
+  scheduleWorkflowFit(false);
   scheduleStepPreviewUpdate(80);
 }
 
@@ -4288,6 +4415,7 @@ function initToolboxSearch() {
   if (!input) return;
   const methodBtn = document.getElementById('tool-open-methods');
   const examplesBtn = document.getElementById('tool-open-examples');
+  const mutationBtn = document.getElementById('tool-add-mutation-node');
   document.querySelectorAll('.tool-action-btn,.tool-note,.tool-cat').forEach((el) => { el.style.display = ''; });
   if (methodBtn) {
     const methodParts = [];
@@ -4307,6 +4435,9 @@ function initToolboxSearch() {
     }
     const exTokens = exParts.join(' ').toLowerCase();
     examplesBtn.dataset.search = `examples tutorials workflow templates ${exTokens}`;
+  }
+  if (mutationBtn) {
+    mutationBtn.dataset.search = 'mutation mutate wordlist variants balanced aggressive extra words generator node';
   }
 
   function openMethodsWithQuery(q) {
@@ -4361,6 +4492,12 @@ function initToolboxSearch() {
     const query = q.toLowerCase();
     const methodsHay = (methodBtn?.dataset.search || '');
     const examplesHay = (examplesBtn?.dataset.search || '');
+    const mutationHay = (mutationBtn?.dataset.search || '');
+    if (mutationHay.includes(query)) {
+      addMutationNode('balanced', '');
+      input.value = '';
+      return;
+    }
     if (methodsHay.includes(query)) {
       openMethodsWithQuery(q);
       return;
@@ -4462,6 +4599,7 @@ window.openExamplesFromSidebar = function openExamplesFromSidebarGlobal(seedQuer
 function bindPrimaryActionButtons() {
   const methodsBtn = document.getElementById('tool-open-methods');
   const examplesBtn = document.getElementById('tool-open-examples');
+  const mutationBtn = document.getElementById('tool-add-mutation-node');
   const clearBtn = document.getElementById('tool-clear-all');
   const hdrExamples = document.querySelector('.studio-actions .hdr-text-btn[title=\"Usage examples\"]');
   const hdrMethods = document.querySelector('.studio-actions .hdr-text-btn[title=\"Method reference\"]');
@@ -4473,6 +4611,10 @@ function bindPrimaryActionButtons() {
   if (examplesBtn) {
     examplesBtn.removeAttribute('onclick');
     examplesBtn.onclick = () => safeOpenExamplesSidebar();
+  }
+  if (mutationBtn) {
+    mutationBtn.removeAttribute('onclick');
+    mutationBtn.onclick = () => addMutationNode('balanced', '');
   }
   if (clearBtn) {
     clearBtn.removeAttribute('onclick');
@@ -4502,10 +4644,6 @@ function clearAllWorkflowData(keepPattern) {
   document.getElementById('opt-methods').value = '';
   document.getElementById('opt-colmethods').value = '';
   document.getElementById('opt-append').value = '';
-  const mutationProfile = document.getElementById('opt-mutate-profile');
-  const mutationWords = document.getElementById('opt-mutate-words');
-  if (mutationProfile) mutationProfile.value = 'balanced';
-  if (mutationWords) mutationWords.value = '';
   updateModeUI();
   METHOD_FLOW_STATE.items = [];
   renderMethodFlow();
@@ -4801,6 +4939,7 @@ function collectCurrentConfig() {
     const value = row.querySelector('.param-value').value.trim();
     if (name) params.push({ name, value });
   }
+  const mutationNode = METHOD_FLOW_STATE.items.find((i) => isMutationFlowItem(i));
   return {
     pattern: document.getElementById('pattern').value,
     params,
@@ -4810,8 +4949,9 @@ function collectCurrentConfig() {
       methods: document.getElementById('opt-methods').value,
       colmethods: document.getElementById('opt-colmethods').value,
       append: document.getElementById('opt-append').value,
-      mutateProfile: document.getElementById('opt-mutate-profile')?.value || 'balanced',
-      mutateWords: document.getElementById('opt-mutate-words')?.value || ''
+      mutationNode: mutationNode
+        ? { profile: mutationNode.profile || 'balanced', words: mutationNode.words || '' }
+        : null
     }
   };
 }
@@ -4823,17 +4963,17 @@ function applyConfig(config) {
   const params = Array.isArray(config.params) ? config.params : [];
   for (const p of params) addParamRow(p.name || '', p.value || '');
   const options = config.options || {};
-  document.getElementById('opt-mode').value = options.mode || 'permutation';
+  document.getElementById('opt-mode').value = (options.mode === 'append' ? 'append' : 'permutation');
   document.getElementById('opt-min').value = options.min || '';
   document.getElementById('opt-methods').value = options.methods || '';
   document.getElementById('opt-colmethods').value = options.colmethods || '';
   document.getElementById('opt-append').value = options.append || '';
-  const mutationProfile = document.getElementById('opt-mutate-profile');
-  const mutationWords = document.getElementById('opt-mutate-words');
-  if (mutationProfile) mutationProfile.value = options.mutateProfile || 'balanced';
-  if (mutationWords) mutationWords.value = options.mutateWords || '';
   updateModeUI();
   syncMethodFlowFromInput();
+  ensureLegacyMutationNode(options, true);
+  layoutMethodNodes(false);
+  renderMethodFlow();
+  syncMethodFlowToInput();
 }
 
 function savePreset() {
@@ -5311,20 +5451,17 @@ function applyExampleConfig(index, shouldRun) {
   for (const p of (ex.params || [])) addParamRow(p.name || '', p.value || '');
 
   const options = ex.options || {};
-  document.getElementById('opt-mode').value = options.mode || 'permutation';
+  document.getElementById('opt-mode').value = (options.mode === 'append' ? 'append' : 'permutation');
   document.getElementById('opt-min').value = Object.prototype.hasOwnProperty.call(options, 'min') ? (options.min || '') : '';
   document.getElementById('opt-methods').value = Object.prototype.hasOwnProperty.call(options, 'methods') ? (options.methods || '') : '';
   document.getElementById('opt-colmethods').value = Object.prototype.hasOwnProperty.call(options, 'colmethods') ? (options.colmethods || '') : '';
   document.getElementById('opt-append').value = Object.prototype.hasOwnProperty.call(options, 'append') ? (options.append || '') : '';
-  const mutationProfile = document.getElementById('opt-mutate-profile');
-  const mutationWords = document.getElementById('opt-mutate-words');
-  if (mutationProfile) mutationProfile.value = options.mutateProfile || 'balanced';
-  if (mutationWords) mutationWords.value = options.mutateWords || '';
   updateModeUI();
 
   METHOD_FLOW_STATE.items = [];
   renderMethodFlow();
   updateWorkflowConnectors();
+  ensureLegacyMutationNode(options, true);
   optionMethods.forEach((m) => addMethodNode(m, undefined, undefined, 'global'));
   patternMethods.forEach((m) => addMethodNode(m, undefined, undefined, 'pattern'));
   syncMethodFlowToInput();
@@ -5767,7 +5904,7 @@ function startOnboarding(force) {
   ONBOARDING_STATE.startedManually = !!force;
   ONBOARDING_STATE.step = 0;
   ONBOARDING_STATE.enteredStep = -1;
-  if (document.body.classList.contains('simplified-mode')) applySimplifiedMode(false);
+  if (document.body.classList.contains('simplified-mode') && !shouldForceSimplifiedViewport()) applySimplifiedMode(false);
   const overlay = document.getElementById('onboarding-overlay');
   if (!overlay) return;
   overlay.classList.add('open');
@@ -5832,16 +5969,26 @@ function updateModeToggleLabel() {
   btn.textContent = simple ? 'Advanced Mode' : 'Simplified Mode';
 }
 
-function applySimplifiedMode(enabled) {
+function applySimplifiedMode(enabled, persist) {
+  const shouldPersist = persist !== false;
   document.body.classList.toggle('simplified-mode', !!enabled);
-  try { localStorage.setItem('cook-ui-mode', enabled ? 'simplified' : 'advanced'); } catch {}
+  if (shouldPersist) {
+    try { localStorage.setItem('cook-ui-mode', enabled ? 'simplified' : 'advanced'); } catch {}
+  }
   updateModeToggleLabel();
+  applyWorkflowScale();
+  scheduleWorkflowFit(false);
   updateWorkflowConnectors();
 }
 
 function toggleSimplifiedMode() {
+  if (shouldForceSimplifiedViewport()) {
+    applySimplifiedMode(true, false);
+    showToast('Simplified mode is used on smaller screens');
+    return;
+  }
   const next = !document.body.classList.contains('simplified-mode');
-  applySimplifiedMode(next);
+  applySimplifiedMode(next, true);
 }
 
 function resetSimplifiedMode() {
@@ -5906,20 +6053,120 @@ const DEFAULT_WORKFLOW_LAYOUT = {
   options: { left: 580, top: 168 }
 };
 const DEFAULT_WORKFLOW_SCALE = 0.9;
-const WORKFLOW_VIEW = { scale: DEFAULT_WORKFLOW_SCALE };
+const MOBILE_SIMPLE_BREAKPOINT = 900;
+const WORKFLOW_VIEW = { scale: DEFAULT_WORKFLOW_SCALE, userLocked: false };
+let WORKFLOW_FIT_TIMER = 0;
+
+function isMobileViewport() {
+  return window.matchMedia(`(max-width: ${MOBILE_SIMPLE_BREAKPOINT}px)`).matches;
+}
+
+function shouldForceSimplifiedViewport() {
+  const w = window.innerWidth || 0;
+  const h = window.innerHeight || 0;
+  if (w <= MOBILE_SIMPLE_BREAKPOINT) return true;
+  if (h <= 620) return true;
+  if (w <= 1180 && h <= 700) return true;
+  return false;
+}
+
+function updateDynamicNodeScale() {
+  const canvas = document.querySelector('.workflow-canvas');
+  const stage = document.getElementById('workflow-stage');
+  if (!canvas || !stage) return;
+  if (window.matchMedia('(max-width: 1020px)').matches || document.body.classList.contains('simplified-mode')) {
+    stage.style.setProperty('--node-scale', '1');
+    stage.style.setProperty('--node-vscale', '1');
+    stage.classList.remove('workflow-tight');
+    return;
+  }
+  const w = canvas.clientWidth || 0;
+  const h = canvas.clientHeight || 0;
+  const byW = w > 0 ? (w / 1180) : 1;
+  const byH = h > 0 ? (h / 760) : 1;
+  const scaleX = Math.max(0.78, Math.min(1.08, byW));
+  const scaleY = Math.max(0.72, Math.min(1.05, byH));
+  const scale = Math.max(0.75, Math.min(1.06, Math.min(scaleX, scaleY)));
+  stage.style.setProperty('--node-scale', String(+scale.toFixed(3)));
+  stage.style.setProperty('--node-vscale', String(+scaleY.toFixed(3)));
+  stage.classList.toggle('workflow-tight', scaleY < 0.93);
+}
+
+function scheduleWorkflowFit(force) {
+  if (WORKFLOW_FIT_TIMER) window.clearTimeout(WORKFLOW_FIT_TIMER);
+  WORKFLOW_FIT_TIMER = window.setTimeout(() => fitWorkflowScale(force), 60);
+}
+
+function fitWorkflowScale(force) {
+  updateDynamicNodeScale();
+  if (document.body.classList.contains('simplified-mode')) return;
+  if (window.matchMedia('(max-width: 1020px)').matches) return;
+  if (WORKFLOW_VIEW.userLocked && !force) return;
+  const canvas = document.querySelector('.workflow-canvas');
+  const stage = document.getElementById('workflow-stage');
+  if (!canvas || !stage) return;
+  const nodes = [...stage.querySelectorAll('.node-pattern, .node-options, .method-node')];
+  if (!nodes.length) return;
+  let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+  for (const node of nodes) {
+    const left = parseFloat(node.style.left) || 0;
+    const top = parseFloat(node.style.top) || 0;
+    const width = node.offsetWidth || 0;
+    const height = node.offsetHeight || 0;
+    minX = Math.min(minX, left);
+    minY = Math.min(minY, top);
+    maxX = Math.max(maxX, left + width);
+    maxY = Math.max(maxY, top + height);
+  }
+  if (!Number.isFinite(minX) || !Number.isFinite(maxX)) return;
+  const pad = 22;
+  const contentW = Math.max(1, (maxX - minX) + pad * 2);
+  const contentH = Math.max(1, (maxY - minY) + pad * 2);
+  const fitW = canvas.clientWidth / contentW;
+  const fitH = canvas.clientHeight / contentH;
+  const next = Math.max(0.72, Math.min(1, Math.min(fitW, fitH)));
+  if (!Number.isFinite(next)) return;
+  const rounded = +next.toFixed(2);
+  if (Math.abs(rounded - WORKFLOW_VIEW.scale) < 0.01) return;
+  WORKFLOW_VIEW.scale = rounded;
+  applyWorkflowScale();
+}
+
+function applyResponsiveModePolicy() {
+  const forcedSimple = shouldForceSimplifiedViewport();
+  document.body.classList.toggle('viewport-forced-simple', forcedSimple);
+  if (forcedSimple) {
+    applySimplifiedMode(true, false);
+    updateDynamicNodeScale();
+    return;
+  }
+  let saved = 'advanced';
+  try { saved = localStorage.getItem('cook-ui-mode') || 'advanced'; } catch {}
+  applySimplifiedMode(saved === 'simplified', false);
+  updateDynamicNodeScale();
+}
 
 function applyWorkflowLayout(layout) {
   const pattern = document.querySelector('.node-pattern');
   const options = document.querySelector('.node-options');
+  updateDynamicNodeScale();
   if (pattern && layout.pattern) { pattern.style.left = `${layout.pattern.left}px`; pattern.style.top = `${layout.pattern.top}px`; }
   if (options && layout.options) { options.style.left = `${layout.options.left}px`; options.style.top = `${layout.options.top}px`; }
   layoutMethodNodes(true);
   renderMethodFlow();
+  scheduleWorkflowFit(false);
 }
 
 function applyWorkflowScale() {
   const stage = document.getElementById('workflow-stage');
   if (!stage) return;
+  if (window.matchMedia('(max-width: 1020px)').matches || document.body.classList.contains('simplified-mode')) {
+    stage.style.transform = 'none';
+    stage.style.width = 'auto';
+    stage.style.height = 'auto';
+    updateWorkflowConnectors();
+    return;
+  }
   stage.style.transform = `scale(${WORKFLOW_VIEW.scale})`;
   stage.style.width = `${100 / WORKFLOW_VIEW.scale}%`;
   stage.style.height = `${100 / WORKFLOW_VIEW.scale}%`;
@@ -5928,6 +6175,7 @@ function applyWorkflowScale() {
 
 function zoomWorkflow(delta) {
   pushWorkflowUndo(captureWorkflowSnapshot());
+  WORKFLOW_VIEW.userLocked = true;
   WORKFLOW_VIEW.scale = Math.max(0.7, Math.min(1.25, +(WORKFLOW_VIEW.scale + delta).toFixed(2)));
   applyWorkflowScale();
 }
@@ -5958,8 +6206,10 @@ function resetWorkflowLayout() {
   pushWorkflowUndo(captureWorkflowSnapshot());
   localStorage.removeItem('cook-workflow-layout-v2');
   applyWorkflowLayout(DEFAULT_WORKFLOW_LAYOUT);
+  WORKFLOW_VIEW.userLocked = false;
   WORKFLOW_VIEW.scale = DEFAULT_WORKFLOW_SCALE;
   applyWorkflowScale();
+  scheduleWorkflowFit(true);
   updateWorkflowConnectors();
 }
 
@@ -5969,8 +6219,10 @@ function autoArrangeWorkflow() {
   layoutMethodNodes(false);
   renderMethodFlow();
   syncMethodFlowToInput();
+  WORKFLOW_VIEW.userLocked = false;
   WORKFLOW_VIEW.scale = DEFAULT_WORKFLOW_SCALE;
   applyWorkflowScale();
+  scheduleWorkflowFit(true);
   updateWorkflowConnectors();
   showToast('Workflow auto-arranged');
 }
@@ -5986,10 +6238,6 @@ function applyStarterTemplate(kind) {
   document.getElementById('opt-colmethods').value = '';
   document.getElementById('opt-append').value = '';
   document.getElementById('opt-min').value = '';
-  const mutationProfile = document.getElementById('opt-mutate-profile');
-  const mutationWords = document.getElementById('opt-mutate-words');
-  if (mutationProfile) mutationProfile.value = 'balanced';
-  if (mutationWords) mutationWords.value = '';
   optMode.value = 'permutation';
   updateModeUI();
 
@@ -6033,7 +6281,7 @@ function initWorkflowDrag() {
     const head = e.target.closest('.node-head');
     const block = e.target.closest('.flow-node');
     if (!head || !block) return;
-    if (window.matchMedia('(max-width: 1200px)').matches) return;
+    if (window.matchMedia('(max-width: 1020px)').matches) return;
     const tag = (e.target.tagName || '').toLowerCase();
     if (tag === 'button' || tag === 'input' || tag === 'textarea' || e.target.closest('button')) return;
     if (block.classList.contains('method-node')) {
@@ -6195,22 +6443,14 @@ function updateWorkflowConnectorsNow() {
 }
 function updateModeUI() {
   const mode = document.getElementById('opt-mode')?.value || 'permutation';
-  const isMutation = mode === 'mutation';
-  const profileWrap = document.getElementById('opt-mutation-profile-wrap');
-  const wordsWrap = document.getElementById('opt-mutation-words-wrap');
   const appendInput = document.getElementById('opt-append');
   const modeHelp = document.getElementById('mode-help-text');
-  if (profileWrap) profileWrap.hidden = !isMutation;
-  if (wordsWrap) wordsWrap.hidden = !isMutation;
   if (appendInput) {
-    appendInput.disabled = isMutation;
-    if (isMutation) appendInput.value = '';
+    appendInput.disabled = false;
   }
   if (modeHelp) {
     if (mode === 'append') {
       modeHelp.innerHTML = 'Line-by-line pairs values by index.<br><code>admin,root</code> + <code>123,456</code> -> <code>admin123</code>, <code>root456</code>';
-    } else if (mode === 'mutation') {
-      modeHelp.innerHTML = 'Mutation mode first builds base values, then creates variants (case, leet, separators, numbers).';
     } else {
       modeHelp.innerHTML = 'Cross-product generates all combinations.<br><code>admin,root</code> + <code>123,456</code> -> <code>admin123</code>, <code>admin456</code>, <code>root123</code>, <code>root456</code>';
     }
@@ -6241,12 +6481,7 @@ function updateModeUI() {
 })();
 function initUXEnhancements() {
   initPerformanceProfile();
-  try {
-    const savedMode = localStorage.getItem('cook-ui-mode');
-    applySimplifiedMode(savedMode === 'simplified');
-  } catch {
-    applySimplifiedMode(false);
-  }
+  applyResponsiveModePolicy();
   const inputs = ['pattern', 'opt-methods', 'opt-colmethods'].map(id => document.getElementById(id));
   inputs.forEach((el) => {
     el.addEventListener('keydown', (e) => {
@@ -6278,8 +6513,6 @@ function initUXEnhancements() {
   });
   document.getElementById('opt-min').addEventListener('input', validateInputs);
   document.getElementById('opt-append').addEventListener('input', validateInputs);
-  const mutationWords = document.getElementById('opt-mutate-words');
-  if (mutationWords) mutationWords.addEventListener('input', validateInputs);
   document.addEventListener('click', (e) => {
     const previewEl = e.target && e.target.closest ? e.target.closest('.node-step-preview') : null;
     if (previewEl) {
@@ -6293,8 +6526,10 @@ function initUXEnhancements() {
   window.addEventListener('scroll', positionAutocomplete, true);
   window.addEventListener('resize', positionAutocomplete);
   window.addEventListener('resize', () => {
+    applyResponsiveModePolicy();
     layoutMethodNodes(true);
     renderMethodFlow();
+    scheduleWorkflowFit(false);
     updateWorkflowConnectors();
     positionOnboardingSpotlight();
   });
@@ -6307,6 +6542,7 @@ function initUXEnhancements() {
   clearStepPreviews();
   updateModeUI();
   validateInputs();
+  scheduleWorkflowFit(true);
   LAST_PATTERN_TEXT_FOR_UNDO = String(document.getElementById('pattern')?.value || '');
   scheduleStepPreviewUpdate(260);
   setTimeout(() => startOnboarding(false), 260);
@@ -6326,9 +6562,11 @@ try {
   console.error('initUXEnhancements failed:', err);
   const m = document.getElementById('tool-open-methods');
   const e = document.getElementById('tool-open-examples');
+  const mu = document.getElementById('tool-add-mutation-node');
   const c = document.getElementById('tool-clear-all');
   if (m) m.onclick = () => safeOpenMethodsSidebar();
   if (e) e.onclick = () => safeOpenExamplesSidebar();
+  if (mu) mu.onclick = () => addMutationNode('balanced', '');
   if (c) c.onclick = () => clearAllAndSidebarSearch();
 }
 
@@ -6451,10 +6689,12 @@ if (new URLSearchParams(window.location.search).has('test')) {
         min: Number.isFinite(parseInt(options.min, 10)) ? parseInt(options.min, 10) : -1,
       });
       let out = await engine.generateAsync();
-      if (options.mode === 'mutation') {
+      if (options.mode === 'mutation' || options.mutationNode) {
+        const profile = options.mutationNode?.profile || options.mutateProfile || 'balanced';
+        const words = options.mutationNode?.words || options.mutateWords || '';
         out = generateMutationWordlist(out, {
-          profile: options.mutateProfile || 'balanced',
-          extraWords: parseMutationWords(options.mutateWords || '')
+          profile,
+          extraWords: parseMutationWords(words)
         });
       }
       return out;
@@ -6486,8 +6726,10 @@ if (new URLSearchParams(window.location.search).has('test')) {
         applyExampleConfig(i, false);
         const uiPattern = document.getElementById('pattern').value;
         const uiNodes = METHOD_FLOW_STATE.items.length;
-        const uiOk = uiPattern === (ex.pattern || '') && uiNodes === methods.length;
-        results.push({ name: `${exName} ui-apply`, ok: uiOk, got: { uiPattern, uiNodes }, expected: { pattern: ex.pattern || '', nodes: methods.length } });
+        const extraMutationNode = (ex.options && ex.options.mode === 'mutation') ? 1 : 0;
+        const expectedNodes = methods.length + extraMutationNode;
+        const uiOk = uiPattern === (ex.pattern || '') && uiNodes === expectedNodes;
+        results.push({ name: `${exName} ui-apply`, ok: uiOk, got: { uiPattern, uiNodes }, expected: { pattern: ex.pattern || '', nodes: expectedNodes } });
         if (uiOk) pass++; else fail++;
 
         const out = await runExampleEngine(ex);

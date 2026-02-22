@@ -5461,9 +5461,15 @@ function applyExampleConfig(index, shouldRun) {
   METHOD_FLOW_STATE.items = [];
   renderMethodFlow();
   updateWorkflowConnectors();
-  ensureLegacyMutationNode(options, true);
+  const mutationAdded = ensureLegacyMutationNode(options, true);
   optionMethods.forEach((m) => addMethodNode(m, undefined, undefined, 'global'));
   patternMethods.forEach((m) => addMethodNode(m, undefined, undefined, 'pattern'));
+  if (mutationAdded && (optionMethods.length + patternMethods.length === 0)) {
+    layoutMethodNodes(false);
+    renderMethodFlow();
+    syncMethodFlowToInput();
+    updateWorkflowConnectors();
+  }
   syncMethodFlowToInput();
   validateInputs();
   const patternNode = document.querySelector('.node-pattern');

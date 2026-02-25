@@ -356,6 +356,40 @@ body.low-power .glass, body.low-power .studio-header { backdrop-filter: none; }
 .examples-modal-head { padding: 16px 20px; }
 .examples-modal-head h3 { font-size: 1.16rem; color: #eef2ff; letter-spacing: -.01em; }
 [data-theme="light"] .examples-modal-head h3 { color: #1f2937; }
+.docs-modal-overlay { background: rgba(4,8,18,.74); }
+.docs-modal { max-width: 1360px; width: min(98vw, 1360px); max-height: 92vh; border-radius: 20px; overflow: hidden; background: linear-gradient(180deg, rgba(15,23,42,.97), rgba(8,12,20,.97)); border: 1px solid rgba(148,163,184,.28); }
+[data-theme="light"] .docs-modal { background: rgba(240,245,251,.98); border-color: rgba(148,163,184,.42); }
+.docs-shell { display: grid; grid-template-columns: 260px minmax(0, 1fr); min-height: 72vh; }
+.docs-sidebar { border-right: 1px solid rgba(148,163,184,.18); padding: 14px; background: rgba(255,255,255,.02); }
+[data-theme="light"] .docs-sidebar { background: rgba(255,255,255,.5); }
+.docs-side-item { width: 100%; text-align: left; border: 1px solid transparent; background: transparent; color: var(--text-secondary); padding: 10px 12px; border-radius: 10px; cursor: pointer; font-size: .82rem; margin-bottom: 6px; }
+.docs-side-item.active, .docs-side-item:hover { border-color: color-mix(in srgb, var(--accent) 46%, var(--border) 54%); color: var(--accent); background: var(--accent-subtle); }
+.docs-main { padding: 16px; overflow-y: auto; overflow-x: hidden; }
+.docs-block { border: 1px solid color-mix(in srgb, var(--border) 74%, transparent); border-radius: 14px; padding: 14px; margin-bottom: 12px; background: color-mix(in srgb, var(--bg-card) 88%, transparent); }
+.docs-block h4 { margin: 0 0 8px; font-size: .98rem; color: var(--text); }
+.docs-block p { margin: 0 0 8px; color: var(--text-secondary); font-size: .86rem; line-height: 1.5; }
+.docs-list { margin: 0; padding-left: 18px; color: var(--text-secondary); font-size: .84rem; line-height: 1.55; }
+.docs-code { display: block; margin-top: 8px; background: color-mix(in srgb, var(--bg-solid) 88%, transparent); border: 1px solid color-mix(in srgb, var(--border) 70%, transparent); border-radius: 10px; padding: 9px 10px; font-family: var(--mono); font-size: .76rem; white-space: pre-wrap; color: var(--text); }
+.docs-hero { border: 1px solid rgba(59,130,246,.26); border-radius: 14px; padding: 16px; background: radial-gradient(120% 120% at 0% 0%, rgba(37,99,235,.18), rgba(15,23,42,.06)); margin-bottom: 12px; }
+.docs-hero h4 { margin: 0 0 6px; font-size: 1.06rem; color: #dbeafe; }
+[data-theme="light"] .docs-hero h4 { color: #1e3a8a; }
+.docs-hero p { margin: 0; color: #b9c8de; font-size: .84rem; }
+[data-theme="light"] .docs-hero p { color: #3f5268; }
+.docs-grid { display: grid; gap: 10px; grid-template-columns: repeat(2, minmax(0,1fr)); }
+.docs-scenario { border: 1px solid color-mix(in srgb, var(--border) 72%, transparent); border-radius: 12px; padding: 12px; background: rgba(255,255,255,.02); }
+[data-theme="light"] .docs-scenario { background: rgba(255,255,255,.68); }
+.docs-scenario h5 { margin: 0 0 6px; font-size: .88rem; color: var(--text); }
+.docs-scenario p { margin: 0 0 8px; font-size: .8rem; color: var(--text-muted); line-height: 1.4; }
+.docs-row-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+.docs-btn { border: 1px solid color-mix(in srgb, var(--accent) 44%, var(--border) 56%); background: color-mix(in srgb, var(--accent-subtle) 78%, transparent); color: var(--text); border-radius: 8px; padding: 7px 10px; font-size: .75rem; font-weight: 700; cursor: pointer; }
+.docs-btn.alt { border-color: color-mix(in srgb, var(--border) 80%, transparent); background: color-mix(in srgb, var(--bg-solid) 82%, transparent); color: var(--text-secondary); }
+.docs-btn:hover { border-color: var(--accent); color: var(--accent); }
+.docs-level { display: inline-flex; align-items: center; gap: 6px; border: 1px solid color-mix(in srgb, var(--border) 70%, transparent); border-radius: 999px; padding: 3px 8px; font-size: .62rem; text-transform: uppercase; letter-spacing: .08em; color: var(--text-muted); margin-bottom: 8px; }
+.docs-level.beginner { border-color: rgba(34,197,94,.45); color: #4ade80; }
+.docs-level.intermediate { border-color: rgba(59,130,246,.45); color: #60a5fa; }
+.docs-level.advanced { border-color: rgba(245,158,11,.45); color: #fbbf24; }
+@media(max-width:980px){ .docs-shell { grid-template-columns: 1fr; } .docs-sidebar { border-right: 0; border-bottom: 1px solid rgba(148,163,184,.18); display: flex; flex-wrap: wrap; gap: 6px; } .docs-side-item { width: auto; margin: 0; } }
+@media(max-width:760px){ .docs-grid { grid-template-columns: 1fr; } }
 .examples-sub { font-size: .78rem; color: #94a3b8; margin-top: 2px; }
 .examples-top-search { padding: 12px 18px; border-top: 1px solid rgba(148,163,184,.14); border-bottom: 1px solid rgba(148,163,184,.14); background: rgba(255,255,255,.02); }
 [data-theme="light"] .examples-top-search { background: rgba(255,255,255,.45); }
@@ -364,7 +398,7 @@ body.low-power .glass, body.low-power .studio-header { backdrop-filter: none; }
 .examples-shell { display: flex; min-height: 0; flex: 1; }
 .examples-sidebar { width: 180px; border-right: 1px solid rgba(148,163,184,.16); padding: 10px; display: flex; flex-direction: column; gap: 6px; overflow-y: auto; background: rgba(255,255,255,.02); }
 [data-theme="light"] .examples-sidebar { background: rgba(255,255,255,.35); }
-.examples-panel { flex: 1; min-width: 0; overflow-y: auto; padding: 14px; }
+.examples-panel { flex: 1; min-width: 0; overflow-y: auto; overflow-x: hidden; padding: 14px; }
 .examples-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
 @media(max-width:900px){ .examples-sidebar { width: 140px; } }
 @media(max-width:640px){ .examples-shell { flex-direction: column; } .examples-sidebar { width: 100%; border-right: 0; border-bottom: 1px solid rgba(148,163,184,.16); flex-direction: row; flex-wrap: wrap; } .examples-sidebar .method-side-title { width: 100%; } .example-side-item { width: auto; } }
@@ -699,7 +733,7 @@ body { overflow-x: hidden; }
   background: linear-gradient(180deg, rgba(15,23,42,.58), rgba(15,23,42,.34));
 }
 [data-theme="light"] .example-tutorial-card { background: rgba(255,255,255,.74); }
-.example-tutorial-inner { display: grid; grid-template-columns: 1.2fr 1fr; gap: 14px; align-items: stretch; }
+.example-tutorial-inner { display: grid; grid-template-columns: minmax(0,1.14fr) minmax(0,.86fr); gap: 14px; align-items: stretch; }
 .example-meta-line { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
 .example-badge {
   font-size: .58rem;
@@ -746,9 +780,10 @@ body { overflow-x: hidden; }
   padding: 12px;
   background: radial-gradient(circle at 0 0, rgba(37,99,235,.1), transparent 55%), rgba(2,6,23,.35);
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 8px;
-  overflow-x: auto;
+  overflow: hidden;
 }
 [data-theme="light"] .example-flow-board { background: rgba(241,245,249,.9); }
 .example-flow-node {
@@ -1415,14 +1450,15 @@ body.simplified-mode .studio-right .starter-templates {
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
       Take Tour
     </button>
-    <button class="hdr-text-btn" onclick="openExamplesModal()" title="Usage examples">
+    <button class="hdr-text-btn" onclick="openDocsModal('recipes')" title="Receipes, workflows, and syntax">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><path d="M8 6h13"/><path d="M8 12h13"/><path d="M8 18h13"/><path d="M3 6h.01"/><path d="M3 12h.01"/><path d="M3 18h.01"/></svg>
-      Examples
+      Receipes
     </button>
     <button class="hdr-text-btn" onclick="openMethodModal()" title="Method reference">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
       Methods
     </button>
+    
     <button class="hdr-btn" onclick="toggleTheme()" id="theme-btn" title="Toggle theme">
       <svg id="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
       <svg id="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -1440,12 +1476,12 @@ body.simplified-mode .studio-right .starter-templates {
       <div class="toolbox-list">
         <div class="tool-cat">Transformations</div>
         <button class="tool-action-btn" type="button" id="tool-open-methods">
-          Open Method Reference
+          Ingredients
           <small>Browse all methods with examples, params, and one-click insert.</small>
         </button>
-        <button class="tool-action-btn" type="button" id="tool-open-examples">
-          Open Examples & Tutorials
-          <small>Explore practical workflows and insert them directly.</small>
+        <button class="tool-action-btn" type="button" id="tool-open-learn">
+          Open Receipes
+          <small>Recipes and practical syntax examples in one place.</small>
         </button>
         <button class="tool-action-btn" type="button" id="tool-add-mutation-node">
           Add Mutation Node
@@ -1677,6 +1713,31 @@ body.simplified-mode .studio-right .starter-templates {
         <button class="btn btn-ghost" onclick="closeExamplesModal()">Cancel</button>
         <button class="btn btn-ghost" id="example-insert-run-btn" onclick="insertSelectedExample(true)">Add + Run</button>
         <button class="btn btn-primary" id="example-insert-btn" onclick="insertSelectedExample(false)">Add Workflow</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="docs-modal" class="modal-overlay docs-modal-overlay" onclick="if(event.target===this)closeDocsModal()">
+  <div class="modal docs-modal">
+    <div class="modal-head">
+      <div>
+        <h3>Receipes</h3>
+        <p class="examples-sub">Practical workflows and syntax examples.</p>
+      </div>
+      <button class="modal-close" onclick="closeDocsModal()">&times;</button>
+    </div>
+    <div class="docs-shell">
+      <aside class="docs-sidebar">
+        <button class="docs-side-item active" data-docs-tab="recipes" onclick="setDocsTab('recipes')">Recipes</button>
+        <button class="docs-side-item" data-docs-tab="syntax" onclick="setDocsTab('syntax')">Syntax</button>
+      </aside>
+      <main class="docs-main" id="docs-main"></main>
+    </div>
+    <div class="examples-footer">
+      <div class="method-hints"><kbd>ESC</kbd> close</div>
+      <div class="examples-actions">
+        <button class="btn btn-ghost" onclick="closeDocsModal()">Close</button>
       </div>
     </div>
   </div>
@@ -2838,6 +2899,19 @@ const PRESET_AUTORESTORE_KEY = 'cooked-preset-autorestore-v1';
 const FAVORITE_METHODS_KEY = 'cooked-favorite-methods-v1';
 const ONBOARDING_KEY = 'cook-onboarding-v1';
 const ONBOARDING_STATE = { open: false, step: 0, startedManually: false, pendingAfterTheme: false, followRaf: 0, enteredStep: -1, dotRestore: null };
+const DOCS_STATE = {
+  tab: 'recipes',
+  recipeQuery: '',
+  recipeCategory: 'all',
+  recipeSelected: -1,
+  recipeLastClickIndex: -1,
+  recipeLastClickTs: 0,
+  syntaxQuery: '',
+  syntaxCategory: 'all',
+  syntaxSelected: '',
+  syntaxLastClickName: '',
+  syntaxLastClickTs: 0
+};
 const METHOD_EDIT_STATE = { id: null, draft: '' };
 let TOOLBOX_SEARCH_OPEN_TIMER = 0;
 const METHOD_SNIPPETS = [
@@ -3052,7 +3126,7 @@ function extractPatternMethodEntriesFromText(patternText) {
   }
   return out;
 }
-const METHOD_NODE_UI = { width: 220, rowHeight: 92, gap: 18, compact: false };
+const METHOD_NODE_UI = { width: 220, rowHeight: 108, gap: 26, compact: false };
 const EXAMPLE_LIBRARY = [
   { name: 'Combo Permutation', tags: ['cross-product'], pattern: 'admin,root _,- pass,secret', options: { methods: 'upper' }, output: 'ADMIN_PASS\nADMIN_SECRET\nADMIN-PASS\nADMIN-SECRET\nROOT_PASS\nROOT_SECRET\nROOT-PASS\nROOT-SECRET' },
   { name: 'Zero-Padded Range', tags: ['range'], pattern: '01-05', options: { methods: 'md5' }, output: '96a3be3cf272e017046d1b2674a52bd3\n...' },
@@ -3101,6 +3175,248 @@ const EXAMPLE_LIBRARY = [
   { name: 'MaxLength Usernames', tags: ['dot-chain'], pattern: '`administrator,alice,ops,dev-team`.split[,].maxlength[6]', output: 'alice\nops' },
   { name: 'Credential Pipeline', tags: ['advanced', 'dot-chain'], pattern: '`alice:12345678\nbob:secret1234\nguest:123`.pass.minlength[6].sha1', output: '7c222fb2927d828af22f592134e8932480637c0d\n...' },
   { name: 'Mixed Recon Chain', tags: ['url', 'dot-chain'], pattern: '`api.example.com,cdn.example.com`.split[,].subdomain.unique', output: 'api\ncdn' }
+];
+const RECIPE_LIBRARY = [
+  {
+    name: 'Scope Host Extraction From URL Archive',
+    category: 'bugbounty',
+    summary: 'Turn noisy historical URLs into a deduplicated host target list for recon.',
+    pattern: '`https://app.example.com/login?next=/dashboard\nhttps://cdn.example.com/assets/app.js?v=2\nhttps://api.example.com/v1/users?id=42\nhttps://api.example.com/v1/users/42?expand=profile\nhttps://admin.example.com/panel\nhttps://cdn.example.com/assets/vendor.js\nhttps://staging-api.example.com/v1/health\nhttps://m.example.com/reset-password\nhttps://app.example.com/logout\nhttps://beta.example.com/invite`',
+    options: { methods: 'split[\n],host,unique,sortu' },
+    output: 'admin.example.com\napi.example.com\napp.example.com\nbeta.example.com\ncdn.example.com\nm.example.com\nstaging-api.example.com'
+  },
+  {
+    name: 'Query Parameter Candidate Extraction',
+    category: 'bugbounty',
+    summary: 'Extract unique query keys from captured endpoints for fuzzing and param mining.',
+    pattern: '`https://shop.example.com/search?q=phone&lang=en&sort=price\nhttps://shop.example.com/cart?coupon=SAVE10&currency=USD\nhttps://api.example.com/v1/orders?limit=50&offset=0&status=open\nhttps://api.example.com/v1/users?role=admin&page=2\nhttps://portal.example.com/export?format=csv&token=abc123\nhttps://api.example.com/v2/invoices?from=2026-01-01&to=2026-02-01`',
+    options: { methods: 'split[\n],keys,unique,sortu' },
+    output: 'coupon\ncurrency\nformat\nfrom\nlang\nlimit\noffset\npage\nq\nrole\nsort\nstatus\nto\ntoken'
+  },
+  {
+    name: 'Likely API Route Isolation',
+    category: 'bugbounty',
+    summary: 'Filter mixed path lists and keep only probable API routes for endpoint testing.',
+    pattern: '`/login\n/assets/logo.svg\n/api/v1/users\n/api/v1/admin\n/docs/index.html\n/api/v2/invoices\n/static/js/main.js\n/health\n/api/internal/metrics\n/images/bg.png\n/api/v1/profile\n/contact`',
+    options: { methods: 'split[\n],contains[/api/],unique,sortu' },
+    output: '/api/internal/metrics\n/api/v1/admin\n/api/v1/profile\n/api/v1/users\n/api/v2/invoices'
+  },
+  {
+    name: 'Credential Username Extraction (Combo Lists)',
+    category: 'identity',
+    summary: 'Parse large combo-format leaks and isolate usernames for identity exposure review.',
+    pattern: '`alice.admin@corp.local:Welcome2026!\nbob.ops@corp.local:Winter#2025\nguest.portal@corp.local:Summer123!\nalice.admin@corp.local:ResetMe123\ncarol.finance@corp.local:Invoice#778\nservice.backup@corp.local:Backup!2026\ndev.portal@corp.local:Build#992\nsupport.team@corp.local:Ticket@901`',
+    options: { methods: 'split[\n],awkn[0::],trim,lower,unique,sortu' },
+    output: 'alice.admin@corp.local\nbob.ops@corp.local\ncarol.finance@corp.local\ndev.portal@corp.local\nguest.portal@corp.local\nservice.backup@corp.local\nsupport.team@corp.local'
+  },
+  {
+    name: 'Weak Password Candidate Isolation',
+    category: 'identity',
+    summary: 'Extract password values and filter out short entries for credential hygiene checks.',
+    pattern: '`alice:admin\nbob:Welcome2026!\nguest:Summer!\nops:Winter2025#\nportal:Password1\nbackup:Qwerty!\nroot:toor\nsecops:BlueTeam#2026`',
+    options: { methods: 'split[\n],awkn[1::],trim,minlength[8],unique,sortu' },
+    output: 'BlueTeam#2026\nPassword1\nWelcome2026!\nWinter2025#'
+  },
+  {
+    name: 'HTTP 5xx Incident Line Extraction',
+    category: 'secops',
+    summary: 'Filter server logs to retain only outage-related 5xx lines for triage.',
+    pattern: '`2026-02-01T10:00:11Z GET /login 200\n2026-02-01T10:01:09Z POST /api/auth 500\n2026-02-01T10:02:13Z GET /admin 403\n2026-02-01T10:02:50Z GET /api/data 503\n2026-02-01T10:03:44Z GET /health 200\n2026-02-01T10:05:02Z POST /api/payment 502\n2026-02-01T10:05:42Z GET /status 200\n2026-02-01T10:06:21Z GET /api/inventory 504`',
+    options: { methods: 'grep[/5\\d\\d/],unique' },
+    output: '2026-02-01T10:01:09Z POST /api/auth 500\n2026-02-01T10:02:50Z GET /api/data 503\n2026-02-01T10:05:02Z POST /api/payment 502\n2026-02-01T10:06:21Z GET /api/inventory 504'
+  },
+  {
+    name: 'IOC Domain Normalization',
+    category: 'secops',
+    summary: 'Normalize IOC domains from different analyst sources into one canonical list.',
+    pattern: '`  MALWARE-CDN.EXAMPLE.NET \nC2-gateway.example.org\nmalware-cdn.example.net\nredirector.example.org \nBeacon-A.EXAMPLE.IO\nbeacon-a.example.io\n   c2-gateway.example.org`',
+    options: { methods: 'split[\n],trim,lower,unique,sortu' },
+    output: 'beacon-a.example.io\nc2-gateway.example.org\nmalware-cdn.example.net\nredirector.example.org'
+  },
+  {
+    name: 'JWT-Like Token Harvest From Logs',
+    category: 'appsec',
+    summary: 'Extract probable JWT tokens from logs/source snippets for token handling review.',
+    pattern: '`Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.e30.signature\nconst token = \"eyJhbGciOiJIUzI1NiJ9.payload.sig\";\nX-Session: eyJraWQiOiIxIn0.eyJ1c2VyIjoiYWxpY2UifQ.zzz\nrandom text without token\njwt=eyJhbGciOiJIUzI1NiJ9.e30.abc123`',
+    options: { methods: 'regex[[A-Za-z0-9_-]+\\.[A-Za-z0-9_-]+\\.[A-Za-z0-9_-]+],unique' },
+    output: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.e30.signature\neyJhbGciOiJIUzI1NiJ9.payload.sig\neyJraWQiOiIxIn0.eyJ1c2VyIjoiYWxpY2UifQ.zzz\neyJhbGciOiJIUzI1NiJ9.e30.abc123'
+  },
+  {
+    name: 'JSON Field Extraction For Asset Inventory',
+    category: 'appsec',
+    summary: 'Extract service names from JSON lines exported by service discovery tools.',
+    pattern: '`{"service":"billing","env":"prod","owner":"secops"}\n{"service":"identity","env":"prod","owner":"iam"}\n{"service":"catalog","env":"staging","owner":"appsec"}\n{"service":"billing","env":"dr","owner":"secops"}`.json[service]',
+    options: { methods: 'unique,sortu' },
+    output: 'billing\ncatalog\nidentity'
+  },
+  {
+    name: 'Subdomain Pivot Seed Builder',
+    category: 'intel',
+    summary: 'Convert host inventories into subdomain seeds for pivoting and clustering.',
+    pattern: '`api.eu.example.com\ncdn.assets.example.com\nvpn.example.com\napi.us.example.com\nm.eu.example.com\nauth.id.example.com\nassets.example.com`',
+    options: { methods: 'split[\n],subdomain,unique,sortu' },
+    output: 'api.eu\napi.us\nauth.id\nassets\ncdn.assets\nm.eu\nvpn'
+  },
+  {
+    name: 'TLD Profile Extraction',
+    category: 'intel',
+    summary: 'Extract TLD distribution from campaign host sets for quick profiling.',
+    pattern: '`example.com\nsecure-example.net\npayments.example.org\nmirror.example.com\nassets.sample.io\ngateway.demo.co.uk\ntracker.example.net`',
+    options: { methods: 'split[\n],tld,unique,sortu' },
+    output: 'com\nio\nnet\norg\nuk'
+  },
+  {
+    name: 'Role/Region Username Builder',
+    category: 'wordlists',
+    summary: 'Generate structured username candidates from role, region, and environment tokens.',
+    pattern: 'admin,ops,dev us,eu,apac _,- corp,prod',
+    options: { methods: 'unique,sortu' },
+    output: 'admin-apac-corp\nadmin_apac_corp\n...\nops_us_prod'
+  },
+  {
+    name: 'Mutation Wordlist Expansion',
+    category: 'wordlists',
+    summary: 'Expand base seeds into realistic variants using mutation mode and context words.',
+    pattern: 'admin,portal,service,backup',
+    options: { mode: 'mutation', mutateProfile: 'balanced', mutateWords: 'corp,secure,prod,cloud,internal' },
+    output: 'admin\nadmin1\nadmin2026\nsecureadmin\ncloud-admin\n...'
+  },
+  {
+    name: 'Credential Password Pipeline To SHA1',
+    category: 'secops',
+    summary: 'Extract password values and hash them for legacy verification workflows.',
+    pattern: '`alice:Welcome2026!\nbob:Winter2025#\nguest:admin123\nops:BlueTeam#2026\nsvc:RotateMe!2026`',
+    options: { methods: 'split[\n],awkn[1::],trim,minlength[8],sha1,unique' },
+    output: '2f44...\n9ac1...'
+  },
+  {
+    name: 'Simple: Grep Staging Domains',
+    category: 'bugbounty',
+    summary: 'Keep only staging/dev hosts from a mixed domain list.',
+    pattern: '`api.example.com\nstaging-api.example.com\ndev-portal.example.com\ncdn.example.com\nauth.example.com\ntest-auth.example.com\nprod-app.example.com`',
+    options: { methods: 'split[\n],grep[/staging|dev|test/i],unique,sortu' },
+    output: 'dev-portal.example.com\nstaging-api.example.com\ntest-auth.example.com'
+  },
+  {
+    name: 'Simple: Extract Hostnames From URLs',
+    category: 'bugbounty',
+    summary: 'Extract unique hosts from collected URL lists.',
+    pattern: '`https://shop.example.com/cart?coupon=NEW\nhttps://api.example.com/v1/users?id=5\nhttps://cdn.example.com/assets/app.js\nhttps://shop.example.com/checkout\nhttps://img.example.com/logo.png`',
+    options: { methods: 'split[\n],host,unique,sortu' },
+    output: 'api.example.com\ncdn.example.com\nimg.example.com\nshop.example.com'
+  },
+  {
+    name: 'Simple: Extract URL Paths',
+    category: 'bugbounty',
+    summary: 'Extract request paths for endpoint mapping.',
+    pattern: '`https://api.example.com/v1/users?id=5\nhttps://api.example.com/v2/orders/42\nhttps://shop.example.com/login\nhttps://shop.example.com/cart/checkout`',
+    options: { methods: 'split[\n],path,unique,sortu' },
+    output: '/cart/checkout\n/login\n/v1/users\n/v2/orders/42'
+  },
+  {
+    name: 'Simple: Keep JavaScript URLs',
+    category: 'appsec',
+    summary: 'Filter only JavaScript assets from mixed URL inventories.',
+    pattern: '`https://cdn.example.com/app.js\nhttps://cdn.example.com/app.css\nhttps://shop.example.com/index.html\nhttps://cdn.example.com/vendor.min.js\nhttps://api.example.com/v1/users`',
+    options: { methods: 'split[\n],contains[.js],unique,sortu' },
+    output: 'https://cdn.example.com/app.js\nhttps://cdn.example.com/vendor.min.js'
+  },
+  {
+    name: 'Simple: Remove Guest/Service Accounts',
+    category: 'identity',
+    summary: 'Exclude guest/service accounts from username lists.',
+    pattern: '`admin\nops\nguest\nservice-api\nqa-user\nguest-demo\nsecurity`',
+    options: { methods: 'split[\n],grepv[/guest|service/i],unique,sortu' },
+    output: 'admin\nops\nqa-user\nsecurity'
+  },
+  {
+    name: 'Simple: Extract Emails',
+    category: 'secops',
+    summary: 'Extract email addresses from logs, alerts, or notes.',
+    pattern: '`alert owner=alice@example.com source=siem\ncontact: bob.ops@example.org\nnoise line\naudit by carol.sec@example.net and dave@example.net`',
+    options: { methods: 'regex[\\w+([.-]?\\w+)*@\\w+([.-]?\\w+)*\\.\\w+],unique,sortu' },
+    output: 'alice@example.com\nbob.ops@example.org\ncarol.sec@example.net\ndave@example.net'
+  },
+  {
+    name: 'Simple: Subdomain List From FQDNs',
+    category: 'intel',
+    summary: 'Extract subdomain prefixes from FQDN inventories.',
+    pattern: '`api.eu.example.com\ncdn.assets.example.com\nvpn.example.com\nauth.id.example.com`',
+    options: { methods: 'split[\n],subdomain,unique,sortu' },
+    output: 'api.eu\nauth.id\ncdn.assets\nvpn'
+  },
+  {
+    name: 'Simple: TLD Extraction',
+    category: 'intel',
+    summary: 'Extract top-level domains for quick domain footprint analysis.',
+    pattern: '`example.com\nportal.example.org\nstatic.sample.io\ngateway.company.co.uk\ninternal.company.net`',
+    options: { methods: 'split[\n],tld,unique,sortu' },
+    output: 'co.uk\ncom\nio\nnet\norg'
+  },
+  {
+    name: 'Simple: Clean + Deduplicate Wordlist',
+    category: 'wordlists',
+    summary: 'Trim whitespace and deduplicate noisy wordlists.',
+    pattern: '`  admin\nadmin\n root \nops\nops\nsecurity-team  `',
+    options: { methods: 'split[\n],trim,unique,sortu' },
+    output: 'admin\nops\nroot\nsecurity-team'
+  },
+  {
+    name: 'Simple: Keep Strong Passwords',
+    category: 'identity',
+    summary: 'Filter candidate passwords by minimum length.',
+    pattern: '`admin\nwelcome\nSummer2026!\nBlueTeam#2026\nqwerty\nS3curePass!`',
+    options: { methods: 'split[\n],minlength[10],unique,sortu' },
+    output: 'BlueTeam#2026\nS3curePass!\nSummer2026!'
+  },
+  {
+    name: 'Advanced: API Key Pattern Harvest',
+    category: 'appsec',
+    summary: 'Extract probable API keys/tokens from source blobs.',
+    pattern: '`const KEY=\"sk_live_51NabCDEFGhijklmnopqrstuv\";\napi_key=AKIAIOSFODNN7EXAMPLE\nBearer eyJhbGciOiJIUzI1NiJ9.e30.signature\nsecret=not-a-key\nstripe=sk_test_51ZZZZZZZZZZZZZZZZZZZZ`',
+    options: { methods: 'regex[(sk_(live|test)_\\w+|AKIA\\w+|\\S+\\.\\S+\\.\\S+)],unique' },
+    output: 'sk_live_...\nAKIA...\neyJhbGci...\nsk_test_...'
+  },
+  {
+    name: 'Advanced: Error Endpoint Correlation',
+    category: 'secops',
+    summary: 'Keep only 5xx lines and extract the affected endpoint path.',
+    pattern: '`2026-03-01 GET /login 200\n2026-03-01 POST /api/auth 500\n2026-03-01 GET /api/users 503\n2026-03-01 GET /health 200\n2026-03-01 POST /api/payment 502`',
+    options: { methods: 'split[\n],grep[/5\\d\\d/],awkn[2: ],unique,sortu' },
+    output: '/api/auth\n/api/payment\n/api/users'
+  },
+  {
+    name: 'Advanced: Credential Password SHA256 Set',
+    category: 'secops',
+    summary: 'Extract passwords from combos and hash with SHA-256 for legacy matching.',
+    pattern: '`alice:Welcome2026!\nbob:Winter2025#\nqa:Qwerty123!\nops:BlueTeam#2026\nsvc:RotateMe!2026`',
+    options: { methods: 'split[\n],awkn[1::],trim,minlength[8],sha256,unique' },
+    output: '8f9d...\n4b3a...\n...'
+  },
+  {
+    name: 'Advanced: Parameter Value Wordlist',
+    category: 'bugbounty',
+    summary: 'Extract unique query values from URL lists for payload seeding.',
+    pattern: '`https://shop.example.com/search?q=laptop&lang=en\nhttps://shop.example.com/search?q=phone&lang=fr\nhttps://api.example.com/v1/users?role=admin&page=2\nhttps://api.example.com/v1/users?role=ops&page=7`',
+    options: { methods: 'split[\n],value,trim,unique,sortu' },
+    output: '2\n7\nadmin\nen\nfr\nlaptop\nops\nphone'
+  },
+  {
+    name: 'Advanced: JS Endpoint Discovery Seeds',
+    category: 'appsec',
+    summary: 'Extract API-like paths from JavaScript snippets/logs for endpoint testing.',
+    pattern: '`fetch(\"/api/v1/users\")\naxios.get(\"/api/v2/orders\")\nconst x=\"/static/app.js\"\nPOST /api/admin/invite\nwindow.location=\"/login\"`',
+    options: { methods: 'regex[/api/[A-Za-z0-9_\\/-]+],unique,sortu' },
+    output: '/api/admin/invite\n/api/v1/users\n/api/v2/orders'
+  },
+  {
+    name: 'Advanced: Environment Host Segmentation',
+    category: 'intel',
+    summary: 'Split hosts by environment keywords (dev/stage/prod) for targeted testing.',
+    pattern: '`dev-api.example.com\nstage-api.example.com\nprod-api.example.com\ndev-auth.example.com\nprod-auth.example.com\ncdn.example.com`',
+    options: { methods: 'split[\n],grep[/dev|stage|prod/],unique,sortu' },
+    output: 'dev-api.example.com\ndev-auth.example.com\nprod-api.example.com\nprod-auth.example.com\nstage-api.example.com'
+  }
 ];
 let acState = { input: null, items: [], activeIndex: 0, replaceRange: null, mode: '', meta: {} };
 
@@ -3473,7 +3789,7 @@ document.addEventListener('keydown', (e) => {
     deleteSelectedMethodNodes();
     return;
   }
-  if (e.key === 'Escape') { closeMethodModal(); closeExamplesModal(); }
+  if (e.key === 'Escape') { closeMethodModal(); closeExamplesModal(); closeDocsModal(); }
 });
 
 function loadExample(chip) {
@@ -4031,8 +4347,8 @@ function layoutMethodNodes(orderByCurrent) {
     const w = Math.min(maxW, Math.floor((availableW - gap * (cols - 1)) / cols));
     if (w < minW) continue;
     const rows = Math.ceil(count / cols);
-    const rowH = w < 170 ? 106 : 120;
-    const neededH = rows * rowH + Math.max(0, rows - 1) * 16;
+    const rowH = w < 176 ? 116 : 132;
+    const neededH = rows * rowH + Math.max(0, rows - 1) * 22;
     if (neededH <= availableH) {
       selected = { cols, w, rowH };
       break;
@@ -4041,14 +4357,14 @@ function layoutMethodNodes(orderByCurrent) {
   if (!selected) {
     const cols = maxCols;
     const w = Math.max(132, Math.min(maxW, Math.floor((availableW - gap * (cols - 1)) / cols)));
-    const rowH = w < 170 ? 102 : 116;
+    const rowH = w < 176 ? 112 : 126;
     selected = { cols, w, rowH };
   }
   METHOD_NODE_UI.width = selected.w;
   METHOD_NODE_UI.rowHeight = selected.rowH;
   METHOD_NODE_UI.compact = selected.w < 188;
   const slotW = METHOD_NODE_UI.width + gap;
-  const slotH = METHOD_NODE_UI.rowHeight + 8;
+  const slotH = METHOD_NODE_UI.rowHeight + 18;
 
   const items = [...METHOD_FLOW_STATE.items];
   if (orderByCurrent) {
@@ -4414,7 +4730,7 @@ function initToolboxSearch() {
   const input = document.querySelector('.toolbox-search');
   if (!input) return;
   const methodBtn = document.getElementById('tool-open-methods');
-  const examplesBtn = document.getElementById('tool-open-examples');
+  const learnBtn = document.getElementById('tool-open-learn');
   const mutationBtn = document.getElementById('tool-add-mutation-node');
   document.querySelectorAll('.tool-action-btn,.tool-note,.tool-cat').forEach((el) => { el.style.display = ''; });
   if (methodBtn) {
@@ -4426,20 +4742,23 @@ function initToolboxSearch() {
     const methodTokens = methodParts.join(' ').toLowerCase();
     methodBtn.dataset.search = `methods transform hash encode regex web string ${methodTokens}`;
   }
-  if (examplesBtn) {
+  if (learnBtn) {
     const exParts = [];
     for (let i = 0; i < EXAMPLE_LIBRARY.length; i++) {
       const e = EXAMPLE_LIBRARY[i];
       exParts.push(e.name || '', e.pattern || '', e.output || '');
       for (const t of (e.tags || [])) exParts.push(t || '');
     }
+    for (let i = 0; i < RECIPE_LIBRARY.length; i++) {
+      const r = RECIPE_LIBRARY[i];
+      exParts.push(r.name || '', r.summary || '', r.pattern || '', r.output || '', r.category || '', r.options?.methods || '');
+    }
     const exTokens = exParts.join(' ').toLowerCase();
-    examplesBtn.dataset.search = `examples tutorials workflow templates ${exTokens}`;
+    learnBtn.dataset.search = `learn receipes recipes examples tutorials workflow templates docs syntax faq ${exTokens}`;
   }
   if (mutationBtn) {
     mutationBtn.dataset.search = 'mutation mutate wordlist variants balanced aggressive extra words generator node';
   }
-
   function openMethodsWithQuery(q) {
     const query = String(q || '').trim();
     if (!query) return;
@@ -4457,14 +4776,14 @@ function initToolboxSearch() {
     openMethodsFromSidebar(query);
     input.blur();
   }
-  function openExamplesWithQuery(q) { openExamplesFromSidebar(q); }
+  function openLearnWithQuery(q) { openLearnFromSidebar(q); }
 
   function scheduleOpen(query) {
     if (ONBOARDING_STATE.open) return;
     if (TOOLBOX_SEARCH_OPEN_TIMER) window.clearTimeout(TOOLBOX_SEARCH_OPEN_TIMER);
     TOOLBOX_SEARCH_OPEN_TIMER = window.setTimeout(() => {
       if (ONBOARDING_STATE.open) return;
-      openMethodsWithQuery(query);
+      openLearnWithQuery(query);
     }, 180);
   }
 
@@ -4475,7 +4794,6 @@ function initToolboxSearch() {
       TOOLBOX_SEARCH_OPEN_TIMER = 0;
       return;
     }
-    // Debounced handoff keeps UI responsive and avoids re-render on each keystroke.
     scheduleOpen(q);
   });
   input.addEventListener('focus', () => {
@@ -4491,22 +4809,22 @@ function initToolboxSearch() {
     if (!q) return;
     const query = q.toLowerCase();
     const methodsHay = (methodBtn?.dataset.search || '');
-    const examplesHay = (examplesBtn?.dataset.search || '');
+    const learnHay = (learnBtn?.dataset.search || '');
     const mutationHay = (mutationBtn?.dataset.search || '');
     if (mutationHay.includes(query)) {
       addMutationNode('balanced', '');
       input.value = '';
       return;
     }
+    if (learnHay.includes(query)) {
+      openLearnWithQuery(q);
+      return;
+    }
     if (methodsHay.includes(query)) {
-      openMethodsWithQuery(q);
+      openLearnWithQuery(q);
       return;
     }
-    if (examplesHay.includes(query)) {
-      openExamplesWithQuery(q);
-      return;
-    }
-    openMethodsWithQuery(q);
+    openLearnWithQuery(q);
   });
 }
 
@@ -4552,17 +4870,22 @@ function safeOpenMethodsSidebar(seedQuery) {
   clearSidebarSearch();
 }
 
-function safeOpenExamplesSidebar(seedQuery) {
+function safeOpenLearnSidebar(seedQuery) {
   const q = String(seedQuery || '').trim();
-  if (typeof openExamplesModal === 'function') {
-    openExamplesModal();
-    const exSearch = document.getElementById('examples-search-input');
-    if (exSearch) {
-      exSearch.value = q;
-      if (typeof filterExamples === 'function') filterExamples(q);
-    }
+  DOCS_STATE.recipeQuery = q;
+  DOCS_STATE.syntaxQuery = q;
+  if (typeof openDocsModal === 'function') openDocsModal('recipes');
+  const search = document.getElementById('docs-recipe-search');
+  if (search) {
+    search.value = q;
+    filterDocsRecipes(q);
   }
-  clearSidebarSearch();
+  const syntaxSearch = document.getElementById('docs-syntax-search');
+  if (syntaxSearch) {
+    syntaxSearch.value = q;
+    filterDocsSyntax(q);
+  }
+  if (!q) clearSidebarSearch();
 }
 
 function openMethodsFromSidebar(seedQuery) {
@@ -4578,14 +4901,11 @@ function openMethodsFromSidebar(seedQuery) {
 }
 
 function openExamplesFromSidebar(seedQuery) {
-  const q = String(seedQuery || '').trim();
-  openExamplesModal();
-  const exSearch = document.getElementById('examples-search-input');
-  if (exSearch) {
-    exSearch.value = q;
-    filterExamples(q);
-  }
-  clearSidebarSearch();
+  return safeOpenLearnSidebar(seedQuery);
+}
+
+function openLearnFromSidebar(seedQuery) {
+  return safeOpenLearnSidebar(seedQuery);
 }
 
 // Resilient global wrappers for inline handlers and cached/stale DOM callbacks.
@@ -4593,24 +4913,27 @@ window.openMethodsFromSidebar = function openMethodsFromSidebarGlobal(seedQuery)
   return safeOpenMethodsSidebar(seedQuery);
 };
 window.openExamplesFromSidebar = function openExamplesFromSidebarGlobal(seedQuery) {
-  return safeOpenExamplesSidebar(seedQuery);
+  return safeOpenLearnSidebar(seedQuery);
+};
+window.openLearnFromSidebar = function openLearnFromSidebarGlobal(seedQuery) {
+  return safeOpenLearnSidebar(seedQuery);
 };
 
 function bindPrimaryActionButtons() {
   const methodsBtn = document.getElementById('tool-open-methods');
-  const examplesBtn = document.getElementById('tool-open-examples');
+  const learnBtn = document.getElementById('tool-open-learn');
   const mutationBtn = document.getElementById('tool-add-mutation-node');
   const clearBtn = document.getElementById('tool-clear-all');
-  const hdrExamples = document.querySelector('.studio-actions .hdr-text-btn[title=\"Usage examples\"]');
+  const hdrLearn = document.querySelector('.studio-actions .hdr-text-btn[title=\"Receipes, workflows, and syntax\"]');
   const hdrMethods = document.querySelector('.studio-actions .hdr-text-btn[title=\"Method reference\"]');
 
   if (methodsBtn) {
     methodsBtn.removeAttribute('onclick');
     methodsBtn.onclick = () => safeOpenMethodsSidebar();
   }
-  if (examplesBtn) {
-    examplesBtn.removeAttribute('onclick');
-    examplesBtn.onclick = () => safeOpenExamplesSidebar();
+  if (learnBtn) {
+    learnBtn.removeAttribute('onclick');
+    learnBtn.onclick = () => safeOpenLearnSidebar();
   }
   if (mutationBtn) {
     mutationBtn.removeAttribute('onclick');
@@ -4620,9 +4943,9 @@ function bindPrimaryActionButtons() {
     clearBtn.removeAttribute('onclick');
     clearBtn.onclick = () => clearAllAndSidebarSearch();
   }
-  if (hdrExamples) {
-    hdrExamples.removeAttribute('onclick');
-    hdrExamples.onclick = () => openExamplesModal();
+  if (hdrLearn) {
+    hdrLearn.removeAttribute('onclick');
+    hdrLearn.onclick = () => openDocsModal('recipes');
   }
   if (hdrMethods) {
     hdrMethods.removeAttribute('onclick');
@@ -5116,6 +5439,7 @@ function openMethodModal(opts) {
     METHOD_MODAL_STATE.query = options.query.toLowerCase();
   }
   closeExamplesModal();
+  closeDocsModal();
   document.getElementById('method-modal').classList.add('open');
   const search = document.getElementById('method-search-input');
   if (search) search.value = METHOD_MODAL_STATE.query;
@@ -5481,6 +5805,49 @@ function applyExampleConfig(index, shouldRun) {
   if (shouldRun) startGenerate();
 }
 
+function applyRecipeConfig(index, shouldRun) {
+  const recipe = RECIPE_LIBRARY[index];
+  if (!recipe) return;
+  const optionMethods = extractOptionMethodsFromExample(recipe);
+  const patternMethods = extractPatternMethodsFromExample(recipe);
+  const methods = [...new Set([...optionMethods, ...patternMethods])];
+  document.getElementById('pattern').value = recipe.pattern || '';
+  onPatternChange();
+  const paramsContainer = document.getElementById('param-rows');
+  paramsContainer.innerHTML = '';
+  for (const p of (recipe.params || [])) addParamRow(p.name || '', p.value || '');
+
+  const options = recipe.options || {};
+  document.getElementById('opt-mode').value = (options.mode === 'append' ? 'append' : (options.mode === 'mutation' ? 'mutation' : 'permutation'));
+  document.getElementById('opt-min').value = Object.prototype.hasOwnProperty.call(options, 'min') ? (options.min || '') : '';
+  document.getElementById('opt-methods').value = Object.prototype.hasOwnProperty.call(options, 'methods') ? (options.methods || '') : '';
+  document.getElementById('opt-colmethods').value = Object.prototype.hasOwnProperty.call(options, 'colmethods') ? (options.colmethods || '') : '';
+  document.getElementById('opt-append').value = Object.prototype.hasOwnProperty.call(options, 'append') ? (options.append || '') : '';
+  updateModeUI();
+
+  METHOD_FLOW_STATE.items = [];
+  renderMethodFlow();
+  updateWorkflowConnectors();
+  const mutationAdded = ensureLegacyMutationNode(options, true);
+  optionMethods.forEach((m) => addMethodNode(m, undefined, undefined, 'global'));
+  patternMethods.forEach((m) => addMethodNode(m, undefined, undefined, 'pattern'));
+  if (mutationAdded && (optionMethods.length + patternMethods.length === 0)) {
+    layoutMethodNodes(false);
+    renderMethodFlow();
+    syncMethodFlowToInput();
+    updateWorkflowConnectors();
+  }
+  syncMethodFlowToInput();
+  validateInputs();
+  const patternNode = document.querySelector('.node-pattern');
+  if (patternNode) patternNode.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
+  closeDocsModal();
+  clearSidebarSearch();
+  if (methods.length) showToast(`Loaded recipe with ${methods.length} workflow node${methods.length > 1 ? 's' : ''}`);
+  else showToast('Recipe loaded');
+  if (shouldRun) startGenerate();
+}
+
 function getExampleCategoryLabel(cat) {
   const labels = {
     ranges: 'Ranges',
@@ -5496,6 +5863,72 @@ function getExampleCategoryLabel(cat) {
     pipelines: 'Pipelines'
   };
   return labels[cat] || 'Workflow';
+}
+
+function getRecipeCategoryLabel(cat) {
+  const labels = {
+    bugbounty: 'Bug Bounty',
+    secops: 'Security Operations',
+    appsec: 'Application Security',
+    identity: 'Identity & Access',
+    intel: 'Threat Intel',
+    wordlists: 'Wordlist Engineering'
+  };
+  return labels[cat] || 'Workflow';
+}
+
+function getRecipeLevel(recipe) {
+  const explicit = String(recipe?.level || '').toLowerCase();
+  if (explicit === 'simple' || explicit === 'intermediate' || explicit === 'advanced') return explicit;
+  const name = String(recipe?.name || '').toLowerCase();
+  if (name.startsWith('simple:')) return 'simple';
+  if (name.startsWith('advanced:')) return 'advanced';
+  return 'intermediate';
+}
+
+function getRecipeUseCaseCategories(ex) {
+  const tags = new Set((ex.tags || []).map((t) => String(t).toLowerCase()));
+  const pattern = String(ex.pattern || '').toLowerCase();
+  const methods = extractMethodsFromExample(ex).map((m) => String(m).toLowerCase());
+  const cats = new Set();
+
+  const hasWebRecon = methods.some((m) => ['host','port','path','query','keys','value','domain','tld','subdomain','allsub','alldir','fragment','scheme'].includes(m))
+    || tags.has('url')
+    || pattern.includes('http://')
+    || pattern.includes('https://');
+  if (hasWebRecon) { cats.add('bugbounty'); cats.add('appsec'); }
+
+  const hasCredentials = methods.some((m) => ['user', 'pass'].includes(m))
+    || tags.has('credentials')
+    || pattern.includes(':');
+  if (hasCredentials) { cats.add('identity'); cats.add('secops'); }
+
+  const hasHashing = methods.some((m) => ['md5','sha1','sha224','sha256','sha384','sha512'].includes(m)) || tags.has('hash');
+  if (hasHashing) { cats.add('secops'); cats.add('intel'); }
+
+  const hasFilters = methods.some((m) => ['contains','grep','grepv','awkn','starts','ends','minlength','maxlength'].includes(m)) || tags.has('filters');
+  if (hasFilters) cats.add('secops');
+
+  const hasExtraction = methods.includes('regex') || methods.includes('json') || tags.has('regex') || tags.has('json');
+  if (hasExtraction) { cats.add('appsec'); cats.add('intel'); }
+
+  const hasWordlistOps =
+    tags.has('cross-product') ||
+    tags.has('line-by-line') ||
+    tags.has('mutation') ||
+    tags.has('leet[1]') ||
+    tags.has('smart') ||
+    tags.has('range') ||
+    tags.has('repeat') ||
+    pattern.includes(',') ||
+    /(^|[^0-9])\d+-\d+([^0-9]|$)/.test(pattern);
+  if (hasWordlistOps) cats.add('wordlists');
+
+  const hasEncoding = methods.some((m) => ['b64e','b64d','hexe','hexd','urle','urld','urlea','jsone','jsonu','xmle','xmlu','unicodee','unicoded','utf16','utf16be','charcode'].includes(m));
+  if (hasEncoding) cats.add('appsec');
+
+  if (!cats.size) cats.add('bugbounty');
+  return [...cats];
 }
 
 function getExampleCategories(ex) {
@@ -5611,6 +6044,7 @@ function insertSelectedExample(shouldRun) {
 
 function openExamplesModal() {
   closeMethodModal();
+  closeDocsModal();
   const search = document.getElementById('examples-search-input');
   if (search) search.value = EXAMPLES_MODAL_STATE.query;
   renderExamplesModal();
@@ -5618,6 +6052,327 @@ function openExamplesModal() {
   if (search) setTimeout(() => search.focus(), 0);
 }
 function closeExamplesModal() { document.getElementById('examples-modal').classList.remove('open'); }
+
+function renderDocsModal() {
+  const main = document.getElementById('docs-main');
+  if (!main) return;
+  const activeTab = DOCS_STATE.tab === 'workflows' ? 'recipes' : DOCS_STATE.tab;
+  DOCS_STATE.tab = activeTab;
+  document.querySelectorAll('[data-docs-tab]').forEach((btn) => {
+    btn.classList.toggle('active', btn.getAttribute('data-docs-tab') === activeTab);
+  });
+  if (activeTab === 'syntax') {
+    const query = String(DOCS_STATE.syntaxQuery || '').trim().toLowerCase();
+    const category = DOCS_STATE.syntaxCategory || 'all';
+    const filtered = METHOD_CATALOG.filter((m) => {
+      const inCategory = category === 'all' || getMethodCategory(m.name) === category;
+      if (!inCategory) return false;
+      if (!query) return true;
+      const hay = [m.insert, m.name, m.desc, ...(m.aliases || [])].join(' ').toLowerCase();
+      return hay.includes(query);
+    });
+    if (!filtered.some((m) => m.name === DOCS_STATE.syntaxSelected) && filtered.length) {
+      DOCS_STATE.syntaxSelected = filtered[0].name;
+    }
+    const cards = filtered.map((m) => {
+      const details = METHOD_DETAILS[m.name];
+      const longDesc = details ? details.long : m.desc;
+      const ex = details ? details.ex : `input.${m.insert}`;
+      const aliasList = (m.aliases || [])
+        .filter((a) => a !== m.name)
+        .slice(0, 4)
+        .map((a) => `<span class="method-alias">${escapeHtml(a)}</span>`)
+        .join('');
+      const paramGuide = METHOD_PARAM_GUIDE[m.name]
+        ? `<div class="method-param">${escapeHtml(METHOD_PARAM_GUIDE[m.name])}</div>`
+        : '';
+      const activeCls = DOCS_STATE.syntaxSelected === m.name ? ' active' : '';
+      return `<article class="method-card${activeCls}" onclick="onDocsSyntaxMethodClick('${escapeHtml(m.name)}')">
+        <div class="method-card-name">.${escapeHtml(m.insert)}</div>
+        <div class="method-card-desc">${escapeHtml(longDesc)}</div>
+        ${aliasList ? `<div class="method-card-meta">${aliasList}</div>` : ''}
+        ${paramGuide}
+        <div class="method-card-ex">${escapeHtml(ex)}</div>
+        <div class="docs-row-actions">
+          <button class="docs-btn" type="button" onclick="event.stopPropagation();addSyntaxMethod('${escapeHtml(m.name)}', false)">Add Node</button>
+          <button class="docs-btn alt" type="button" onclick="event.stopPropagation();addSyntaxMethod('${escapeHtml(m.name)}', true)">Add + Run</button>
+        </div>
+      </article>`;
+    }).join('');
+    main.innerHTML = `<section class="docs-hero">
+      <h4>Syntax & Method Reference</h4>
+      <p>Same method-browser experience: search, filter by category, and insert directly to workflow.</p>
+    </section>
+    <div class="method-top-search" style="padding:0 0 10px;border:0;background:transparent">
+      <input type="text" id="docs-syntax-search" class="method-search" placeholder="Search methods (e.g. .md5, .regex, .split)..." value="${escapeHtml(DOCS_STATE.syntaxQuery || '')}" oninput="filterDocsSyntax(this.value)" />
+    </div>
+    <div class="method-shell" style="min-height:min(66vh,640px)">
+      <aside class="method-sidebar">
+        <button class="method-side-item${category === 'all' ? ' active' : ''}" data-cat="all" onclick="setDocsSyntaxCategory('all')">All Methods</button>
+        <div class="method-side-title">Categories</div>
+        <button class="method-side-item${category === 'string' ? ' active' : ''}" data-cat="string" onclick="setDocsSyntaxCategory('string')">String</button>
+        <button class="method-side-item${category === 'hashing' ? ' active' : ''}" data-cat="hashing" onclick="setDocsSyntaxCategory('hashing')">Hashing</button>
+        <button class="method-side-item${category === 'encoding' ? ' active' : ''}" data-cat="encoding" onclick="setDocsSyntaxCategory('encoding')">Encoding</button>
+        <button class="method-side-item${category === 'web' ? ' active' : ''}" data-cat="web" onclick="setDocsSyntaxCategory('web')">Web</button>
+        <button class="method-side-item${category === 'regex' ? ' active' : ''}" data-cat="regex" onclick="setDocsSyntaxCategory('regex')">Regex</button>
+      </aside>
+      <main class="method-panel">
+        <div class="method-grid">${cards || '<div class="method-empty">No methods found for this search/category.</div>'}</div>
+      </main>
+    </div>`;
+    return;
+  }
+  if (activeTab === 'recipes') {
+    const query = String(DOCS_STATE.recipeQuery || '').trim().toLowerCase();
+    const recipeCategory = DOCS_STATE.recipeCategory || 'all';
+    const list = RECIPE_LIBRARY.filter((recipe) => {
+      const category = String(recipe.category || '').toLowerCase();
+      const inCategory = recipeCategory === 'all' || category === recipeCategory;
+      if (!inCategory) return false;
+      if (!query) return true;
+      const hay = [
+        recipe.name || '',
+        recipe.summary || '',
+        recipe.pattern || '',
+        recipe.output || '',
+        recipe.category || '',
+        getRecipeLevel(recipe),
+        recipe.options?.methods || '',
+        recipe.options?.colmethods || '',
+        recipe.options?.mode || ''
+      ].join(' ').toLowerCase();
+      return hay.includes(query);
+    });
+    if (!list.some((r) => RECIPE_LIBRARY.indexOf(r) === DOCS_STATE.recipeSelected) && list.length) {
+      DOCS_STATE.recipeSelected = RECIPE_LIBRARY.indexOf(list[0]);
+    }
+    const cards = list.map((recipe) => {
+      const idx = RECIPE_LIBRARY.indexOf(recipe);
+      const tags = [
+        `<span class="example-tag">${escapeHtml(getRecipeCategoryLabel(recipe.category || 'wordlists'))}</span>`,
+        `<span class="example-tag">level:${escapeHtml(getRecipeLevel(recipe))}</span>`,
+        recipe.options?.mode ? `<span class="example-tag">mode:${escapeHtml(recipe.options.mode)}</span>` : '',
+        recipe.options?.methods ? `<span class="example-tag">methods:${escapeHtml(recipe.options.methods.split(',').slice(0, 2).join(','))}</span>` : ''
+      ].filter(Boolean).join('');
+      const primaryCategory = getRecipeCategoryLabel(recipe.category || 'bugbounty');
+      const options = recipe.options || {};
+      const methodsFromOptions = (options.methods || '')
+        .split(';')
+        .flatMap((chunk) => parseMethodCsv(chunk))
+        .slice(0, 3)
+        .map((m) => `.${m}`);
+      const methodsFromPattern = [...(recipe.pattern || '').matchAll(/\.([a-zA-Z][a-zA-Z0-9_]*(?:\[[^\]]*\])?)/g)]
+        .map((m) => `.${m[1]}`)
+        .slice(0, 3);
+      const methods = methodsFromOptions.length ? methodsFromOptions : methodsFromPattern;
+      const flowNodes = [
+        { kind: 'Pattern', value: (recipe.pattern || '').replace(/\n/g, ' ').slice(0, 34) || 'pattern' },
+        ...methods.map((m) => ({ kind: 'Method', value: m })),
+        { kind: 'Output', value: (recipe.output || '').split('\n')[0].slice(0, 34) || 'result' }
+      ];
+      const flowHtml = flowNodes.map((node, i) => {
+        const nodeHtml = `<div class="example-flow-node"><b>${escapeHtml(node.kind)}</b><span>${escapeHtml(node.value)}</span></div>`;
+        if (i === flowNodes.length - 1) return nodeHtml;
+        return `${nodeHtml}<div class="example-flow-conn"></div>`;
+      }).join('');
+      const outputPreview = String(recipe.output || '').split('\n').slice(0, 2).join(' | ');
+      const activeCls = DOCS_STATE.recipeSelected === idx ? ' active' : '';
+      return `<article class="example-card example-tutorial-card${activeCls}" data-recipe-index="${idx}" onclick="onRecipeCardClick(${idx})">
+        <div class="example-tutorial-inner">
+          <div>
+            <div class="example-meta-line">
+              <span class="example-badge">${escapeHtml(primaryCategory)}</span>
+              <span class="example-blocks">${flowNodes.length} blocks</span>
+            </div>
+            <div class="example-main-title">${escapeHtml(recipe.name)}</div>
+            <div class="example-main-desc">${escapeHtml(recipe.summary || 'Practical workflow recipe.')}</div>
+            <div class="example-io"><strong>Output Preview</strong>${escapeHtml(outputPreview || 'Generated output preview')}</div>
+            <div class="example-tags">${tags}</div>
+            <div class="example-cta-row">
+              <button class="example-cta" type="button" onclick="event.stopPropagation();applyRecipeConfig(${idx}, true)">Use This Recipe + Run</button>
+              <button class="example-cta alt" type="button" onclick="event.stopPropagation();applyRecipeConfig(${idx}, false)">Use This Recipe</button>
+            </div>
+          </div>
+          <div class="example-flow-board">${flowHtml}</div>
+        </div>
+      </article>`;
+    }).join('');
+    const syntaxMatches = query
+      ? METHOD_CATALOG.filter((m) => {
+          const hay = [m.name || '', m.insert || '', m.desc || '', ...(m.aliases || [])].join(' ').toLowerCase();
+          return hay.includes(query);
+        }).slice(0, 18)
+      : [];
+    const syntaxCards = syntaxMatches.map((m) => {
+      const details = METHOD_DETAILS[m.name];
+      const longDesc = details ? details.long : m.desc;
+      return `<article class="method-card" onclick="onDocsSyntaxMethodClick('${escapeHtml(m.name)}')">
+        <div class="method-card-name">.${escapeHtml(m.insert)}</div>
+        <div class="method-card-desc">${escapeHtml(longDesc)}</div>
+      </article>`;
+    }).join('');
+    main.innerHTML = `<section class="docs-hero">
+      <h4>Recipes</h4>
+      <p>All workflows in one place. Search shows both recipes and matching methods.</p>
+    </section>
+    <section class="docs-block" style="padding:10px">
+      <div class="examples-top-search" style="padding:0;border:0;background:transparent">
+        <input type="text" class="method-search" id="docs-recipe-search" placeholder="Search recipes (bug bounty, secops, host, grep, json...)" value="${escapeHtml(DOCS_STATE.recipeQuery || '')}" oninput="filterDocsRecipes(this.value)" />
+      </div>
+      <div style="margin-top:8px;color:var(--muted);font-size:12px">${list.length} recipe${list.length === 1 ? '' : 's'} found</div>
+    </section>
+    <section class="docs-block" style="margin-bottom:10px">
+      <h4 style="margin-bottom:8px">Matching Ingredients ${query ? `(${syntaxMatches.length})` : ''}</h4>
+      ${query
+        ? `<div class="method-grid" style="max-height:220px;overflow:auto">${syntaxCards || '<div class="method-empty">No matching methods.</div>'}</div>`
+        : '<div class="method-empty">Type in search to filter both recipes and ingredients together.</div>'
+      }
+    </section>
+    <section class="examples-shell" style="height:min(68vh,680px)">
+      <aside class="examples-sidebar">
+        <button class="example-side-item${recipeCategory === 'all' ? ' active' : ''}" type="button" onclick="setDocsRecipeCategory('all')">All Recipes</button>
+        <div class="method-side-title">Use Cases</div>
+        <button class="example-side-item${recipeCategory === 'bugbounty' ? ' active' : ''}" type="button" onclick="setDocsRecipeCategory('bugbounty')">Bug Bounty</button>
+        <button class="example-side-item${recipeCategory === 'secops' ? ' active' : ''}" type="button" onclick="setDocsRecipeCategory('secops')">Security Operations</button>
+        <button class="example-side-item${recipeCategory === 'appsec' ? ' active' : ''}" type="button" onclick="setDocsRecipeCategory('appsec')">Application Security</button>
+        <button class="example-side-item${recipeCategory === 'identity' ? ' active' : ''}" type="button" onclick="setDocsRecipeCategory('identity')">Identity & Access</button>
+        <button class="example-side-item${recipeCategory === 'intel' ? ' active' : ''}" type="button" onclick="setDocsRecipeCategory('intel')">Threat Intel</button>
+        <button class="example-side-item${recipeCategory === 'wordlists' ? ' active' : ''}" type="button" onclick="setDocsRecipeCategory('wordlists')">Wordlist Engineering</button>
+      </aside>
+      <main class="examples-panel">
+        <div class="examples-grid">
+          ${cards || '<div class="method-empty">No recipes found for this search/category.</div>'}
+        </div>
+      </main>
+    </section>`;
+    return;
+  }
+  DOCS_STATE.tab = 'recipes';
+  renderDocsModal();
+}
+
+function filterDocsRecipes(query) {
+  DOCS_STATE.recipeQuery = String(query || '');
+  renderDocsModal();
+}
+
+function setDocsRecipeCategory(category) {
+  DOCS_STATE.recipeCategory = String(category || 'all');
+  renderDocsModal();
+}
+
+function selectRecipeCardDom(index) {
+  document.querySelectorAll('.example-card.example-tutorial-card').forEach((el) => {
+    el.classList.remove('active');
+  });
+  const target = document.querySelector(`.example-card.example-tutorial-card[data-recipe-index="${index}"]`);
+  if (target) target.classList.add('active');
+}
+
+function onRecipeCardClick(index) {
+  const now = Date.now();
+  const isDouble = DOCS_STATE.recipeLastClickIndex === index && (now - DOCS_STATE.recipeLastClickTs) <= 2000;
+  DOCS_STATE.recipeLastClickIndex = index;
+  DOCS_STATE.recipeLastClickTs = now;
+  DOCS_STATE.recipeSelected = index;
+  selectRecipeCardDom(index);
+  if (isDouble) applyRecipeConfig(index, true);
+}
+
+function filterDocsSyntax(query) {
+  DOCS_STATE.syntaxQuery = String(query || '');
+  renderDocsModal();
+  const s = document.getElementById('docs-syntax-search');
+  if (s) {
+    s.focus();
+    const p = s.value.length;
+    try { s.setSelectionRange(p, p); } catch {}
+  }
+}
+
+function setDocsSyntaxCategory(category) {
+  DOCS_STATE.syntaxCategory = String(category || 'all');
+  renderDocsModal();
+}
+
+function addSyntaxMethod(methodName, shouldRun) {
+  addMethodToWorkflow(methodName, !!shouldRun);
+  closeDocsModal();
+}
+
+function onDocsSyntaxMethodClick(methodName) {
+  const now = Date.now();
+  const isDouble = DOCS_STATE.syntaxLastClickName === methodName && (now - (DOCS_STATE.syntaxLastClickTs || 0)) <= 2000;
+  DOCS_STATE.syntaxLastClickName = methodName;
+  DOCS_STATE.syntaxLastClickTs = now;
+  DOCS_STATE.syntaxSelected = methodName;
+  if (isDouble) {
+    addSyntaxMethod(methodName, false);
+    return;
+  }
+  renderDocsModal();
+}
+
+function loadDocsScenario(key, shouldRun) {
+  const pattern = document.getElementById('pattern');
+  if (!pattern) return;
+  const setBasics = () => {
+    document.getElementById('opt-mode').value = 'permutation';
+    document.getElementById('opt-min').value = '';
+    document.getElementById('opt-methods').value = '';
+    document.getElementById('opt-colmethods').value = '';
+    document.getElementById('opt-append').value = '';
+    METHOD_FLOW_STATE.items = [];
+  };
+  setBasics();
+  if (key === 'url') {
+    pattern.value = 'https://api.example.com/v1\nhttps://cdn.example.com/assets\nhttps://api.example.com/login';
+    document.getElementById('opt-methods').value = 'host,unique,sortu';
+  } else if (key === 'creds') {
+    pattern.value = 'alice:Secret123\nbob:Welcome2026\nguest:Summer2025';
+    document.getElementById('opt-methods').value = 'user,unique,sortu';
+  } else if (key === 'mutation') {
+    pattern.value = 'admin,test';
+    addMutationNode('balanced', 'corp,secure');
+    document.getElementById('opt-methods').value = 'upper,unique,sortu';
+  } else if (key === 'hashrange') {
+    pattern.value = '01-20';
+    document.getElementById('opt-methods').value = 'md5';
+  } else if (key === 'apifilter') {
+    pattern.value = '/login\n/api/v1/users\n/assets/logo.png\n/api/v2/admin';
+    document.getElementById('opt-methods').value = 'contains[/api/],unique,sortu';
+  } else if (key === 'usernorm') {
+    pattern.value = 'Admin_User\nadmin-user\nADMINUSER\nadmin user';
+    document.getElementById('opt-methods').value = 'lower,replace[ :_],replace[-:_],unique,sortu';
+  }
+  updateModeUI();
+  onPatternChange();
+  syncMethodFlowFromInput(true);
+  validateInputs();
+  if (shouldRun) startGenerate();
+  closeDocsModal();
+}
+
+function setDocsTab(tab) {
+  const next = tab === 'workflows'
+    ? 'recipes'
+    : (tab === 'faq' ? 'syntax' : (tab === 'start' ? 'recipes' : (tab || 'recipes')));
+  DOCS_STATE.tab = next;
+  renderDocsModal();
+}
+
+function openDocsModal(defaultTab) {
+  closeMethodModal();
+  closeExamplesModal();
+  if (defaultTab) setDocsTab(defaultTab);
+  renderDocsModal();
+  document.getElementById('docs-modal').classList.add('open');
+}
+
+function closeDocsModal() {
+  const modal = document.getElementById('docs-modal');
+  if (modal) modal.classList.remove('open');
+}
 
 // ── Theme toggle ──
 function applyTheme(theme) {
@@ -5646,17 +6401,17 @@ function onboardingSteps() {
   return [
     {
       title: 'Welcome to COOKED',
-      body: 'COOKED generates custom wordlists and transforms text fast. This 60-second tour will show the core workflow.',
+      body: 'In this tour: paste input, add one method, run, and verify output. Follow each step in order.',
       showFlow: true
     },
     {
       selector: '.node-pattern',
       title: '1) Input Text Area',
-      body: 'Write or paste values and ranges here. Use commas for alternatives and spaces for columns. Backticks keep spaces in one value.',
-      actionLabel: 'Load a range sample',
+      body: 'Paste your raw list here (URLs, combos, ranges, words). Everything starts from this box.',
+      actionLabel: 'Load URL wordlist sample',
       action: () => {
         const p = document.getElementById('pattern');
-        p.value = '1-5';
+        p.value = '`https://api.example.com/v1\nhttps://cdn.example.com/assets\nhttps://api.example.com/login`';
         onPatternChange();
         validateInputs();
         p.focus();
@@ -5664,16 +6419,14 @@ function onboardingSteps() {
     },
     {
       selector: '#pattern',
-      title: '2) Dot Methods in Input',
-      body: 'Type a dot after text (example: test.) to get method suggestions, then pick one like upper to build chains such as test.upper.',
-      actionLabel: 'Show dot suggestions',
+      title: '2) Dot Methods In Input',
+      body: 'Use inline chains directly on pasted blocks. Example: add .host to extract hosts from URLs.',
+      actionLabel: 'Show .host inline chain',
       action: () => {
         const p = document.getElementById('pattern');
         if (!p) return;
         ONBOARDING_STATE.dotRestore = p.value;
-        const current = p.value || '';
-        if (!current.trim()) p.value = 'test.';
-        else if (!current.endsWith('.')) p.value = current.replace(/\s+$/, '') + '.';
+        p.value = '`https://api.example.com/v1\nhttps://cdn.example.com/assets\nhttps://api.example.com/login`.host';
         p.focus();
         p.setSelectionRange(p.value.length, p.value.length);
         updateAutocomplete(p);
@@ -5690,12 +6443,12 @@ function onboardingSteps() {
     {
       selector: '#step-preview-input',
       title: '3) Input Expansion Preview',
-      body: 'This preview shows the intermediate output of the current node before it goes to the next step.',
-      actionLabel: 'Preview 1-5 expansion',
+      body: 'Each node preview shows what changed at that step so you can debug chains quickly.',
+      actionLabel: 'Preview range expansion',
       action: () => {
         const p = document.getElementById('pattern');
         if (!p) return;
-        p.value = '1-5';
+        p.value = '01-10';
         onPatternChange();
         validateInputs();
       }
@@ -5703,12 +6456,12 @@ function onboardingSteps() {
     {
       selector: '.toolbox-search',
       title: '4) Left Library Search',
-      body: 'Use left search to quickly find actions and methods in the workflow library.',
-      actionLabel: 'Search for md5',
+      body: 'Search actions fast: methods, examples, docs, and mutation node insertion.',
+      actionLabel: 'Search for docs',
       action: () => {
         const s = document.querySelector('.toolbox-search');
         if (!s) return;
-        s.value = 'md5';
+        s.value = 'docs';
         s.dispatchEvent(new Event('input', { bubbles: true }));
         s.focus();
       },
@@ -5717,7 +6470,7 @@ function onboardingSteps() {
     {
       selector: '#opt-mode',
       title: '5) Choose Combine Mode',
-      body: 'Cross-product creates all combinations. Line-by-line pairs items by row.',
+      body: 'Cross-product combines columns broadly. Line-by-line pairs row by row. Choose based on your data shape.',
       actionLabel: 'Switch to Line-by-line',
       action: () => {
         const mode = document.getElementById('opt-mode');
@@ -5729,83 +6482,106 @@ function onboardingSteps() {
     {
       selector: '#opt-methods',
       title: '6) Add Global Methods',
-      body: 'Methods run in order on final output. Example: upper,sha256 or trim,unique,sortu.',
-      actionLabel: 'Apply upper + sha256',
+      body: 'Methods here run left to right on the generated output. Use this for cleanup and normalization.',
+      actionLabel: 'Apply host cleanup chain',
       action: () => {
         const input = document.getElementById('opt-methods');
-        input.value = 'upper,sha256';
+        input.value = 'trim,unique,sortu';
         syncMethodFlowFromInput();
         validateInputs();
       }
     },
     {
       selector: '#tool-open-methods',
-      title: '7) Open Methods',
-      body: 'Use Method Reference to browse all supported transformations and insert them safely.',
-      actionLabel: 'Open Method Reference',
+      title: '7) Open Ingredients',
+      body: 'Ingredients is your method library. Use it to add transforms to the workflow.',
+      actionLabel: 'Open Ingredients',
       action: () => openMethodModal()
     },
     {
       selector: '#method-search-input',
       title: '8) Search in Methods',
-      body: 'Search by name or alias (for example: md5, regex, json).',
+      body: 'Search by use-case quickly: hash, regex, user/pass parsing, URL parsing, encoding.',
       enter: () => openMethodModal(),
-      actionLabel: 'Search sha',
+      actionLabel: 'Search user',
       action: () => {
         const s = document.getElementById('method-search-input');
         if (!s) return;
-        s.value = 'sha';
-        filterMethods('sha');
+        s.value = 'user';
+        filterMethods('user');
         s.focus();
       }
     },
     {
-      selector: '#tool-open-examples',
-      title: '9) Open Examples',
-      body: 'Examples are ready-made workflows you can apply directly and run.',
+      selector: '#tool-open-learn',
+      title: '9) Open Receipes',
+      body: 'Receipes contains ready workflows. Pick one and run to understand results fast.',
       enter: () => closeMethodModal(),
-      actionLabel: 'Open Examples',
-      action: () => openExamplesModal()
+      actionLabel: 'Open Receipes',
+      action: () => openDocsModal('recipes')
     },
     {
-      selector: '#examples-search-input',
-      title: '10) Search in Examples',
-      body: 'Search by use case like credentials, url, hash, regex, or json.',
-      enter: () => openExamplesModal(),
+      selector: '#docs-recipe-search',
+      title: '10) Search Recipes',
+      body: 'Find workflows by method, tag, or use-case and load them instantly.',
+      enter: () => { openDocsModal('recipes'); filterDocsRecipes(''); },
       actionLabel: 'Search credentials',
       action: () => {
-        const s = document.getElementById('examples-search-input');
+        const s = document.getElementById('docs-recipe-search');
         if (!s) return;
         s.value = 'credential';
-        filterExamples('credential');
+        filterDocsRecipes('credential');
         s.focus();
       }
+    },
+    {
+      selector: '#tool-add-mutation-node',
+      title: '11) Mutation Node',
+      body: 'Mutation is now a real node with profile and extra words. You can place it anywhere in the workflow.',
+      enter: () => closeDocsModal(),
+      actionLabel: 'Add Mutation Node',
+      action: () => addMutationNode('balanced', 'corp,secure')
     },
     {
       selector: '#btn-generate',
-      title: '11) Run Generation',
-      body: 'Click Generate to run the workflow and stream results into the Results Pane.',
+      title: '12) Run Generation',
+      body: 'Generate runs the full chain and fills Results Pane. Use this after each change to validate output.',
       actionLabel: 'Generate now',
-      enter: () => { closeMethodModal(); closeExamplesModal(); },
+      enter: () => { closeMethodModal(); closeDocsModal(); },
       action: () => startGenerate()
     },
     {
       selector: '#output-card',
-      title: '12) Review Output',
-      body: 'Results Pane shows a compact preview; use Open Full, Copy All, or Download for complete output.',
+      title: '13) Review Output',
+      body: 'Check output here. Use Open Full for large sets, Copy All to clipboard, or Download.',
       actionLabel: 'Copy output',
       action: () => copyOutput()
     },
     {
+      selector: '#tool-open-learn',
+      title: '14) Receipes',
+      body: 'Use Receipes for practical workflow templates, then tweak methods to fit your target.',
+      actionLabel: 'Open Receipes',
+      action: () => openDocsModal('recipes')
+    },
+    {
+      selector: '[data-docs-tab="recipes"]',
+      title: '15) Workflow Recipes',
+      body: 'Choose a recipe, load it, and run. Then edit one method at a time to adapt it to your target.',
+      enter: () => { openDocsModal('recipes'); setDocsTab('recipes'); },
+      actionLabel: 'Open recipes',
+      action: () => setDocsTab('recipes')
+    },
+    {
       selector: '#mode-toggle-btn',
-      title: '13) Simplified vs Advanced',
-      body: 'Use Simplified Mode for fast direct generation. Advanced Mode keeps the full workflow layout.',
+      title: '16) Simplified vs Advanced',
+      body: 'Use Simplified Mode for quick one-off generation. Use Advanced for node workflows and step debugging.',
       actionLabel: 'Try Simplified Mode',
       action: () => toggleSimplifiedMode()
     },
     {
       title: 'You are ready',
-      body: 'Need ideas? Open Examples for ready-made workflows. You can replay this tutorial anytime with the Take Tour button.',
+      body: 'Start with a Receipe, inspect the output, then adjust one method at a time. This keeps workflows understandable and reproducible.',
       showFlow: true,
       final: true
     }
@@ -5901,6 +6677,7 @@ function startOnboarding(force) {
   }
   closeMethodModal();
   closeExamplesModal();
+  closeDocsModal();
   const chooserOpen = document.getElementById('theme-chooser')?.classList.contains('open');
   if (chooserOpen && !force) {
     ONBOARDING_STATE.pendingAfterTheme = true;
@@ -6567,11 +7344,11 @@ try {
 } catch (err) {
   console.error('initUXEnhancements failed:', err);
   const m = document.getElementById('tool-open-methods');
-  const e = document.getElementById('tool-open-examples');
+  const l = document.getElementById('tool-open-learn');
   const mu = document.getElementById('tool-add-mutation-node');
   const c = document.getElementById('tool-clear-all');
   if (m) m.onclick = () => safeOpenMethodsSidebar();
-  if (e) e.onclick = () => safeOpenExamplesSidebar();
+  if (l) l.onclick = () => safeOpenLearnSidebar();
   if (mu) mu.onclick = () => addMutationNode('balanced', '');
   if (c) c.onclick = () => clearAllAndSidebarSearch();
 }
